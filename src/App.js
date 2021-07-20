@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import './stile/App.css';
+import './stile/NavBar.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NavBarComponent from "./component/NavBarComponent";
+import React from "react";
+
+import ViewEtichette from "./ViewEtichette";
+import ViewHome from "./ViewHome";
+import ViewProdotti from "./ViewProdotti";
+
+class App extends React.Component {
+
+    static singleton;
+
+    constructor(props) {
+        super(props);
+        App.singleton = this;
+        this.state = {
+            itemActive : 'home'
+        }
+
+    }
+
+    render() {
+        let json = require('./dataMock/product.json');
+        let view;
+        switch (this.state.itemActive){
+            case "home":
+                view = <ViewHome/>;
+                break;
+            case "etichette":
+                view = <ViewEtichette/>;
+                break;
+            case "prodotti":
+                view = <ViewProdotti/>;
+                break;
+            default: view = '';
+                break;
+        }
+        return (
+            <div className="App">
+                <NavBarComponent itemActive={this.state.itemActive}/>
+                {view}
+            </div>
+        );
+    }
 }
+
+
 
 export default App;

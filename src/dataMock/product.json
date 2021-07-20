@@ -1,0 +1,52 @@
+{
+  "product" : [
+    {
+      "name": "Biscotti da Latte",
+      "cost": 8.00
+    },
+    {
+      "name": "Mostaccioli",
+      "cost": 15.00
+    },
+    {
+      "name": "Amaretti",
+      "cost": 18.00
+    },
+    {
+      "name": "Friselle",
+      "cost": 4.50
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    },
+    {
+      "name": "Scaldatelli al Finocchio",
+      "cost": 8.00
+    }
+  ]
+}
