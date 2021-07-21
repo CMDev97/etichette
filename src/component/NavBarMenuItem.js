@@ -14,7 +14,7 @@ class NavBarMenuItem extends React.Component {
 
     render() {
         return (
-            <ul>
+            <ul className="mt-3">
                 <li onClick={this.handleOnClick} id="home" className={`Item ${(this.props.active === 'home') ? 'Active' :''} `}>Home</li>
                 <li onClick={this.handleOnClick} id="vendita" className={`Item ${(this.props.active === 'vendita') ? 'Active' :''} `}>Vendita</li>
                 <li onClick={this.handleOnClick} id="etichette" className={`Item ${(this.props.active === 'etichette') ? 'Active' :''} `}>Etichette</li>

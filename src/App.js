@@ -7,6 +7,17 @@ import React from "react";
 import ViewEtichette from "./ViewEtichette";
 import ViewHome from "./ViewHome";
 import ViewProdotti from "./ViewProdotti";
+import {Container} from "react-bootstrap";
+
+Array.prototype.filterName = function (search){
+    let newArray = [];
+    this.forEach((element) => {
+        if (element.name.startsWith(search)){
+            newArray.push(element);
+        }
+    });
+    return newArray;
+}
 
 class App extends React.Component {
 
@@ -40,7 +51,9 @@ class App extends React.Component {
         return (
             <div className="App">
                 <NavBarComponent itemActive={this.state.itemActive}/>
-                {view}
+                <Container>
+                    {view}
+                </Container>
             </div>
         );
     }

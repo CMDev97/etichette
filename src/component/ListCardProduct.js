@@ -2,9 +2,10 @@ import React from "react";
 import RowItemProduct from "./RowItemProduct";
 
 class ListCardProduct extends React.Component{
+
+
     constructor(props) {
         super(props);
-        
     }
 
 
@@ -19,7 +20,7 @@ class ListCardProduct extends React.Component{
 
         });
         return (
-            <div className="List">
+            <div className="List mt-2">
                 {righe}
             </div>
         );

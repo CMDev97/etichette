@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {Row} from "react-bootstrap";
 
 class RowItemProduct extends React.Component {
 
@@ -13,12 +14,12 @@ class RowItemProduct extends React.Component {
 
     render() {
         return (
-            <div className="Row">
-                <div className="Body">
-                    <h2>{this._element.name}</h2>
-                    <p>{this._element.cost}</p>
+            <div className="d-flex px-1 py-2">
+                <div className="w-100">
+                    <h4>{this._element.name}</h4>
+                    <span>Costo al KG : {this._element.cost}</span>
                 </div>
-                <FontAwesomeIcon className="Icon-right" icon={faChevronRight} />
+                <span className="flex-shrink-1 align-self-center"><FontAwesomeIcon icon={faChevronRight} /></span>
             </div>
         );
     }

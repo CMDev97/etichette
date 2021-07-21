@@ -9,7 +9,7 @@ class NavBarComponent extends React.Component{
 
     render() {
         return (
-            <div className="NavBar Shadow">
+            <div className="NavBar shadow-sm">
                 <h2>Gestion</h2>
                 <NavBarMenuItem active={this.props.itemActive}/>
             </div>
