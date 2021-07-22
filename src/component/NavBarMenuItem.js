@@ -19,6 +19,7 @@ class NavBarMenuItem extends React.Component {
                 <li onClick={this.handleOnClick} id="vendita" className={`Item ${(this.props.active === 'vendita') ? 'Active' :''} `}>Vendita</li>
                 <li onClick={this.handleOnClick} id="etichette" className={`Item ${(this.props.active === 'etichette') ? 'Active' :''} `}>Etichette</li>
                 <li onClick={this.handleOnClick} id="prodotti" className={`Item ${(this.props.active === 'prodotti') ? 'Active' :''} `}>Prodotti</li>
+                <li onClick={this.handleOnClick} id="settings" className={`Item ${(this.props.active === 'settings') ? 'Active' :''} `}>Impoostazioni</li>
             </ul>
         );
     }

@@ -8,6 +8,7 @@ import ViewEtichette from "./ViewEtichette";
 import ViewHome from "./ViewHome";
 import ViewProdotti from "./ViewProdotti";
 import {Container} from "react-bootstrap";
+import ViewSettings from "./ViewSettings";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
@@ -44,6 +45,9 @@ class App extends React.Component {
                 break;
             case "prodotti":
                 view = <ViewProdotti/>;
+                break;
+            case "settings":
+                view = <ViewSettings/>;
                 break;
             default: view = '';
                 break;
