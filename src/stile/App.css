@@ -8,9 +8,13 @@
   text-align: start;
 }
 
-.App .List-Box .List {
+.List {
   max-height: 60vh;
   overflow-y: scroll;
+}
+
+.List .Item {
+  cursor: pointer;
 }
 
 .Shadow{

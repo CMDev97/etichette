@@ -19,13 +19,8 @@ class FormSearchComponent extends React.Component {
     }
 
     listenerOnClickSearch() {
-        console.log("Devo recuperare il valore di input");
-        console.log(this.state.inputValue);
         let search = this.state.inputValue;
-        let list = this.props.parent.state.lista;
-        list = list.filter(element => element.name.startsWith(search));
-        console.log(list);
-        this.props.parent.list = list;
+        this.props.onClickSearch(search);
     }
 
     _updateInputValue(evt) {

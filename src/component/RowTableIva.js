@@ -8,6 +8,11 @@ class RowTableIva extends React.Component {
 
     constructor(props) {
         super(props);
+        this._handleClickDeleteIva = this._handleClickDeleteIva.bind(this);
+    }
+
+    _handleClickDeleteIva(){
+        console.log(this.props.id);
     }
 
     render() {
@@ -18,7 +23,7 @@ class RowTableIva extends React.Component {
                 <td>{this.props.value}</td>
                 <td>
                     <Button className="me-2" variant="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button variant="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <Button onClick={this._handleClickDeleteIva} variant="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </td>
             </tr>
         );

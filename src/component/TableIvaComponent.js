@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import RowTableIva from "./RowTableIva";
 
 class TableIvaComponent extends React.Component {
+    
 
     constructor(props) {
         super(props);
