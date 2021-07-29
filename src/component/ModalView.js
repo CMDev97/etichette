@@ -1,29 +1,22 @@
 import React from "react";
 import {Modal} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {hideModal} from "../actions";
 
-class ModalView extends React.Component{
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            show:false,
-            title:"Titolo modal"
-        }
-    }
-
-
-
-    render() {
-        return (
-            <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Modal Eliminazione
-                    </Modal.Title>
-                </Modal.Header>
-
-            </Modal>
-        );
-    }
-
+function ModalView(){
+    const modal = useSelector(state => state.modal);
+    const dispatch = useDispatch();
+    console.log(modal);
+    return (
+        <Modal show={modal.visible} onHide={()=>{dispatch(hideModal())}}>
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    Modal Eliminazione
+                </Modal.Title>
+            </Modal.Header>
+            {modal.content}
+        </Modal>
+    );
 }
+
+export default ModalView;

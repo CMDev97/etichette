@@ -8,9 +8,6 @@ class NavBarMenuItem extends React.Component {
         this.handleOnClick = this.handleOnClick.bind(this);
     }
 
-    handleOnClick(value){
-        App.singleton.setState({itemActive : value.currentTarget.id})
-    }
 
     render() {
         return (

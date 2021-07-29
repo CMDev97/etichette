@@ -11,17 +11,17 @@
     position: relative;
 }
 
-.NavBar ul li {
+.NavBar ul a {
     cursor: pointer;
     list-style: none;
-}
-
-.Item {
+    text-decoration: none;
     padding: 10px 15px 10px 15px;
     color: #0059E6;
 }
 
-.Item.Active {
+
+.NavBar .Active {
+    text-decoration: none;
     border-radius: 1.5rem;
     background-color: #0059E6;
     color: white;

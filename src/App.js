@@ -1,14 +1,14 @@
 import './stile/App.css';
 import './stile/NavBar.css';
-
-import NavBarComponent from "./component/NavBarComponent";
 import React from "react";
-
-import ViewEtichette from "./ViewEtichette";
-import ViewHome from "./ViewHome";
-import ViewProdotti from "./ViewProdotti";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import NavBarComponent from "./component/NavBarComponent";
 import {Container} from "react-bootstrap";
-import ViewSettings from "./ViewSettings";
+import ViewHome from "./view/ViewHome";
+import ViewEtichette from "./view/ViewEtichette";
+import ViewProdotti from "./view/ViewProdotti";
+import ViewSettings from "./view/ViewSettings";
+import ModalView from "./component/ModalView";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
@@ -20,47 +20,23 @@ Array.prototype.filterName = function (search){
     return newArray;
 }
 
-class App extends React.Component {
-
-    static singleton;
-
-    constructor(props) {
-        super(props);
-        App.singleton = this;
-        this.state = {
-            itemActive : 'home'
-        }
-
-    }
-
-    render() {
-        let json = require('./dataMock/product.json');
-        let view;
-        switch (this.state.itemActive){
-            case "home":
-                view = <ViewHome/>;
-                break;
-            case "etichette":
-                view = <ViewEtichette/>;
-                break;
-            case "prodotti":
-                view = <ViewProdotti/>;
-                break;
-            case "settings":
-                view = <ViewSettings/>;
-                break;
-            default: view = '';
-                break;
-        }
-        return (
+function App(){
+    return (
+        <Router>
             <div className="App">
-                <NavBarComponent itemActive={this.state.itemActive}/>
+                <NavBarComponent/>
                 <Container>
-                    {view}
+                    <Switch>
+                        <Route exact path="/" component={ViewHome}/>
+                        <Route exact path="/labels" component={ViewEtichette}/>
+                        <Route exact path="/product" component={ViewProdotti}/>
+                        <Route exact path="/settings" component={ViewSettings}/>
+                    </Switch>
                 </Container>
+                <ModalView/>
             </div>
-        );
-    }
+        </Router>
+    );
 }
 
 

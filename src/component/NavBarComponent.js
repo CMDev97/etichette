@@ -1,22 +1,18 @@
 import React from "react";
-import NavBarMenuItem from "./NavBarMenuItem";
+import {NavLink} from "react-router-dom";
 
-class NavBarComponent extends React.Component{
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="NavBar shadow-sm">
-                <h2>Gestion</h2>
-                <NavBarMenuItem active={this.props.itemActive}/>
-            </div>
-        );
-
-    }
-
+function NavBarComponent(){
+    return (
+        <div className="NavBar shadow-sm">
+            <h2>Gestion</h2>
+            <ul className="mt-3">
+                <NavLink exact activeClassName="Active" to="/"><li >Home</li></NavLink>
+                <NavLink exact activeClassName="Active" to="/product"><li >Prodotti</li></NavLink>
+                <NavLink exact activeClassName="Active" to="/labels"><li >Etichette</li></NavLink>
+                <NavLink exact activeClassName="Active" to="/settings"><li >Impostazioni</li></NavLink>
+            </ul>
+        </div>
+    );
 }
 
 export default NavBarComponent;

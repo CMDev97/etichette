@@ -1,5 +1,5 @@
 import React from "react";
-import CardItemMenu from "./component/CardItemMenu";
+import CardItemMenu from "../component/CardItemMenu";
 
 class ViewHome extends React.Component {
 
