@@ -26,3 +26,10 @@ export const setContentModal = (value)=>{
         content:value
     }
 }
+
+export const changeWeight = (value)=>{
+    return {
+        type:"UPDATE_WEIGHT",
+        value: value
+    }
+}

@@ -2,7 +2,6 @@
 import React from "react";
 import FormSearchComponent from "./FormSearchComponent";
 import ListProduct from "./ListProduct";
-import Col from "react-bootstrap/Col";
 
 class ListSearchProduct extends React.Component {
 
@@ -35,10 +34,10 @@ class ListSearchProduct extends React.Component {
 
     render() {
         return (
-            <Col md="4" className="List-Box px-2 py-3">
+            <div className="List-Box px-2 py-3">
                 <FormSearchComponent onClickSearch={this.handleOnClickSearch}/>
                 <ListProduct lista={this.state.lista}/>
-            </Col>
+            </div>
         );
     }
 
