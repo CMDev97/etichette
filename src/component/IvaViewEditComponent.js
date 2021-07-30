@@ -3,8 +3,8 @@ import {Button, Col} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import TableIvaComponent from "./TableIvaComponent";
-import ModalIva from "./ModalIva";
-import ModalDeleteEntityComponent from "./ModalDeleteEntityComponent";
+import ModalIva from "./ModalComponents/ModalIva";
+import ModalDeleteEntityComponent from "./ModalComponents/ModalDeleteEntityComponent";
 
 class IvaViewEditComponent extends React.Component {
 

@@ -1,13 +1,14 @@
 const initialState = {
     visible: false,
-    content:''
+    content:'',
+    title:'Modal'
 }
 
 const ModalReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SHOW':
             return {
-                ...state, visible: true
+                ...state, visible: true, title: action.title
             }
         case 'HIDDEN':
             return {

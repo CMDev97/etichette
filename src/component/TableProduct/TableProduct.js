@@ -1,15 +1,19 @@
 import React from "react";
 import RowProduct from "./RowProduct";
-import Table from "react-bootstrap/Table";
-const jsonData = require('../../dataMock/product.json');
+import {useSelector} from "react-redux";
+import MessageEndTable from "../MessageEndTable";
 
 function TableProduct() {
+    const productsState = useSelector(state => state.products);
     let rows = [];
-    jsonData.product.forEach(element => {
+    productsState.forEach(element => {
         rows.push(<RowProduct key={element.id} element={element}/>);
     });
+    if (rows.length === 0){
+        rows.push(<MessageEndTable colSpan='4' />)
+    }
     return(
-        <Table striped borderless hover>
+        <table className='table table-image table-stripe'>
             <thead>
                 <tr>
                     <th>#</th>
@@ -21,7 +25,7 @@ function TableProduct() {
             <tbody>
                 {rows}
             </tbody>
-        </Table>
+        </table>
     );
 
 }

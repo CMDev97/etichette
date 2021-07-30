@@ -1,9 +1,16 @@
-import ModalDeleteEntityComponent from "../component/ModalDeleteEntityComponent";
 
 
-export const showModal = () =>{
+export const deleteProduct = (id) =>{
     return {
-        type:"SHOW"
+        type:'DELETE',
+        id:id
+    }
+}
+
+export const showModal = (title) =>{
+    return {
+        type:"SHOW",
+        title:title
     }
 }
 

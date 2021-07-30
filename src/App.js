@@ -8,12 +8,22 @@ import ViewHome from "./view/ViewHome";
 import ViewEtichette from "./view/ViewEtichette";
 import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
-import ModalView from "./component/ModalView";
+import ModalView from "./component/ModalComponents/ModalView";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
     this.forEach((element) => {
         if (element.name.startsWith(search)){
+            newArray.push(element);
+        }
+    });
+    return newArray;
+}
+
+Array.prototype.removeByID = function(id){
+    let newArray = [];
+    this.forEach((element, position)=>{
+        if (element.id != id){
             newArray.push(element);
         }
     });
