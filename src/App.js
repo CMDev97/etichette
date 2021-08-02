@@ -1,5 +1,6 @@
 import './stile/App.css';
 import './stile/NavBar.css';
+import 'antd/dist/antd.css';
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavBarComponent from "./component/NavBarComponent";
@@ -20,10 +21,11 @@ Array.prototype.filterName = function (search){
     return newArray;
 }
 
+
 Array.prototype.removeByID = function(id){
     let newArray = [];
-    this.forEach((element, position)=>{
-        if (element.id != id){
+    this.forEach((element)=>{
+        if (element.id !== id){
             newArray.push(element);
         }
     });

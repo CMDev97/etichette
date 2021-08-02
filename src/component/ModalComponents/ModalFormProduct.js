@@ -1,51 +1,69 @@
-import React from "react";
-import {Button, Form, Modal} from "react-bootstrap";
+import React, { useState } from 'react';
+import {Form, message, Input, Button, InputNumber} from 'antd';
+import {useDispatch, useSelector} from "react-redux";
+import {addProduct, hideModal} from "../../actions";
 
-class ModalFormProduct extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            cost:0.00
+
+
+function ModalFormProduct(){
+    const dispatch = useDispatch();
+
+    const [form] = Form.useForm();
+
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        message.loading({ content: 'Caricamento in corso...', key:'updatable' })
+        const jsonValue = {
+            id:34,
+            name:values.name,
+            cost:values.cost
         }
-        this._handleChangeCost = this._handleChangeCost.bind(this);
-        this._handleChangeName = this._handleChangeName.bind(this);
-    }
+        console.log(jsonValue);
+        dispatch(addProduct(jsonValue));
+        setTimeout(() => {
+            message.success({ content: 'Caricato!', key:'updatable', duration: 2 });
+        }, 1000);
+        dispatch(hideModal());
+    };
 
-    _handleChangeName(event){
-        this.setState({name : event.target.value});
-    }
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo.errorFields);
+        const hide = message.error(errorInfo.errorFields[0].name + " : " + errorInfo.errorFields[0].errors);
+        setTimeout(hide, 2500);
 
-    _handleChangeCost(event){
-        this.setState({cost: event.target.value});
-    }
+    };
 
-    render() {
-        return(
-            <>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" value={this.state.name}
-                                          placeholder="Inserisci descrizione" onChange={this._handleChangeName} />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Cost</Form.Label>
-                            <Form.Control type="number" value={this.state.cost}
-                                          placeholder="Inserisci valore" onChange={this._handleChangeCost}/>
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
 
-                <Modal.Footer>
-                    <Button variant="light">Annulla</Button>
-                    <Button variant="primary">Salva</Button>
-                </Modal.Footer>
-            </>
-        );
-    }
+    return(
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
+            <Form.Item name="name" label="Name" required rules={[
+                {
+                    required: true,
+                },
+            ]} tooltip="Devi inserire il nome del prodotto">
+                <Input placeholder="Inserisci Nome prodotto" />
+            </Form.Item>
+            <Form.Item name="cost" label="Cost" required rules={[
+                {
+                    required: true,
+                },
+            ]} tooltip="Devi inserire il prezzo del prodotto">
+                <InputNumber
+                    formatter={value => `€ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    parser={value => value.replace(/\€\s?|(,*)/g, '')}
+                />
+            </Form.Item>
+            <Form.Item>
+                <Button type="primary" htmlType="submit">Submit</Button>
+            </Form.Item>
+        </Form>
+    );
 
 }
 

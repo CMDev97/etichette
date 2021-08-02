@@ -1,4 +1,10 @@
 
+export const addProduct = (value) =>{
+    return {
+        type:'ADD_PRODUCT',
+        value:value
+    }
+}
 
 export const deleteProduct = (id) =>{
     return {
