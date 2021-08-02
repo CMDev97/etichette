@@ -1,39 +1,45 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
-import RowTableIva from "./RowTableIva";
 
-class TableIvaComponent extends React.Component {
-    
+import {Button} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {Table} from "antd";
 
-    constructor(props) {
-        super(props);
+function TableIvaComponent(props){
 
-    }
-
-    render() {
-        let row = [];
-        if (this.props.list.length > 0){
-            this.props.list.forEach((element) => {
-                row.push(<RowTableIva id={element.id} value={element.value} description={element.description}/>);
-            });
+    const columns = [
+        {
+            title: "ID",
+            dataIndex: "id",
+            key: "id",
+            render: text => <>#{text}</>
+        },
+        {
+            title: "Description",
+            dataIndex: "description",
+            key: "description"
+        },
+        {
+            title: "Value",
+            dataIndex: "value",
+            key: "value",
+            render: value => <>{value}%</>
+        },
+        {
+            title:"Action",
+            key:"action",
+            render: (value) => (
+                <>
+                    <Button className="me-2" variant="primary"><FontAwesomeIcon icon={faEdit}/></Button>
+                    <Button variant="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                </>
+            )
         }
-        return (
-            <Table striped borderless hover>
-                <thead className="">
-                <tr>
-                    <th>#</th>
-                    <th>Description</th>
-                    <th>Value</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {row}
-                </tbody>
-            </Table>
-        );
-    }
+    ];
 
+    return(
+        <Table className="mt-4" dataSource={props.list} columns={columns} />
+    );
 
 }
 
