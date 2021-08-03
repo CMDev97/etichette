@@ -1,0 +1,43 @@
+
+class Request {
+
+    static GET_OPTION = () => {
+        return {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }
+    };
+
+    static POST_OPTION = (body) =>{
+        return {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: body
+        }
+    }
+
+
+    constructor(url) {
+        this._url = url;
+    }
+
+    set methodSuccess(handle){
+        this._methodSuccess = handle;
+    }
+
+    set methodError(handle){
+        this._methodError = handle;
+    }
+
+    fetchData = async () => {
+        const rawData  = await fetch(this._url, Request.GET_OPTION());
+        if (rawData.ok){
+            this._methodSuccess(await rawData.json());
+        } else {
+            this._methodError(await rawData.error());
+        }
+    };
+
+}
+
+export default Request;

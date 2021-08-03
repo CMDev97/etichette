@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import {Row, Col, Card} from "react-bootstrap";
-import IvaViewEditComponent from "../component/IvaViewEditComponent";
+import IvaSettingsView from "../component/IvaSettingsView";
 import {Menu} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faFileImage} from "@fortawesome/free-solid-svg-icons";
+import IconSettingsView from "../component/IconSettingsView";
+import CategorySettingsView from "../component/CategorySettingsView";
 
 function ViewSettings(){
     const [keyMenu, setKeyMenu] = useState('1');
@@ -17,7 +19,13 @@ function ViewSettings(){
 
     switch (keyMenu){
         case '5':
-            view = <IvaViewEditComponent/>
+            view = <IvaSettingsView/>
+            break;
+        case '6':
+            view = <CategorySettingsView/>
+            break;
+        case '7':
+            view = <IconSettingsView/>
             break;
         default:
             view = <h3>{keyMenu}</h3>
@@ -53,6 +61,9 @@ function ViewSettings(){
                             </Menu.Item>
                             <Menu.Item key="6" icon={<FontAwesomeIcon icon={faTags} />}>
                                 Categorie
+                            </Menu.Item>
+                            <Menu.Item key="7" icon={<FontAwesomeIcon icon={faFileImage} />}>
+                                Icone di sistema
                             </Menu.Item>
                         </Menu>
                     </Card>

@@ -1,4 +1,19 @@
 
+export const setListIvas = (value) => {
+    return {
+        type:'SET_LIST_IVAS',
+        values:value
+    }
+}
+
+export const setLoadingUploadIvas = (value) =>{
+    return {
+        type:'SET_LOADING_UPLOAD_IVAS',
+        value:value
+    }
+}
+
+
 export const addProduct = (value) =>{
     return {
         type:'ADD_PRODUCT',

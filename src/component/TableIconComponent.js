@@ -1,9 +1,12 @@
-import React from "react";
+import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
+import parse from "html-react-parser";
 
-function TableIvaComponent(props){
+
+
+function TableIconComponent(props){
 
     const columns = [
         {
@@ -18,22 +21,18 @@ function TableIvaComponent(props){
             key: "description"
         },
         {
-            title: "Value",
-            dataIndex: "value",
-            key: "value",
-            render: value => <>{value}%</>
+            title: "Icon",
+            dataIndex: "code",
+            key: "code",
+            render: value => <span>{parse(value)}</span>
         },
         {
             title:"Action",
-            key:"id",
+            key:"action",
             render: (value) => (
                 <>
-                    <Button onClick={()=>{
-                        console.log(value);
-                    }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button onClick={()=>{
-                        console.log(value);
-                    }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <Button className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
+                    <Button shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
             )
         }
@@ -42,7 +41,6 @@ function TableIvaComponent(props){
     return(
         <Table className="mt-4" dataSource={props.list} columns={columns} />
     );
-
 }
 
-export default TableIvaComponent;
+export default TableIconComponent;
