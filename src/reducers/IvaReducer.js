@@ -2,10 +2,16 @@
 const initialState = {
     list:[],
     loadingUpload:false,
-    valueEdit: {
-        description:'',
-        value:1
-    }
+    form:[
+        {
+            name:['description'],
+            value:''
+        },
+        {
+            name:['value'],
+            value:1
+        }
+    ]
 }
 
 
@@ -14,6 +20,10 @@ const IvaReducer = (state = initialState, action) => {
         case 'SET_LIST_IVAS':
             return {
                 ...state, list: action.values
+            }
+        case 'EDIT_IVA':
+            return {
+                ...state, form: action.value
             }
         case 'SET_LOADING_UPLOAD_IVAS':
             return {

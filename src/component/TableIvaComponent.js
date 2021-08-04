@@ -2,9 +2,13 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {setContentModal, setEditIva, showModal} from "../actions";
+import DrawerIva from "./ModalComponents/DrawerIva";
 
 function TableIvaComponent(props){
-
+    const ivaReducer = useSelector(state => state.ivasReducer);
+    const dispatch = useDispatch();
     const columns = [
         {
             title: "ID",
@@ -29,10 +33,11 @@ function TableIvaComponent(props){
             render: (value) => (
                 <>
                     <Button onClick={()=>{
-                        console.log(value);
+                        dispatch(setContentModal(<DrawerIva/>));
+                        dispatch(showModal("Modifica prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        console.log(value);
+
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
             )

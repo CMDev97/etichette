@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faFileImage} from "@fortawesome/free-solid-svg-icons";
 import IconSettingsView from "../component/IconSettingsView";
 import CategorySettingsView from "../component/CategorySettingsView";
+import Demo from "../component/TestComponent";
 
 function ViewSettings(){
     const [keyMenu, setKeyMenu] = useState('1');
@@ -18,6 +19,9 @@ function ViewSettings(){
     let view = '';
 
     switch (keyMenu){
+        case '1':
+            view = <Demo/>
+            break;
         case '5':
             view = <IvaSettingsView/>
             break;

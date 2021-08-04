@@ -31,7 +31,6 @@ function ModalFormProduct(){
         console.log('Failed:', errorInfo.errorFields);
         const hide = message.error(errorInfo.errorFields[0].name + " : " + errorInfo.errorFields[0].errors);
         setTimeout(hide, 2500);
-
     };
 
 

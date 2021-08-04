@@ -1,4 +1,11 @@
 
+export const setEditIva = (value) => {
+    return {
+        type:'EDIT_IVA',
+        value:value
+    }
+}
+
 export const setListIvas = (value) => {
     return {
         type:'SET_LIST_IVAS',

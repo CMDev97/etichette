@@ -2,8 +2,9 @@ import React, {useEffect} from "react";
 import TableIvaComponent from "./TableIvaComponent";
 import {Button, Form, Input, InputNumber, message} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {setListIvas, setLoadingUploadIvas} from "../actions";
+import {setContentModal, setEditIva, setListIvas, setLoadingUploadIvas, showModal} from "../actions";
 import Request from "../utils/Request";
+import DrawerIva from "./ModalComponents/DrawerIva";
 
 function IvaSettingsView(){
     const ivaReducer = useSelector(state => state.ivasReducer);
@@ -58,39 +59,10 @@ function IvaSettingsView(){
 
     return (
         <>
-            <Form form={form} initialValues={ivaReducer.valueEdit} name="horizontal_login" layout="inline" onFinish={onFinish}>
-                <Form.Item
-                    label="Descrizione "
-                    name="description"
-                    rules={[{ required: true, message: 'Per favore inserisci la descrizione!' }]}>
-                    <Input placeholder="Inserisci descrizione" />
-                </Form.Item>
-                <Form.Item
-                    label="Iva "
-                    name="value"
-                    rules={[{ required: true, message: 'Valore non corretto!' }]}>
-                    <InputNumber
-                        min={1} max={24}
-                        defaultValue="1"
-                        type="number"
-                        placeholder="Inserisci iva"/>
-                </Form.Item>
-                <Form.Item shouldUpdate>
-                    {() => (
-                        <Button
-                            shape="round"
-                            loading={ivaReducer.loadingUpload}
-                            type="primary"
-                            htmlType="submit"
-                            disabled={
-                                !form.isFieldsTouched(true) ||
-                                !!form.getFieldsError().filter(({ errors }) => errors.length).length
-                            }>
-                            Salva
-                        </Button>
-                    )}
-                </Form.Item>
-            </Form>
+            <Button onClick={()=>{
+                dispatch(setContentModal(<DrawerIva/>));
+                dispatch(showModal("Aggiungi iva"));
+            }} type="primary" shape="round">Nuovo</Button>
             <TableIvaComponent list={ivaReducer.list}/>
         </>
     );

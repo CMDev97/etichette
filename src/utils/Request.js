@@ -16,7 +16,6 @@ class Request {
         }
     }
 
-
     constructor(url) {
         this._url = url;
     }
@@ -37,6 +36,16 @@ class Request {
             this._methodError(await rawData.error());
         }
     };
+
+    fetchPost = async (body) => {
+        const rawData = await fetch(this._url, Request.POST_OPTION(body));
+        if (rawData.status === 201){
+            console.log("Creato");
+            this._methodSuccess(await rawData.json());
+        } else {
+            this._methodError(await rawData.error());
+        }
+    }
 
 }
 
