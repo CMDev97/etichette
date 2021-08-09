@@ -1,10 +1,12 @@
 import React, {useEffect} from "react";
 import TableIvaComponent from "./TableIvaComponent";
-import {Button, Form, Input, InputNumber, message} from "antd";
+import {Button, Form, message} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {setContentModal, setEditIva, setListIvas, setLoadingUploadIvas, showModal} from "../actions";
+import {setContentDrawer, setListIvas, setLoadingUploadIvas, showDrawer} from "../actions";
 import Request from "../utils/Request";
-import DrawerIva from "./ModalComponents/DrawerIva";
+import {Row, Col} from "react-bootstrap";
+import FormSearchComponent from "./FormSearchComponent";
+import DrawerIva from "./DrawerComponent/DrawerIva";
 
 function IvaSettingsView(){
     const ivaReducer = useSelector(state => state.ivasReducer);
@@ -57,13 +59,31 @@ function IvaSettingsView(){
         }
     };
 
+    const onSearchClicked = (value) => {
+        console.log(value);
+    }
+
+    const onDeleteItem = () => {
+        reloadData();
+    }
+
     return (
         <>
-            <Button onClick={()=>{
-                dispatch(setContentModal(<DrawerIva/>));
-                dispatch(showModal("Aggiungi iva"));
-            }} type="primary" shape="round">Nuovo</Button>
-            <TableIvaComponent list={ivaReducer.list}/>
+            <Row>
+                <Col lg="6">
+                    <FormSearchComponent  onClickSearch={onSearchClicked} />
+                </Col>
+                <Col lg="6" className="d-flex justify-content-end" >
+                    <Button onClick={()=>{
+                        dispatch(setContentDrawer(<DrawerIva/>));
+                        dispatch(showDrawer("Nuovo reparto"));
+                    }} type="primary" shape="round">
+                        Nuovo
+                    </Button>
+                </Col>
+            </Row>
+
+            <TableIvaComponent list={ivaReducer.list} onDeleteFinish={onDeleteItem}/>
         </>
     );
 

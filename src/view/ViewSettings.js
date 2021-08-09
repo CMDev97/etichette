@@ -39,7 +39,7 @@ function ViewSettings(){
     return (
         <div className="mt-4">
             <h2>Impostazioni</h2>
-            <Row >
+            <Row>
                 <Col md="3 mt-2">
                     <Card className="h-auto p-3 m-0">
                         <Menu

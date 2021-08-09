@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import Request from "../../utils/Request";
 import {Button, Form,Input, message} from "antd";
 import {useDispatch} from "react-redux";
-import {hideModal} from "../../actions";
+import {hideDrawer} from "../../actions";
 
 function DrawerIva(props){
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function DrawerIva(props){
                     <Input type="number" placeholder="Inserisci valore IVA" />
                 </Form.Item>
 
-                <Button onClick={()=>{dispatch(hideModal())}} className="me-2" >Annulla</Button>
+                <Button onClick={()=>{dispatch(hideDrawer())}} className="me-2" >Annulla</Button>
                 <Button htmlType="submit" type="primary">Salva</Button>
             </Form>
         </>

@@ -1,21 +1,18 @@
 import React from "react";
+import Modal from "antd/es/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {hideModal} from "../../actions";
-import {Drawer} from "antd";
 
-function ModalView(){
+function ModalView(props){
     const modal = useSelector(state => state.modal);
     const dispatch = useDispatch();
-    console.log(modal);
+
+
     return (
-        <Drawer
-            title={modal.title}
-            width={520}
-            closable={false}
-            onClose={()=>{dispatch(hideModal())}}
-            visible={modal.visible}>
-        {modal.content}
-    </Drawer>
+        <Modal title={modal.title} visible={modal.visible} onOk={()=>{modal.actionOk()}}
+        confirmLoading={modal.confirmLoading} onCancel={()=>{dispatch(hideModal())}}>
+            <>{modal.content}</>
+        </Modal>
     );
 }
 

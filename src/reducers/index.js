@@ -1,11 +1,13 @@
 import {combineReducers} from "redux";
-import ModalReducer from "./ModalReducer";
+import DrawerReducer from "./DrawerReducer";
 import ProductsReducer from "./ProductsReducer";
 import EditorReducer from "./EditorReducer";
 import IvaReducer from "./IvaReducer";
+import {ModalReducer} from "./ModalReducer";
 
 const rootReducer = combineReducers({
-    modal: ModalReducer,
+    drawer: DrawerReducer,
+    modal:ModalReducer,
     products : ProductsReducer,
     editor: EditorReducer,
     ivasReducer: IvaReducer

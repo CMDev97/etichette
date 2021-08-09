@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Form, message, Input, Button, InputNumber} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
-import {addProduct, hideModal} from "../../actions";
+import {addProduct, hideDrawer} from "../../actions";
 
 
 
@@ -24,7 +24,7 @@ function ModalFormProduct(){
         setTimeout(() => {
             message.success({ content: 'Caricato!', key:'updatable', duration: 2 });
         }, 1000);
-        dispatch(hideModal());
+        dispatch(hideDrawer());
     };
 
     const onFinishFailed = (errorInfo) => {

@@ -9,6 +9,7 @@ import ViewHome from "./view/ViewHome";
 import ViewEtichette from "./view/ViewEtichette";
 import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
+import DrawerView from "./component/DrawerComponent/DrawerView";
 import ModalView from "./component/ModalComponents/ModalView";
 
 Array.prototype.filterName = function (search){
@@ -45,6 +46,7 @@ function App(){
                         <Route exact path="/settings" component={ViewSettings}/>
                     </Switch>
                 </Container>
+                <DrawerView/>
                 <ModalView/>
             </div>
         </Router>

@@ -4,7 +4,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormControl from 'react-bootstrap/FormControl';
-import {Button} from "react-bootstrap";
+import {Button, Input} from "antd";
 
 
 class FormSearchComponent extends React.Component {
@@ -33,13 +33,8 @@ class FormSearchComponent extends React.Component {
         return (
             <Row>
                 <Col className="d-flex">
-                    <FormControl className="me-2"
-                        placeholder="Cerca..."
-                        aria-label="Cerca"
-                        aria-describedby="basic-addon1"
-                        value={this.state.inputValue} onChange={this._updateInputValue}
-                    />
-                    <Button className="rounded-pill" onClick={this.listenerOnClickSearch} type='button'>
+                    <Input placeholder="Cerca..." onChange={this._updateInputValue} value={this.state.inputValue} />
+                    <Button onClick={this.listenerOnClickSearch} type='primary'>
                         <FontAwesomeIcon icon={faSearch}/>
                     </Button>
                 </Col>

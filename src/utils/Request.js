@@ -8,6 +8,13 @@ class Request {
         }
     };
 
+    static DELETE_OPTION = () => {
+        return {
+            method:'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        }
+    }
+
     static POST_OPTION = (body) =>{
         return {
             method: 'POST',
@@ -42,6 +49,15 @@ class Request {
         if (rawData.status === 201){
             console.log("Creato");
             this._methodSuccess(await rawData.json());
+        } else {
+            this._methodError(await rawData.error());
+        }
+    }
+
+    fetchDelete = async ()=>{
+        const rawData  = await fetch(this._url, Request.DELETE_OPTION());
+        if (rawData.ok){
+            this._methodSuccess();
         } else {
             this._methodError(await rawData.error());
         }

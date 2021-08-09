@@ -2,12 +2,12 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {setContentModal, setEditIva, showModal} from "../actions";
-import DrawerIva from "./ModalComponents/DrawerIva";
+import {useDispatch} from "react-redux";
+import {setContentDrawer, setContentModal, showDrawer, showModal} from "../actions";
+import DrawerIva from "./DrawerComponent/DrawerIva";
+import ModalDeleteEntityComponent from "./ModalComponents/ModalDeleteEntityComponent";
 
 function TableIvaComponent(props){
-    const ivaReducer = useSelector(state => state.ivasReducer);
     const dispatch = useDispatch();
     const columns = [
         {
@@ -33,11 +33,12 @@ function TableIvaComponent(props){
             render: (value) => (
                 <>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<DrawerIva/>));
-                        dispatch(showModal("Modifica prodotto"));
+                        dispatch(setContentDrawer(<DrawerIva/>));
+                        dispatch(showDrawer("Modifica prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-
+                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} onDeleteFinish={props.onDeleteFinish} />));
+                        dispatch(showModal("Elimina iva"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
             )

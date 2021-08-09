@@ -1,0 +1,26 @@
+const initialState = {
+    visible: false,
+    content:'',
+    title:'Drawer'
+}
+
+const DrawerReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'SHOW_DRAWER':
+            return {
+                ...state, visible: true, title: action.title
+            }
+        case 'HIDDEN_DRAWER':
+            return {
+                ...state, visible: false
+            }
+        case 'NEW_CONTENT_DRAWER':
+            return{
+                ...state, content: action.content
+            }
+        default: return state
+    }
+
+}
+
+export default DrawerReducer;

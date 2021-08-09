@@ -1,6 +1,6 @@
 
 import React from "react";
-import FormSearchComponent from "./FormSearchComponent";
+import FormSearchComponent from "../FormSearchComponent";
 import ListProduct from "./ListProduct";
 
 class ListSearchProduct extends React.Component {

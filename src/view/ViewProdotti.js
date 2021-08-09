@@ -1,11 +1,11 @@
 import React from "react";
 import TableProduct from "../component/TableProduct/TableProduct";
 import {Row, Col, Button} from "react-bootstrap";
-import FormSearchComponent from "../component/ListProductComponent/FormSearchComponent";
+import FormSearchComponent from "../component/FormSearchComponent";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {useDispatch} from "react-redux";
-import {setContentModal, showModal} from "../actions";
+import {setContentDrawer, showDrawer} from "../actions";
 import ModalFormProduct from "../component/ModalComponents/ModalFormProduct";
 
 
@@ -24,8 +24,8 @@ function ViewProdotti(){
                 </Col>
                 <Col className="text-end">
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<ModalFormProduct/>));
-                        dispatch(showModal("Nuovo prodotto"));
+                        dispatch(setContentDrawer(<ModalFormProduct/>));
+                        dispatch(showDrawer("Nuovo prodotto"));
                     }}>
                         <FontAwesomeIcon className="me-2" icon={faPlus}/> Nuovo
                     </Button>
