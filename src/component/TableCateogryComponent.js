@@ -3,9 +3,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
 import parse from "html-react-parser";
+import {useDispatch} from "react-redux";
+import {setContentDrawer, showDrawer} from "../actions";
+import DrawerCateogry from "./DrawerComponent/DrawerCateogry";
 
 function TableCateogryComponent(props){
-
+    const dispatch = useDispatch();
     const columns = [
         {
             title: "ID",
@@ -29,7 +32,12 @@ function TableCateogryComponent(props){
             key:"action",
             render: (value) => (
                 <>
-                    <Button className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
+                    <Button className="me-2" shape="round" type="primary"
+                        onClick={()=>{
+                           dispatch(setContentDrawer(<DrawerCateogry/>));
+                           dispatch(showDrawer("Modifica categoria"));
+                        }}
+                    ><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
             )

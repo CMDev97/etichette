@@ -33,12 +33,12 @@ function TableIvaComponent(props){
             render: (value) => (
                 <>
                     <Button onClick={()=>{
+                        console.log(value);
                         dispatch(setContentDrawer(<DrawerIva item={value}/>));
                         dispatch(showDrawer("Modifica prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} entity="reparto"
-                                                                             onDeleteFinish={props.onRefreshData} />));
+                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} entity="reparto"/>));
                         dispatch(showModal("Elimina iva"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>

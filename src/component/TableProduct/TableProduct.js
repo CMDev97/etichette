@@ -13,6 +13,7 @@ import {deleteProduct} from "../../actions";
 function TableProduct() {
     const productsState = useSelector(state => state.products);
     const dispatch = useDispatch();
+
     const handleOnClick = (object)=>{
         console.log(object.value.id);
         dispatch(deleteProduct(object.value.id));

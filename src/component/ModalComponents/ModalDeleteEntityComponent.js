@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {hideModal, setAction, setConfirmLoading} from "../../actions";
 import Request from "../../utils/Request";
 import {message} from "antd";
+import retrieveReparti from "../../actions/ActionIvas";
 
 function ModalDeleteEntityComponent(props){
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function ModalDeleteEntityComponent(props){
             dispatch(setConfirmLoading(false));
             message.success("Hai eliminato correttamente l'oggetto");
             dispatch(hideModal());
-            props.onDeleteFinish();
+            retrieveReparti(dispatch);
         }
         request.fetchDelete().catch((error)=>{
             console.log(error);

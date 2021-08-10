@@ -5,12 +5,10 @@ import EditorReducer from "./EditorReducer";
 import IvaReducer from "./IvaReducer";
 import {ModalReducer} from "./ModalReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     drawer: DrawerReducer,
     modal:ModalReducer,
     products : ProductsReducer,
     editor: EditorReducer,
     ivasReducer: IvaReducer
 });
-
-export default rootReducer;

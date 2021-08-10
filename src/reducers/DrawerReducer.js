@@ -12,7 +12,7 @@ const DrawerReducer = (state = initialState, action) => {
             }
         case 'HIDDEN_DRAWER':
             return {
-                ...state, visible: false
+                ...state, visible: false, content: ''
             }
         case 'NEW_CONTENT_DRAWER':
             return{
