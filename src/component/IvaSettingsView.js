@@ -63,7 +63,7 @@ function IvaSettingsView(){
         console.log(value);
     }
 
-    const onDeleteItem = () => {
+    const onRefresh = () => {
         reloadData();
     }
 
@@ -83,7 +83,7 @@ function IvaSettingsView(){
                 </Col>
             </Row>
 
-            <TableIvaComponent list={ivaReducer.list} onDeleteFinish={onDeleteItem}/>
+            <TableIvaComponent list={ivaReducer.list} onRefreshData={onRefresh}/>
         </>
     );
 

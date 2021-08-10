@@ -11,6 +11,7 @@ import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
 import DrawerView from "./component/DrawerComponent/DrawerView";
 import ModalView from "./component/ModalComponents/ModalView";
+import {useDispatch} from "react-redux";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
@@ -33,24 +34,34 @@ Array.prototype.removeByID = function(id){
     return newArray;
 }
 
-function App(){
-    return (
-        <Router>
-            <div className="App">
-                <NavBarComponent/>
-                <Container>
-                    <Switch>
-                        <Route exact path="/" component={ViewHome}/>
-                        <Route exact path="/labels" component={ViewEtichette}/>
-                        <Route exact path="/product" component={ViewProdotti}/>
-                        <Route exact path="/settings" component={ViewSettings}/>
-                    </Switch>
-                </Container>
-                <DrawerView/>
-                <ModalView/>
-            </div>
-        </Router>
-    );
+class App extends React.Component {
+
+    
+
+    constructor(props) {
+        super(props);
+    }
+
+
+    render() {
+        return (
+            <Router>
+                <div className="App">
+                    <NavBarComponent/>
+                    <Container>
+                        <Switch>
+                            <Route exact path="/" component={ViewHome}/>
+                            <Route exact path="/labels" component={ViewEtichette}/>
+                            <Route exact path="/product" component={ViewProdotti}/>
+                            <Route exact path="/settings" component={ViewSettings}/>
+                        </Switch>
+                    </Container>
+                    <DrawerView/>
+                    <ModalView/>
+                </div>
+            </Router>
+        );
+    }
 }
 
 

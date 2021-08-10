@@ -10,10 +10,10 @@ function ModalDeleteEntityComponent(props){
     const actionDelete = ()=>{
         console.log("Devi eliminare un 'entità con id : " + props.id);
         dispatch(setConfirmLoading(true));
-        let request = new Request("http://localhost:8080/Gestionale_war/api/reparto/" + props.id);
+        let request = new Request("http://localhost:8080/Gestionale_war/api/" + props.entity + "/" + props.id);
         request.methodSuccess = () =>{
             dispatch(setConfirmLoading(false));
-            message.success("Hai eliminato correttamente l'oggett");
+            message.success("Hai eliminato correttamente l'oggetto");
             dispatch(hideModal());
             props.onDeleteFinish();
         }
@@ -25,7 +25,6 @@ function ModalDeleteEntityComponent(props){
     };
 
     dispatch(setAction(actionDelete));
-
 
     return (
         <div>
