@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../actions";
 import DrawerIva from "./DrawerComponent/DrawerIva";
 import ModalDeleteEntityComponent from "./ModalComponents/ModalDeleteEntityComponent";
+import {actionDeleteReparto} from "../actions/ActionIvas";
 
 function TableIvaComponent(props){
     const dispatch = useDispatch();
@@ -38,7 +39,8 @@ function TableIvaComponent(props){
                         dispatch(showDrawer("Modifica prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} entity="reparto"/>));
+                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} entity="reparto"
+                        onDelete={actionDeleteReparto}/>));
                         dispatch(showModal("Elimina iva"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>

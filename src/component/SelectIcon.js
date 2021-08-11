@@ -5,34 +5,45 @@ import {useEffect} from "react";
 import parse from "html-react-parser";
 import Request from "../utils/Request";
 
-function SelectIcon(){
+function SelectIcon({ value, onChange }){
 
     const [icons, setIcons] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [id, setId] = useState(value);
+
+    const triggerChange = (changedValue) => {
+        setId(changedValue.idSelect);
+        onChange?.(changedValue.idSelect);
+    };
 
     const handleChange = (value) => {
-        console.log(value);
+        triggerChange({
+            idSelect : value
+        })
     }
 
     useEffect(() => {
-        console.log("Show");
         let request = new Request('http://localhost:8080/Gestionale_war/api/icon');
         request.methodSuccess = (json)=>{
-            console.log(json);
             setIcons(json);
+            setLoading(false);
         }
         request.fetchData().catch(error => {
+            setLoading(false);
             message.error("Si è verificato un errore nello scaricare i dati!");
         });
     }, [1]);
 
     let option = [];
     icons.forEach(icon => {
-        option.push(<Option value={icon.id}>{parse(icon.code)} {icon.description}</Option>)
+        option.push(<Option  value={icon.id} key={icon.id}>{parse(icon.code)} {icon.description}</Option>)
     });
 
+
+
     return (
-        <Select>
-            <Option value="-1">Seleziona icona</Option>
+        <Select loading={loading} defaultValue={id} onChange={handleChange}>
+            <Option value='0'>Seleziona icona</Option>
             {option}
         </Select>
     );

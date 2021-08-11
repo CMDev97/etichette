@@ -48,7 +48,7 @@ class Request {
         const rawData = await fetch(this._url, Request.POST_OPTION(body));
         if (rawData.status === 201){
             console.log("Creato");
-            this._methodSuccess(await rawData.json());
+            this._methodSuccess();
         } else {
             this._methodError(await rawData.error());
         }

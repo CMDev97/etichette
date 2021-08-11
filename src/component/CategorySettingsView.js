@@ -1,32 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import TableCateogryComponent from "./TableCateogryComponent";
+import {useDispatch, useSelector} from "react-redux";
+import {reloadCategory} from "../actions/ActionsCategory";
+import {Col, Row} from "react-bootstrap";
+import FormSearchComponent from "./FormSearchComponent";
+import {Button} from "antd";
+import {setContentDrawer, showDrawer} from "../actions";
+import DrawerIva from "./DrawerComponent/DrawerIva";
+import DrawerCateogry from "./DrawerComponent/DrawerCateogry";
 
 function CategorySettingsView(props){
-
-    const [list, setList] = useState();
-    const [loading, setLoading] = useState(false);
-
-    const reloadData = () => {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        };
-        fetch('http://localhost:8080/Gestionale_war/api/category', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setList(data);
-            });
-    };
+    const categoryReducer = useSelector(state => state.category)
+    const dispatch = useDispatch();
 
 
     useEffect(()=>{
-        reloadData();
+        reloadCategory(dispatch);
     },[1]);
+
+    const onSearchClicked = ()=>{
+
+    }
 
     return (
         <>
-            <TableCateogryComponent list={list}/>
+            <Row>
+                <Col lg="6">
+                    <FormSearchComponent  onClickSearch={onSearchClicked} />
+                </Col>
+                <Col lg="6" className="d-flex justify-content-end" >
+                    <Button onClick={()=>{
+                        dispatch(setContentDrawer(<DrawerCateogry item={undefined}/>));
+                        dispatch(showDrawer("Aggiungi Categoria"));
+                    }} type="primary" shape="round">
+                        Nuovo
+                    </Button>
+                </Col>
+            </Row>
+            <TableCateogryComponent list={categoryReducer.list}/>
         </>
     );
 }

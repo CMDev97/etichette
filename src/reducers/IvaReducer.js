@@ -29,8 +29,6 @@ const IvaReducer = (state = initialState, action) => {
             return {
                 ...state, loadingUpload: action.value
             }
-        case 'RELOAD_IVAS':
-
         default: return state
     }
 

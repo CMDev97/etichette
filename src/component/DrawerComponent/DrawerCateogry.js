@@ -3,30 +3,36 @@ import {hideDrawer} from "../../actions";
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import SelectIcon from "../SelectIcon";
+import {saveCategory} from "../../actions/ActionsCategory";
 
 
-function DrawerCateogry(){
+function DrawerCateogry(props){
     const dispatch = useDispatch();
 
     const [fields, setFields] = useState([
         {
             name: ['description'],
-            value: ''
+            value: (props.item === undefined) ? '' : props.item.description
         },
         {
             name: ['icon'],
-            value: '-1'
+            value: (props.item === undefined) ? 0 : props.item.idIcon
         }
     ]);
 
     const finish = (values) => {
-        console.log(values);
+        const items = {
+            id: (props.item === undefined) ? 0 : props.item.id,
+            description : values.description,
+            idIcon : values.icon
+        }
+        saveCategory(dispatch, items);
     }
 
     return (
         <>
             <Form layout="vertical" fields={fields} onFinish={finish}>
-                <Form.Item label="Description" name="description" required tooltip="Inserire descrizione categoria">
+                <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Inserire descrizione categoria!' }]} tooltip="Inserire descrizione categoria">
                     <Input placeholder="PIZZE, DOlCI, PANE..." />
                 </Form.Item>
                 <Form.Item label="Icon" name="icon" required tooltip="Selezionare icona da associare alla categoria">

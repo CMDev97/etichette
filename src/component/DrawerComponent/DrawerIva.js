@@ -27,7 +27,7 @@ function DrawerIva(props){
             value: parseInt(values.iva)
         }
         let request = new Request('http://localhost:8080/Gestionale_war/api/reparto');
-        request.methodSuccess = (json) => {
+        request.methodSuccess = () => {
             message.success("Reparto " + ((props.item !== undefined) ? "modificato" : "salvato") + " correttamente");
             dispatch(hideDrawer());
             retrieveReparti(dispatch);
@@ -42,10 +42,10 @@ function DrawerIva(props){
     return (
         <>
             <Form layout="vertical" fields={fields} onFinish={finish}>
-                <Form.Item label="Description" name="description" required tooltip="Inserire il nome del reparto associato all'iva">
+                <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Inserire descrizione iva!' }]} required tooltip="Inserire il nome del reparto associato all'iva">
                     <Input placeholder="PIZZA, DOLCI o SALATO" />
                 </Form.Item>
-                <Form.Item label="IVA" name="iva" required tooltip="Inserire il valore dell'iva del raparto">
+                <Form.Item label="IVA" name="iva" required rules={[{ required: true, message: 'Inserire valore iva!' }]} tooltip="Inserire il valore dell'iva del raparto">
                     <Input type="number" placeholder="Inserisci valore IVA" />
                 </Form.Item>
 
