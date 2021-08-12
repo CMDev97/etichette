@@ -11,7 +11,6 @@ import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
 import DrawerView from "./component/DrawerComponent/DrawerView";
 import ModalView from "./component/ModalComponents/ModalView";
-import {useDispatch} from "react-redux";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
@@ -24,14 +23,14 @@ Array.prototype.filterName = function (search){
 }
 
 
-Array.prototype.removeByID = function(id){
-    let newArray = [];
+Array.prototype.findById = function(id){
+    let trovato = null;
     this.forEach((element)=>{
-        if (element.id !== id){
-            newArray.push(element);
+        if (element.id === id){
+            trovato = element;
         }
     });
-    return newArray;
+    return trovato;
 }
 
 class App extends React.Component {

@@ -1,20 +1,15 @@
-const jsonData = require('../dataMock/product.json');
+
 let initialState = {
     search:"",
-    products: jsonData.product
+    products: [],
 }
 
 const ProductsReducer = (state = initialState, action)=>{
     switch (action.type){
-        case 'ADD_PRODUCT':
+        case 'SET_LIST_PRODUCT':
             return {
-                ...state, products: [...state.products, action.value]
-            };
-        case 'DELETE':
-            return {
-                ...state,
-                products : [...state.products.removeByID(action.id)]
-            };
+                ...state, products: action.values
+            }
         default: return state;
     }
 }

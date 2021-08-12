@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import TableIconComponent from "./TableIconComponent";
+import TableIconComponent from "./table/TableIconComponent";
 import {Button, Form, Input, message} from "antd";
 import Request from "../utils/Request";
 

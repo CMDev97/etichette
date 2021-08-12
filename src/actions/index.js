@@ -20,18 +20,10 @@ export const setLoadingUploadIvas = (value) =>{
     }
 }
 
-
-export const addProduct = (value) =>{
+export const setLoadingForm = (value) => {
     return {
-        type:'ADD_PRODUCT',
+        type:'LOADING_STATE',
         value:value
-    }
-}
-
-export const deleteProduct = (id) =>{
-    return {
-        type:'DELETE',
-        id:id
     }
 }
 

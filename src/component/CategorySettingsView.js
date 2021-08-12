@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import TableCateogryComponent from "./TableCateogryComponent";
+import TableCateogryComponent from "./table/TableCateogryComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {reloadCategory} from "../actions/ActionsCategory";
 import {Col, Row} from "react-bootstrap";

@@ -4,10 +4,10 @@ import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
 import parse from "html-react-parser";
 import {useDispatch} from "react-redux";
-import {setContentDrawer, setContentModal, showDrawer, showModal} from "../actions";
-import DrawerCateogry from "./DrawerComponent/DrawerCateogry";
-import ModalDeleteEntityComponent from "./ModalComponents/ModalDeleteEntityComponent";
-import {actionDeleteCategory} from "../actions/ActionsCategory";
+import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
+import DrawerCateogry from "../DrawerComponent/DrawerCateogry";
+import ModalDeleteEntityComponent from "../ModalComponents/ModalDeleteEntityComponent";
+import {actionDeleteCategory} from "../../actions/ActionsCategory";
 
 function TableCateogryComponent(props){
     const dispatch = useDispatch();

@@ -31,7 +31,12 @@ function DrawerCateogry(props){
 
     return (
         <>
-            <Form layout="vertical" fields={fields} onFinish={finish}>
+            <Form layout="vertical"
+                  initialValues={{
+                      description:(props.item === undefined) ? '' : props.item.description,
+                      icon:(props.item === undefined) ? 0 : props.item.idIcon
+                  }}
+                  onFinish={finish}>
                 <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Inserire descrizione categoria!' }]} tooltip="Inserire descrizione categoria">
                     <Input placeholder="PIZZE, DOlCI, PANE..." />
                 </Form.Item>

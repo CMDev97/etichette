@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import TableIvaComponent from "./TableIvaComponent";
+import TableIvaComponent from "./table/TableIvaComponent";
 import {Button} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";

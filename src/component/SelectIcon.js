@@ -5,21 +5,13 @@ import {useEffect} from "react";
 import parse from "html-react-parser";
 import Request from "../utils/Request";
 
-function SelectIcon({ value, onChange }){
+function SelectIcon({ value, onChange }, props){
 
     const [icons, setIcons] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [id, setId] = useState(value);
-
-    const triggerChange = (changedValue) => {
-        setId(changedValue.idSelect);
-        onChange?.(changedValue.idSelect);
-    };
 
     const handleChange = (value) => {
-        triggerChange({
-            idSelect : value
-        })
+        onChange?.(value);
     }
 
     useEffect(() => {
@@ -39,11 +31,9 @@ function SelectIcon({ value, onChange }){
         option.push(<Option  value={icon.id} key={icon.id}>{parse(icon.code)} {icon.description}</Option>)
     });
 
-
-
     return (
-        <Select loading={loading} defaultValue={id} onChange={handleChange}>
-            <Option value='0'>Seleziona icona</Option>
+        <Select loading={loading} defaultValue={value} onChange={handleChange}>
+            <Option value={0}>Seleziona icona</Option>
             {option}
         </Select>
     );

@@ -1,12 +1,13 @@
-import React from "react";
-import TableProduct from "../component/TableProduct/TableProduct";
+import React, {useEffect} from "react";
+import TableProduct from "../component/table/TableProduct";
 import {Row, Col, Button} from "react-bootstrap";
 import FormSearchComponent from "../component/FormSearchComponent";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {useDispatch} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";
-import ModalFormProduct from "../component/ModalComponents/ModalFormProduct";
+import DrawerFormProduct from "../component/DrawerComponent/DrawerFormProduct";
+import {reloadProduct} from "../actions/ActionProduct";
 
 
 function startSearch(value){
@@ -15,6 +16,11 @@ function startSearch(value){
 
 function ViewProdotti(){
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        reloadProduct(dispatch);
+    },[1])
+
     return (
         <div>
             <h2 className="mt-4">Prodotti</h2>
@@ -24,7 +30,7 @@ function ViewProdotti(){
                 </Col>
                 <Col className="text-end">
                     <Button onClick={()=>{
-                        dispatch(setContentDrawer(<ModalFormProduct/>));
+                        dispatch(setContentDrawer(<DrawerFormProduct/>));
                         dispatch(showDrawer("Nuovo prodotto"));
                     }}>
                         <FontAwesomeIcon className="me-2" icon={faPlus}/> Nuovo
