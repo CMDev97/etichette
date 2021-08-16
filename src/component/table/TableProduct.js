@@ -7,6 +7,7 @@ import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../ac
 import ModalDeleteEntityComponent from "../ModalComponents/ModalDeleteEntityComponent";
 import {deleteProduct} from "../../actions/ActionProduct";
 import DrawerFormProduct from "../DrawerComponent/DrawerFormProduct";
+import {Link} from "react-router-dom";
 
 
 function TableProduct() {
@@ -47,7 +48,7 @@ function TableProduct() {
             key:"action",
             render: (value) => (
                 <>
-                    <Button className="me-2" shape="round" type="default"><FontAwesomeIcon icon={faInfoCircle}/></Button>
+                    <Link to={"product/" + value.id}><Button  className="me-2" shape="round" type="default"><FontAwesomeIcon icon={faInfoCircle}/></Button></Link>
                     <Button onClick={()=>{
                         console.log(value);
                         dispatch(setContentDrawer(<DrawerFormProduct item={value}/>))

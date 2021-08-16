@@ -5,7 +5,7 @@ import {message} from "antd";
 
 export const addProduct = (dispatch, value) => {
     dispatch(setLoadingForm(true));
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto');
+    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
     request.methodSuccess = (json) => {
         message.success('Caricato!');
         dispatch(setLoadingForm(false));
@@ -17,9 +17,21 @@ export const addProduct = (dispatch, value) => {
     });
 }
 
+export const getProduct = (dispatch, id) => {
+    dispatch(setLoadingProduct(true));
+    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/' + id);
+    request.methodSuccess = (json) => {
+        console.log(json);
+        dispatch(setDetailProduct(json));
+        dispatch(setLoadingProduct(false));
+    }
+    request.fetchData().catch((error) => {
+        console.log(error);
+    })
+}
 
 export const reloadProduct = (dispatch) => {
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto');
+    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
     request.methodSuccess = (json) => {
         dispatch(setListProduct(json));
     }
@@ -41,6 +53,20 @@ export const deleteProduct = (dispatch, id)=>{
         dispatch(setConfirmLoading(false));
         message.error("Errore di connessione con il server");
     });
+}
+
+export const setDetailProduct = (value)=>{
+    return {
+        type:'SET_PRODUCT',
+        value:value
+    }
+}
+
+export const  setLoadingProduct = (value) => {
+    return {
+        type:'SET_LOADING_PRODUCT',
+        value:value
+    }
 }
 
 export const setListProduct = (values) => {

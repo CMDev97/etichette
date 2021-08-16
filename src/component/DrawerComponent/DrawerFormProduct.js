@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import SelectReparto from "../SelectReparto";
 import SelectCategory from "../SelectCategory";
 import {addProduct} from "../../actions/ActionProduct";
+import SelectTagDieta from "../SelectTagDieta";
 
 
 
@@ -63,6 +64,12 @@ function DrawerFormProduct(props){
             <Form.Item valuePropName="checked" name="confezionato">
                 <Checkbox>Confezionato</Checkbox>
             </Form.Item>
+
+            <Form.Item name="tags" label="Tags">
+                <SelectTagDieta/>
+            </Form.Item>
+
+
 
             <Form.Item>
                 <Button loading={formReducer.loading} type="primary" htmlType="submit">Save</Button>
