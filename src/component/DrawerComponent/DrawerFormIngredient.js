@@ -1,6 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Checkbox, Form, Input, message, Select, Space} from "antd";
-import {addProduct} from "../../actions/ActionProduct";
 import React from "react";
 import {Option} from "antd/es/mentions";
 import {addIngredient} from "../../actions/ActionIngredient";

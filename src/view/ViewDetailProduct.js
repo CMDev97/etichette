@@ -103,7 +103,7 @@ function ViewDetailProduct(props){
                 </Row>
             </Card>
             <Row className="py-5">
-                <IngredientComponent items={[]}/>
+                <IngredientComponent id={id}/>
             </Row>
         </>
     )
