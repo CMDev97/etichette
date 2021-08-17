@@ -23,6 +23,7 @@ function DrawerFormProduct(props){
             if (!isNaN(values.categoria)) values.categoria = props.item.categoria
         }
 
+        console.log(values);
         addProduct(dispatch, JSON.stringify(values));
     };
 
@@ -38,7 +39,8 @@ function DrawerFormProduct(props){
                 confezionato:(props.item === undefined) ? false : props.item.confezionato,
                 nome : (props.item === undefined) ? '' : props.item.nome,
                 reparto : (props.item === undefined) ? 0 : props.item.reparto.id,
-                categoria:(props.item === undefined) ? 0 : props.item.categoria.id
+                categoria:(props.item === undefined) ? 0 : props.item.categoria.id,
+                tagDieta:(props.item === undefined) ? [] : props.item.tagDieta
             }}
             form={form}
             layout="vertical"
@@ -65,7 +67,7 @@ function DrawerFormProduct(props){
                 <Checkbox>Confezionato</Checkbox>
             </Form.Item>
 
-            <Form.Item name="tags" label="Tags">
+            <Form.Item name="tagDieta" label="Tags">
                 <SelectTagDieta/>
             </Form.Item>
 

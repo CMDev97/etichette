@@ -3,7 +3,6 @@ import {Row, Col} from "react-bootstrap";
 import {Button, Card} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {getProduct} from "../actions/ActionProduct";
-import parse from "html-react-parser";
 
 function ViewDetailProduct(props){
     const productReducer = useSelector(state => state.products);

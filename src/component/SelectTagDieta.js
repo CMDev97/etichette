@@ -5,10 +5,14 @@ import {Option} from "antd/es/mentions";
 import {reloadTagDieta} from "../actions/ActionTagDieta";
 
 
-export default function SelectTagDieta(){
+export default function SelectTagDieta({value={}, onChange}){
 
     const handleChange = (value)=>{
-        console.log(value);
+        let json = []
+        value.forEach((element)=>{
+            json.push({id:element, descrizione:""});
+        });
+        onChange?.(json);
     }
 
     const tagReducer = useSelector(state => state.tagDieta);
@@ -21,18 +25,17 @@ export default function SelectTagDieta(){
     const children = [];
 
     tagReducer.list.forEach((tag) => {
-        children.push(<Option key={tag.id} value={tag.id} >{tag.descrizione}</Option>);
+        children.push(<Option  key={tag.id} value={tag.id} >{tag.descrizione}</Option>);
     })
 
+    const ids = [];
+    value.forEach(element => {
+        ids.push(element.id);
+    })
 
     return (
-        <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-            placeholder="Please select"
-            onChange={handleChange}
-        >
+        <Select defaultValue={ids} mode="multiple" allowClear style={{ width: '100%' }} placeholder="Please select"
+            onChange={handleChange}>
             {children}
         </Select>
     );
