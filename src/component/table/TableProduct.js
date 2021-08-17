@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
 import ModalDeleteEntityComponent from "../ModalComponents/ModalDeleteEntityComponent";
-import {deleteProduct} from "../../actions/ActionProduct";
+import {deleteProduct, reloadProduct} from "../../actions/ActionProduct";
 import DrawerFormProduct from "../DrawerComponent/DrawerFormProduct";
 import {Link} from "react-router-dom";
 
@@ -51,7 +51,7 @@ function TableProduct() {
                     <Link to={"product/" + value.id}><Button  className="me-2" shape="round" type="default"><FontAwesomeIcon icon={faInfoCircle}/></Button></Link>
                     <Button onClick={()=>{
                         console.log(value);
-                        dispatch(setContentDrawer(<DrawerFormProduct item={value}/>))
+                        dispatch(setContentDrawer(<DrawerFormProduct item={value} actionOnSave={reloadProduct}/>))
                         dispatch(showDrawer("Modifica Prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{

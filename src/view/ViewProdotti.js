@@ -30,7 +30,7 @@ function ViewProdotti(){
                 </Col>
                 <Col className="text-end">
                     <Button onClick={()=>{
-                        dispatch(setContentDrawer(<DrawerFormProduct/>));
+                        dispatch(setContentDrawer(<DrawerFormProduct actionOnSave={reloadProduct}/>));
                         dispatch(showDrawer("Nuovo prodotto"));
                     }}>
                         <FontAwesomeIcon className="me-2" icon={faPlus}/> Nuovo

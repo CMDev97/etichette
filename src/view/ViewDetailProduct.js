@@ -1,8 +1,13 @@
 import React, {useEffect} from "react";
 import {Row, Col} from "react-bootstrap";
-import {Button, Card} from "antd";
+import {Button, Card, Tag} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {getProduct} from "../actions/ActionProduct";
+import {setContentDrawer, showDrawer} from "../actions";
+import DrawerFormProduct from "../component/DrawerComponent/DrawerFormProduct";
+import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import IngredientComponent from "../component/IngredientComponent";
 
 function ViewDetailProduct(props){
     const productReducer = useSelector(state => state.products);
@@ -13,12 +18,18 @@ function ViewDetailProduct(props){
         getProduct(dispatch, id);
     },[1]);
 
-    console.log(productReducer.item);
+    let tags = [];
+
+    if (productReducer.item !== null){
+        productReducer.item.tagDieta.forEach(element => {
+            tags.push(<Tag color="blue">{element.descrizione}</Tag>)
+        });
+    }
 
     return (
         <>
             <h1>Questi sono i dettagli del prodotto</h1>
-            <Card loading={productReducer.loading}  className="mt-4">
+            <Card loading={productReducer.loading}  className="mt-4 shadow">
                 <Row className="justify-content-between">
                     <Col className="mt-2" lg={4}>
                         <img src="https://picsum.photos/300/300" className="rounded m-auto p-auto d-block"
@@ -26,22 +37,29 @@ function ViewDetailProduct(props){
                     </Col>
                     <Col className="mt-2" lg={8}>
                         <Row>
-                            <Col className="mb-3" md={12}>
+                            <Col className="mb-3" md={6}>
                                 <span className="float-start">
                                     <h3 className="mb-2">{(productReducer.item !== null) ? productReducer.item.nome : ""}</h3>
                                 </span>
-                                <span className="float-left">
-                                    <Button className="btn-outline-danger" shape="round">
+                            </Col>
+                            <Col className="mb-3 text-end" md={6}>
+                                <span>
+                                    <Button className="btn-outline-danger me-2" shape="round">
                                         <i className= {((productReducer.item !== null) ? productReducer.item.preferito : "") ? "fas fa-heart text-danger" : "far fa-heart text-danger"}></i>
                                     </Button>
+                                    <Button onClick={()=>{
+                                        dispatch(setContentDrawer(<DrawerFormProduct item={productReducer.item} actionOnSave={getProduct}/>))
+                                        dispatch(showDrawer("Modifica Prodotto"));
+                                    }} className="me-2" shape="round"><FontAwesomeIcon icon={faEdit}/></Button>
+                                    <Button  type="danger" shape="round"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                                 </span>
                             </Col>
+                        </Row>
+                        <Row>
                             <Col className="text-start" md={6}>
                                 <p><span className="text-muted">Codice int.:</span>
                                     <span className="float-right">
-                                        <b>
-                                            <span className=" p-2">{(productReducer.item !== null) ? productReducer.item.codice : ""}</span>
-                                        </b>
+                                        <b><span className=" p-2">{(productReducer.item !== null) ? productReducer.item.codice : ""}</span></b>
                                     </span>
                                 </p>
                                 <hr></hr>
@@ -51,6 +69,7 @@ function ViewDetailProduct(props){
                                         <i className={(productReducer.item !== null && productReducer.item.confezionato) ? "fas fa-check" : "fas fa-times"}></i>
                                     </span>
                                 </b></span></p>
+                                <hr></hr>
                             </Col>
                             <Col className="text-start" md={6}>
                                 <p><span className="text-muted">Categoria :</span>
@@ -66,11 +85,26 @@ function ViewDetailProduct(props){
                                         {(productReducer.item !== null) ? productReducer.item.reparto.description : ""}
                                     </span>
                                 </b></span></p>
+                                <hr></hr>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="text-start" md={12}>
+                                <p className="d-flex">
+                                    <span className="text-muted">Tags : </span>
+                                    <span className="ms-2 float-right">
+                                        <div> {tags}</div>
+                                    </span>
+                                </p>
+                                <hr></hr>
                             </Col>
                         </Row>
                     </Col>
                 </Row>
             </Card>
+            <Row className="py-5">
+                <IngredientComponent items={[]}/>
+            </Row>
         </>
     )
 

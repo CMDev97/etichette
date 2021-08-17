@@ -12,6 +12,7 @@ import ViewSettings from "./view/ViewSettings";
 import DrawerView from "./component/DrawerComponent/DrawerView";
 import ModalView from "./component/ModalComponents/ModalView";
 import ViewDetailProduct from "./view/ViewDetailProduct";
+import ViewIngredients from "./view/ViewIngredients";
 
 Array.prototype.filterName = function (search){
     let newArray = [];
@@ -51,6 +52,7 @@ class App extends React.Component {
                             <Route exact path="/product" component={ViewProdotti}/>
                             <Route exact path="/settings" component={ViewSettings}/>
                             <Route exact path="/product/:id" component={ViewDetailProduct}/>
+                            <Route exact path="/ingredient" component={ViewIngredients}/>
                         </Switch>
                     </Container>
                     <DrawerView/>

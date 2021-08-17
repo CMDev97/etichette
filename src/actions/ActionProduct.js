@@ -3,16 +3,22 @@ import {hideDrawer, hideModal, setConfirmLoading, setLoadingForm} from "./index"
 import {message} from "antd";
 
 
-export const addProduct = (dispatch, value) => {
+export const addProduct = (dispatch, value, action) => {
     dispatch(setLoadingForm(true));
     let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
     request.methodSuccess = (json) => {
         message.success('Caricato!');
         dispatch(setLoadingForm(false));
         dispatch(hideDrawer());
-        reloadProduct(dispatch);
+        console.log(value);
+        if (value.id != 0){
+            action(dispatch, value.id);
+        } else {
+            action(dispatch);
+        }
+
     }
-    request.fetchPost(value).catch((error) => {
+    request.fetchPost(JSON.stringify(value)).catch((error) => {
         dispatch(setLoadingForm(false));
     });
 }

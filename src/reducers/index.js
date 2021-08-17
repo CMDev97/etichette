@@ -7,6 +7,7 @@ import {ModalReducer} from "./ModalReducer";
 import CategoryReducer from "./CategoryReducer";
 import {FormReducer} from "./FormReducer";
 import TagDietaReducer from "./TagDietaReducer";
+import IngredientReducer from "./IngredientReducer";
 
 export const rootReducer = combineReducers({
     drawer: DrawerReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     ivasReducer: IvaReducer,
     category: CategoryReducer,
     form:FormReducer,
-    tagDieta: TagDietaReducer
+    tagDieta: TagDietaReducer,
+    ingredient:IngredientReducer
 });
