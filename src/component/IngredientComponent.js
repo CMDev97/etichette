@@ -19,7 +19,6 @@ function IngredientComponent(props){
 
 
     return (
-        <Col md={4}>
             <Card className="pb-3 shadow">
                 <div className="card-body d-flex">
                     <h3 className="card-title w-100 text-start mb-0">Ingredienti</h3>
@@ -49,7 +48,7 @@ function IngredientComponent(props){
                     )}
                 />
             </Card>
-        </Col>
+
     );
 
 }

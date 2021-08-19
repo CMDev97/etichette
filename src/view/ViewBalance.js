@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileImage} from '@fortawesome/free-solid-svg-icons';
 import {useSelector} from "react-redux";
 
-function ViewEtichette(){
+function ViewBalance(){
     const editorState = useSelector(state => state.editor);
     return(
         <>
@@ -42,4 +42,4 @@ function ViewEtichette(){
     );
 }
 
-export default ViewEtichette;
+export default ViewBalance;

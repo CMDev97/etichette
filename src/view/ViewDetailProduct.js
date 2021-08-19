@@ -2,12 +2,13 @@ import React, {useEffect} from "react";
 import {Row, Col} from "react-bootstrap";
 import {Button, Card, Tag} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProduct} from "../actions/ActionProduct";
+import {getProduct, togglePrefer} from "../actions/ActionProduct";
 import {setContentDrawer, showDrawer} from "../actions";
 import DrawerFormProduct from "../component/DrawerComponent/DrawerFormProduct";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import IngredientComponent from "../component/IngredientComponent";
+import OptionProductView from "../component/OptionProductView";
 
 function ViewDetailProduct(props){
     const productReducer = useSelector(state => state.products);
@@ -28,7 +29,6 @@ function ViewDetailProduct(props){
 
     return (
         <>
-            <h1>Questi sono i dettagli del prodotto</h1>
             <Card loading={productReducer.loading}  className="mt-4 shadow">
                 <Row className="justify-content-between">
                     <Col className="mt-2" lg={4}>
@@ -44,7 +44,10 @@ function ViewDetailProduct(props){
                             </Col>
                             <Col className="mb-3 text-end" md={6}>
                                 <span>
-                                    <Button className="btn-outline-danger me-2" shape="round">
+                                    <Button onClick={()=>{
+                                            togglePrefer(dispatch, id);
+                                        }}
+                                        className="btn-outline-danger me-2" shape="round">
                                         <i className= {((productReducer.item !== null) ? productReducer.item.preferito : "") ? "fas fa-heart text-danger" : "far fa-heart text-danger"}></i>
                                     </Button>
                                     <Button onClick={()=>{
@@ -103,7 +106,12 @@ function ViewDetailProduct(props){
                 </Row>
             </Card>
             <Row className="py-5">
-                <IngredientComponent id={id}/>
+                <Col md={4}>
+                    <IngredientComponent id={id}/>
+                </Col>
+                <Col md={8}>
+                    <OptionProductView id={id}/>
+                </Col>
             </Row>
         </>
     )

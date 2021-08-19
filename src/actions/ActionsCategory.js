@@ -1,7 +1,6 @@
 import Request from "../utils/Request";
 import {message} from "antd";
 import {hideDrawer, hideModal, setConfirmLoading} from "./index";
-import retrieveReparti from "./ActionIvas";
 
 
 export const saveCategory = (dispatch, item) => {

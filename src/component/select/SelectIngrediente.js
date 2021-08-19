@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import {Option} from "antd/es/mentions";
 import {Select} from "antd";
-import {retrieveAllIngredient} from "../actions/ActionIngredient";
+import {retrieveAllIngredient} from "../../actions/ActionIngredient";
 
 export default function SelectIngrediente({value={}, onChange}){
 

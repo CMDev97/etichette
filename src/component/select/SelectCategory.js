@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Option} from "antd/es/mentions";
 import {Select} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {reloadCategory} from "../actions/ActionsCategory";
+import {reloadCategory} from "../../actions/ActionsCategory";
 
 export default function SelectCategory({value={}, onChange}){
 

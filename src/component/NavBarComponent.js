@@ -9,7 +9,7 @@ function NavBarComponent(){
                 <NavLink exact activeClassName="Active" to="/"><li>Home</li></NavLink>
                 <NavLink exact activeClassName="Active" to="/product"><li>Prodotti</li></NavLink>
                 <NavLink exact activeClassName="Active" to="/ingredient"><li>Ingredienti</li></NavLink>
-                <NavLink exact activeClassName="Active" to="/labels"><li>Etichette</li></NavLink>
+                <NavLink exact activeClassName="Active" to="/balance"><li>Bilancia</li></NavLink>
                 <NavLink exact activeClassName="Active" to="/settings"><li>Impostazioni</li></NavLink>
             </ul>
         </div>

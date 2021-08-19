@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {Row, Col, Card} from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import IvaSettingsView from "../component/IvaSettingsView";
-import {Menu} from "antd";
+import {Menu, Card} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faFileImage} from "@fortawesome/free-solid-svg-icons";
 import IconSettingsView from "../component/IconSettingsView";
 import CategorySettingsView from "../component/CategorySettingsView";
-import Demo from "../component/TestComponent";
+import {AziendaSetting} from "../component/AziendaSetting";
 
 function ViewSettings(){
     const [keyMenu, setKeyMenu] = useState('1');
@@ -20,7 +20,7 @@ function ViewSettings(){
 
     switch (keyMenu){
         case '1':
-            view = <Demo/>
+            view = <AziendaSetting/>
             break;
         case '5':
             view = <IvaSettingsView/>
@@ -37,11 +37,11 @@ function ViewSettings(){
     }
 
     return (
-        <div className="mt-4">
+        <div className="py-3 text-start">
             <h2>Impostazioni</h2>
             <Row>
-                <Col md="3 mt-2">
-                    <Card className="h-auto p-3 m-0">
+                <Col md="3 mt-3">
+                    <Card className="h-auto p-3 m-0 shadow">
                         <Menu
                             onClick={handleClick}
                             className="w-100 border-0"
@@ -72,8 +72,11 @@ function ViewSettings(){
                         </Menu>
                     </Card>
                 </Col>
-                <Col className="card mt-2 p-4">
-                    {view}
+                <Col className="mt-3">
+                    <Card className="p-3 shadow">
+                        {view}
+                    </Card>
+
                 </Col>
             </Row>
         </div>

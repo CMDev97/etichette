@@ -3,7 +3,7 @@ import {message, Select} from "antd";
 import {Option} from "antd/es/mentions";
 import {useEffect} from "react";
 import parse from "html-react-parser";
-import Request from "../utils/Request";
+import Request from "../../utils/Request";
 
 function SelectIcon({ value, onChange }, props){
 

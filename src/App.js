@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavBarComponent from "./component/NavBarComponent";
 import {Container} from "react-bootstrap";
 import ViewHome from "./view/ViewHome";
-import ViewEtichette from "./view/ViewEtichette";
+import ViewBalance from "./view/ViewBalance";
 import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
 import DrawerView from "./component/DrawerComponent/DrawerView";
@@ -48,7 +48,7 @@ class App extends React.Component {
                     <Container>
                         <Switch>
                             <Route exact path="/" component={ViewHome}/>
-                            <Route exact path="/labels" component={ViewEtichette}/>
+                            <Route exact path="/balance" component={ViewBalance}/>
                             <Route exact path="/product" component={ViewProdotti}/>
                             <Route exact path="/settings" component={ViewSettings}/>
                             <Route exact path="/product/:id" component={ViewDetailProduct}/>

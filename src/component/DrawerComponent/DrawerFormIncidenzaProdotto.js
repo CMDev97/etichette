@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, Form, InputNumber, message} from "antd";
 
 import React from "react";
-import SelectIngrediente from "../SelectIngrediente";
+import SelectIngrediente from "../select/SelectIngrediente";
 import {addIncidenza} from "../../actions/ActionIngredient";
 
 function DrawerFormIncidenzaProdotto(props){

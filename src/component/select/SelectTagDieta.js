@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Select} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {Option} from "antd/es/mentions";
-import {reloadTagDieta} from "../actions/ActionTagDieta";
+import {reloadTagDieta} from "../../actions/ActionTagDieta";
 
 
 export default function SelectTagDieta({value={}, onChange}){

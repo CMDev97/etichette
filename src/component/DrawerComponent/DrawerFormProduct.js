@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {Form, message, Input, Button, Space, Checkbox} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
-import SelectReparto from "../SelectReparto";
-import SelectCategory from "../SelectCategory";
+import SelectReparto from "../select/SelectReparto";
+import SelectCategory from "../select/SelectCategory";
 import {addProduct} from "../../actions/ActionProduct";
-import SelectTagDieta from "../SelectTagDieta";
+import SelectTagDieta from "../select/SelectTagDieta";
 
 function DrawerFormProduct(props){
     const formReducer = useSelector(state => state.form);

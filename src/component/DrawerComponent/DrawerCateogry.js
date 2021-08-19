@@ -2,7 +2,7 @@ import {Button, Form, Input} from "antd";
 import {hideDrawer} from "../../actions";
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import SelectIcon from "../SelectIcon";
+import SelectIcon from "../select/SelectIcon";
 import {saveCategory} from "../../actions/ActionsCategory";
 
 

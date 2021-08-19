@@ -35,7 +35,7 @@ class Request {
         this._methodError = handle;
     }
 
-    fetchData = async () => {
+    fetchData = async (noContent) => {
         const rawData  = await fetch(this._url, Request.GET_OPTION());
         if (rawData.ok){
             this._methodSuccess(await rawData.json());

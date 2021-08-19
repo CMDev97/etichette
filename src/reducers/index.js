@@ -8,6 +8,9 @@ import CategoryReducer from "./CategoryReducer";
 import {FormReducer} from "./FormReducer";
 import TagDietaReducer from "./TagDietaReducer";
 import IngredientReducer from "./IngredientReducer";
+import SellReducer from "./SellReducer";
+import {ProvinceReducer} from "./ProvinceReducer";
+import {OptionProductReducer} from "./OptionProductReducer";
 
 export const rootReducer = combineReducers({
     drawer: DrawerReducer,
@@ -18,5 +21,8 @@ export const rootReducer = combineReducers({
     category: CategoryReducer,
     form:FormReducer,
     tagDieta: TagDietaReducer,
-    ingredient:IngredientReducer
+    ingredient:IngredientReducer,
+    sell:SellReducer,
+    province:ProvinceReducer,
+    optionProduct:OptionProductReducer
 });

@@ -27,7 +27,6 @@ export const getProduct = (dispatch, id) => {
     dispatch(setLoadingProduct(true));
     let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/' + id);
     request.methodSuccess = (json) => {
-        console.log(json);
         dispatch(setDetailProduct(json));
         dispatch(setLoadingProduct(false));
     }
@@ -40,6 +39,18 @@ export const reloadProduct = (dispatch) => {
     let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
     request.methodSuccess = (json) => {
         dispatch(setListProduct(json));
+    }
+    request.fetchData().catch((error) => {
+        console.log(error);
+    })
+}
+
+export const togglePrefer = (dispatch, id) => {
+    dispatch(setLoadingProduct(true));
+    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/prefer/' + id);
+    request.methodSuccess = (json) => {
+        dispatch(setDetailProduct(json));
+        dispatch(setLoadingProduct(false));
     }
     request.fetchData().catch((error) => {
         console.log(error);
