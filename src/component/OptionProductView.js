@@ -5,6 +5,8 @@ import React, {useEffect} from "react";
 import TableOptionProduct from "./table/TableOptionProduct";
 import {retriveOptionProduct} from "../actions/ActionOptionProduct";
 import {useDispatch} from "react-redux";
+import {setContentDrawer, showDrawer} from "../actions";
+import DrawerFormOption from "./DrawerComponent/DrawerFormOption";
 
 
 export default function OptionProductView(props){
@@ -19,7 +21,10 @@ export default function OptionProductView(props){
             <div className="card-body d-flex">
                 <h3 className="card-title w-100 text-start mb-0">Varianti prodotto</h3>
                 <span className="flex-shrink-1">
-                    <Button shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
+                    <Button onClick={()=>{
+                        dispatch(setContentDrawer(<DrawerFormOption />));
+                        dispatch(showDrawer("Nuova variante prodotto"));
+                    }} shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
                 </span>
             </div>
             <div className="card-body p-0">
