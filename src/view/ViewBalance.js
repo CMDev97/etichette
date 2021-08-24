@@ -1,44 +1,56 @@
 import React from "react";
-import {Row, Col, Card, Form} from "react-bootstrap";
 import ListSearchProduct from "../component/ListProductComponent/ListSearchProduct";
-import TastierinoComponent from "../component/TastierinoLabel/TastierinoComponent";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFileImage} from '@fortawesome/free-solid-svg-icons';
+import {Row, Card, Col, Popover, Result} from "antd";
 import {useSelector} from "react-redux";
+import TastierinoComponent from "../component/TastierinoLabel/TastierinoComponent";
+import {IndicatorDisplay} from "../component/IndicatorDisplay";
+import {DescriptionProduct} from "../component/DescriptionProduct";
+import {FrownOutlined} from "@ant-design/icons";
 
 function ViewBalance(){
-    const editorState = useSelector(state => state.editor);
+    const balance = useSelector(state => state.balance);
+
+    console.log("Price " + ( balance.price * parseFloat(balance.weight)));
+
     return(
-        <>
-            <h2 className="mt-4 text-start">Etichette</h2>
-            <Card className="mt-2 px-2 py-3">
-                <Row className="justify-content-between">
-                    <Col className="Border-Right" md="4">
-                        <h4 className="ms-2 text-start">Prodotti</h4>
+        < >
+            <Row className={"mt-5"} gutter={[24,8]}>
+                <Col span={8}>
+                    <Card className={"shadow"}>
                         <ListSearchProduct/>
-                    </Col>
-                    <Col md="4">
-                        <Row className="justify-content-center"><FontAwesomeIcon size="9x" icon={faFileImage}/></Row>
-                        <h3>Nome del prodotto</h3>
-                        <p className="text-start">Ingredienti: Farina tipo 0, Acqua, Lievito, Sale,</p>
-                        <Row>
-                            <Col className="text-start"><p>€/KG: 7.00</p></Col>
-                            <Col className="text-end"><p>KG: {editorState.weight}</p></Col>
-                        </Row>
-                    </Col>
-                    <Col className="Border-Left text-start" md="4">
-                        <h4 className="ms-2">Editor etichetta</h4>
-                        <div className="Border-Bottom py-2">
-                            <Form.Check label="Breve (2 mesi)" name="preservationGroup" type="radio"/>
-                            <Form.Check label="Media (3 mesi)" name="preservationGroup" type="radio"/>
-                            <Form.Check label="Lunga (4 mesi)" name="preservationGroup" type="radio"/>
-                        </div>
-                        <TastierinoComponent/>
-                    </Col>
-                </Row>
-            </Card>
+                    </Card>
+                </Col>
+
+                <Col span={16}>
+                    <Row  gutter={[16,8]}>
+                        <Col span={12}>
+                            <IndicatorDisplay title={"Costo"} value={balance.price * parseFloat(balance.weight)} subvalue={"€"}/>
+                        </Col>
+                        <Col span={12}>
+                            <Popover placement="topLeft" content={<TastierinoComponent/>} trigger="click">
+                                <div>
+                                    <IndicatorDisplay title={"Peso"} value={balance.weight} subvalue={"Kg"}/>
+                                </div>
+                            </Popover>
+                        </Col>
+                    </Row>
+                    <div className={"mt-4"}>
+                        {(balance.idProduct === 0) ? result() : <DescriptionProduct/>}
+                    </div>
+                </Col>
+            </Row>
         </>
 
+    );
+}
+
+function result(){
+    return (
+        <Card className={"shadow"}>
+            <Result
+                icon={<FrownOutlined />}
+                title="Non hai selezionato ancora il prodotto! Selezionalo dalla lista affianco"/>
+        </Card>
     );
 }
 

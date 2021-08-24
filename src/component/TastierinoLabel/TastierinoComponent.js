@@ -16,12 +16,12 @@ function TastierinoComponent(){
     html.push(<ButtonKeypad value="canc" icon={<FontAwesomeIcon icon={faBackspace}/>}/>);
 
     return (
-        <div className="px-2 py-3">
-            <h1 className="display-3 ps-3 py-3 bg-dark text-white text-start Border-Radius">{editorState.weight}</h1>
+        <>
+
             <div className="row mt-2" >
                 {html}
             </div>
-        </div>
+        </>
     );
 
 }

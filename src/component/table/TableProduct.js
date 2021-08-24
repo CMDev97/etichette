@@ -19,7 +19,7 @@ function TableProduct() {
             title: "ID",
             dataIndex: "id",
             key: "id",
-            render: text => <p>#{text}</p>
+            render: text => <>#{text}</>
         },
         {
             title: "Codice int.",

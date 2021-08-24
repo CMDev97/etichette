@@ -1,27 +1,24 @@
 import React from "react";
 import RowItemProduct from "./RowItemProduct";
 
-class ListProduct extends React.Component{
+function ListProduct (props){
 
-    constructor(props) {
-        super(props);
+    const handleClickItemProduct = (element) => {
+        props.onClickItem(element);
     }
 
-    handleClickItemProduct(idProduct){
-        console.log(idProduct);
-    }
+    let row = [];
 
-    render() {
-        let righe = [];
-        this.props.lista.forEach((element)=>{
-           righe.push(<RowItemProduct key={element.id} item={element} onClickItem={this.handleClickItemProduct}/>);
-        });
-        return (
-            <ul className="list-group list-group-flush List mt-2">
-                {righe}
-            </ul>
-        );
-    }
+    props.dataSource.forEach((element)=>{
+        row.push(<RowItemProduct key={element.idProduct} item={element} onClickItem={handleClickItemProduct}/>);
+    });
+
+    return (
+        <ul className="list-group list-group-flush List mt-2">
+            {row}
+        </ul>
+    );
+
 }
 
 export default ListProduct

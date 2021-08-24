@@ -16,7 +16,6 @@ export const addProduct = (dispatch, value, action) => {
         } else {
             action(dispatch);
         }
-
     }
     request.fetchPost(JSON.stringify(value)).catch((error) => {
         dispatch(setLoadingForm(false));

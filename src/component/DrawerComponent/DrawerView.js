@@ -6,6 +6,7 @@ import {Drawer} from "antd";
 function DrawerView(){
     const drawer = useSelector(state => state.drawer);
     const dispatch = useDispatch();
+
     return (
         <Drawer
             title={drawer.title}

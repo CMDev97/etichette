@@ -1,45 +1,35 @@
-
-import React from "react";
+import React, {useEffect} from "react";
 import FormSearchComponent from "../FormSearchComponent";
 import ListProduct from "./ListProduct";
+import {retriveOptionUnit, setListEditor} from "../../actions/ActionOptionProduct";
+import {useDispatch, useSelector} from "react-redux";
+import {setIdProduct, setPriceProduct} from "../../actions/ActionBalance";
 
-class ListSearchProduct extends React.Component {
+function ListSearchProduct(){
+    const reducer = useSelector(state => state.balance);
+    const dispatch = useDispatch();
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            lista : [],
-            productSelected : undefined,
-            error : undefined,
-            searchState : undefined
-        }
-        this.handleOnClickSearch = this.handleOnClickSearch.bind(this);
-    }
+    useEffect(()=>{
+        retriveOptionUnit(dispatch, "KG", setListEditor);
+    },[1])
 
-    componentDidMount() {
-        console.log("componentDidMount");
-        let json = require('../../dataMock/product.json');
-        this.setState({
-            lista : json.product
-        });
-    }
-
-    componentWillUnmount() {
-        console.log("componentWillUnmount");
-    }
-
-    handleOnClickSearch(value){
+    const handleOnClickSearch = (value)=>{
         console.log(value);
     }
 
-    render() {
-        return (
-            <div className="List-Box px-2 py-3">
-                <FormSearchComponent onClickSearch={this.handleOnClickSearch}/>
-                <ListProduct lista={this.state.lista}/>
-            </div>
-        );
+    const handleOnClickItem = (item) => {
+        dispatch(setIdProduct(item.idProduct));
+        dispatch(setPriceProduct(item.price));
     }
+
+
+    return (
+        <div className="List-Box px-2 py-3">
+            <FormSearchComponent onClickSearch={handleOnClickSearch}/>
+            <ListProduct dataSource={reducer.products} onClickItem={handleOnClickItem}/>
+        </div>
+    );
+
 
 
 }

@@ -7,6 +7,7 @@ import {addProduct} from "../../actions/ActionProduct";
 import SelectTagDieta from "../select/SelectTagDieta";
 
 function DrawerFormProduct(props){
+
     const formReducer = useSelector(state => state.form);
     const dispatch = useDispatch();
 

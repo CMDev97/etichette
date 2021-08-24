@@ -11,9 +11,26 @@ export const retriveOptionProduct = (dispatch, id) => {
     })
 }
 
+export const retriveOptionUnit = (dispatch, unit, action) =>{
+    let request = new Request('http://localhost:8080/Gestionale_war/api/options/unit/'+ unit);
+    request.methodSuccess = (json) => {
+        dispatch(action(json));
+    }
+    request.fetchData().catch((error) => {
+        console.log(error);
+    })
+}
+
 const setListOption = (values) => {
     return {
         type:'SET_LIST_OPTION',
+        values:values
+    }
+}
+
+export const setListEditor = (values) => {
+    return {
+        type:'PRODUCTS_WEIGHT',
         values:values
     }
 }
