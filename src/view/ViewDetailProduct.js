@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Row, Col} from "react-bootstrap";
 import {Button, Card, Tag} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProduct, togglePrefer} from "../actions/ActionProduct";
+import {getProduct, setDetailProduct, setLoadingProduct, togglePrefer} from "../actions/ActionProduct";
 import {setContentDrawer, showDrawer} from "../actions";
 import DrawerFormProduct from "../component/DrawerComponent/DrawerFormProduct";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
@@ -15,8 +15,14 @@ function ViewDetailProduct(props){
     const dispatch = useDispatch();
     const id = props.match.params.id;
 
+    const actionSuccessRetrieve = (result) => {
+        dispatch(setDetailProduct(result));
+        dispatch(setLoadingProduct(false));
+    }
+
     useEffect(()=>{
-        getProduct(dispatch, id);
+        dispatch(setLoadingProduct(true));
+        getProduct(actionSuccessRetrieve, id);
     },[1]);
 
     let tags = [];

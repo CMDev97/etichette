@@ -22,12 +22,10 @@ export const addProduct = (dispatch, value, action) => {
     });
 }
 
-export const getProduct = (dispatch, id) => {
-    dispatch(setLoadingProduct(true));
+export const getProduct = (action, id) => {
     let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/' + id);
     request.methodSuccess = (json) => {
-        dispatch(setDetailProduct(json));
-        dispatch(setLoadingProduct(false));
+        action(json);
     }
     request.fetchData().catch((error) => {
         console.log(error);

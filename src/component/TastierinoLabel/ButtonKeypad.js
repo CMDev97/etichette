@@ -1,13 +1,10 @@
 import React from "react";
 import {Button} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {changeWeight} from "../../actions";
 
 function ButtonKeypad(props){
-    const dispatch = useDispatch();
 
     const clickNumber = ()=>{
-        dispatch(changeWeight(props.value))
+        props.onClick(props.value);
     }
 
     return (
