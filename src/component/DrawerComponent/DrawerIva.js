@@ -26,7 +26,7 @@ function DrawerIva(props){
             description: values.description,
             value: parseInt(values.iva)
         }
-        let request = new Request('http://localhost:8080/Gestionale_war/api/reparto');
+        let request = new Request('http://localhost:8080/Gestionale_war/api/reparto/');
         request.methodSuccess = () => {
             message.success("Reparto " + ((props.item !== undefined) ? "modificato" : "salvato") + " correttamente");
             dispatch(hideDrawer());

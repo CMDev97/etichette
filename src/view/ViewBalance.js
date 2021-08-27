@@ -35,7 +35,7 @@ function ViewBalance(){
                         </Col>
                     </Row>
                     <div className={"mt-4"}>
-                        {(balance.idProduct === 0) ? result() : <DescriptionProduct id={balance.idProduct} product={balance.product} price={balance.price}/>}
+                        {(balance.idProduct === 0) ? result() : <DescriptionProduct id={balance.idProduct} preservation={balance.preservation} product={balance.product} price={balance.price}/>}
                     </div>
                 </Col>
             </Row>

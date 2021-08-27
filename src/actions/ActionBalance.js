@@ -20,3 +20,17 @@ export const setPriceProduct = (value) => {
         value:value
     }
 }
+
+export const setOption = (value) => {
+    return {
+        type:'SET_OPTION',
+        value:value
+    }
+}
+
+export const setPreservation = (value) => {
+    return {
+        type:'SET_PRESERVATION',
+        value:value
+    }
+}

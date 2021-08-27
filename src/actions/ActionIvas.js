@@ -2,10 +2,13 @@ import React from "react";
 import {message} from "antd";
 import {hideModal, setConfirmLoading, setListIvas} from "./index";
 import Request from "../utils/Request";
+import {Constant} from "../Constant";
 
+
+const path = Constant.urlBase + Constant.reparto + "/";
 
 export default function retrieveReparti(dispatch){
-    fetch('http://localhost:8080/Gestionale_war/api/reparto')
+    fetch(path)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -21,7 +24,7 @@ export default function retrieveReparti(dispatch){
 }
 
 export const actionDeleteReparto = (dispatch, id)=>{
-    let request = new Request("http://localhost:8080/Gestionale_war/api/reparto/" + id);
+    let request = new Request(path + id);
     request.methodSuccess = () =>{
         dispatch(setConfirmLoading(false));
         message.success("Hai eliminato correttamente l'oggetto");
@@ -33,4 +36,8 @@ export const actionDeleteReparto = (dispatch, id)=>{
         dispatch(setConfirmLoading(false));
         message.error("Errore di connessione con il server");
     });
+}
+
+export const requestSaveReparto = (onSuccess, onError) => {
+
 }

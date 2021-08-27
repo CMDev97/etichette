@@ -1,9 +1,10 @@
 import Request from "../utils/Request";
 import {message} from "antd";
+import {Constant} from "../Constant";
 
 
 export const retriveProductCategory = (dispatch, id, pagina) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/prodotto/category?idCategory=" + id + "&pagina=" + pagina + "&numElementi=16");
+    let request = new Request(Constant.urlBase + Constant.product + "/category?idCategory=" + id + "&pagina=" + pagina + "&numElementi=16");
     request.methodSuccess = (json) =>{
         console.log(json);
         dispatch(setProductSell(json.content));

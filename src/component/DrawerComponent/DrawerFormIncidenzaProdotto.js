@@ -4,6 +4,7 @@ import {Button, Form, InputNumber, message} from "antd";
 import React from "react";
 import SelectIngrediente from "../select/SelectIngrediente";
 import {addIncidenza} from "../../actions/ActionIngredient";
+import {Constant} from "../../Constant";
 
 function DrawerFormIncidenzaProdotto(props){
     const formReducer = useSelector(state => state.form);
@@ -26,12 +27,12 @@ function DrawerFormIncidenzaProdotto(props){
         <Form form={form}
               layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
-            <Form.Item name="ingrediente" label="Ingrediente" required rules={[{required: true,},]}
+            <Form.Item name="ingrediente" label="Ingrediente" rules={[Constant.requiredField]}
                        tooltip="Devi selezionare un ingrediente">
                 <SelectIngrediente/>
             </Form.Item>
 
-            <Form.Item name="incidenza" label={"Percentuale incidenza"} required rules={[{required: true,},]}
+            <Form.Item name="incidenza" label={"Percentuale incidenza"} rules={[Constant.requiredField]}
                        tooltip="Devi inserire quanto incide tale ingrediente nel prodotto">
                 <InputNumber min={10} max={100} defaultValue={10} />
             </Form.Item>

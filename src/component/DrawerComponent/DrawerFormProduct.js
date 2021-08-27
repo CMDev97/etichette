@@ -5,6 +5,7 @@ import SelectReparto from "../select/SelectReparto";
 import SelectCategory from "../select/SelectCategory";
 import {addProduct} from "../../actions/ActionProduct";
 import SelectTagDieta from "../select/SelectTagDieta";
+import {Constant} from "../../Constant";
 
 function DrawerFormProduct(props){
 
@@ -39,17 +40,17 @@ function DrawerFormProduct(props){
             }} form={form}
             layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
-            <Form.Item name="nome" label="Name" required rules={[{required: true,},]}
+            <Form.Item name="nome" label="Name" rules={[Constant.requiredField]}
                        tooltip="Devi inserire il nome del prodotto">
                 <Input placeholder="Inserisci Nome prodotto" />
             </Form.Item>
 
             <Space className="w-100" key={0} align="baseline" direction={"horizontal"} size={"large"}>
-                <Form.Item name="reparto" label="Reparto iva" required rules={[{required: true}]}
+                <Form.Item name="reparto" label="Reparto iva" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare il reparto iva per il prodotto">
                     <SelectReparto/>
                 </Form.Item>
-                <Form.Item name="categoria" label="Categoria" required rules={[{required: true}]}
+                <Form.Item name="categoria" label="Categoria" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare la categoria per il prodotto">
                     <SelectCategory/>
                 </Form.Item>

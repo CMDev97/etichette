@@ -22,7 +22,7 @@ function TastierinoComponent(){
     }
 
     let html = [];
-    
+
     for (let i = 1; i < 10; i++){
         html.push(<ButtonKeypad value={i} icon={i} onClick={handleOnClick}/>);
     }

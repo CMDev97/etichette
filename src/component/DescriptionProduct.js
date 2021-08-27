@@ -5,6 +5,8 @@ import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {getProduct} from "../actions/ActionProduct";
 import {setProductSelect} from "../actions/ActionBalance";
+import {ButtonPrintLabel} from "./ButtonPrintLabel";
+import ButtonPreservation from "./ButtonPreservation";
 
 export function DescriptionProduct(props){
 
@@ -23,7 +25,7 @@ export function DescriptionProduct(props){
     }, [props.id]);
 
     let dataScad = new Date();
-    dataScad.setMonth(dataScad.getMonth() + 3);
+    dataScad.setMonth(dataScad.getMonth() + props.preservation);
 
 
     return (
@@ -37,9 +39,8 @@ export function DescriptionProduct(props){
                     title={(props.product !== undefined) ? props.product.nome : ""}
                     subTitle={props.price + " € / Kg"}
                     extra={[
-                        <Button icon={<FontAwesomeIcon className={"me-2"} icon={faPlus}/>}>Ingrediente</Button>,
-                        <Button type="primary"
-                                icon={<FontAwesomeIcon className={"me-2"} icon={faPrint}/>}> Stampa</Button>,
+                        <ButtonPreservation/>,
+                        <ButtonPrintLabel/>
                     ]}>
 
                     <Descriptions size={"small"} layout={"vertical"} column={3}>

@@ -1,9 +1,13 @@
 import Request from "../utils/Request";
 import {message} from "antd";
 import {hideDrawer, hideModal, setConfirmLoading, setLoadingForm} from "./index";
+import {Constant} from "../Constant";
+
+const pathIncidenza = Constant.urlBase + "incidenza/";
+const pathIngredienti = Constant.urlBase + "ingredienti/";
 
 export const retriveIngredientsProduct = (dispatch, id) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/incidenza/"+id);
+    let request = new Request(pathIncidenza + id);
     request.methodSuccess = (result)=>{
         dispatch(setListIncidenze(result));
     }
@@ -14,7 +18,7 @@ export const retriveIngredientsProduct = (dispatch, id) => {
 }
 
 export const retrieveAllIngredient = (dispatch) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/ingredienti/");
+    let request = new Request(pathIngredienti);
     request.methodSuccess = (result)=>{
         dispatch(setListIngredient(result));
     }
@@ -25,7 +29,7 @@ export const retrieveAllIngredient = (dispatch) => {
 
 export const addIncidenza = (dispatch, value, id) => {
     dispatch(setLoadingForm(true));
-    let request = new Request("http://localhost:8080/Gestionale_war/api/incidenza/" + id);
+    let request = new Request(pathIncidenza + id);
     request.methodSuccess = (result)=>{
         dispatch(setLoadingForm(false));
         message.success("Salvato con successo");
@@ -40,7 +44,7 @@ export const addIncidenza = (dispatch, value, id) => {
 
 
 export const addIngredient = (dispatch, value) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/ingredienti/");
+    let request = new Request(pathIngredienti);
     request.methodSuccess = (result)=>{
         message.success("Salvato con successo");
         retrieveAllIngredient(dispatch);
@@ -52,7 +56,7 @@ export const addIngredient = (dispatch, value) => {
 }
 
 export const deleteIncidenzaProduct = (dispatch, id) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/incidenza/" + id);
+    let request = new Request(pathIncidenza + id);
     request.methodSuccess = () =>{
         dispatch(setConfirmLoading(false));
         message.success("Hai eliminato correttamente l'oggetto");
@@ -67,7 +71,7 @@ export const deleteIncidenzaProduct = (dispatch, id) => {
 }
 
 export const deleteIngredient = (dispatch, id) => {
-    let request = new Request("http://localhost:8080/Gestionale_war/api/ingredienti/" + id);
+    let request = new Request(pathIngredienti + id);
     request.methodSuccess = () =>{
         dispatch(setConfirmLoading(false));
         message.success("Hai eliminato correttamente l'oggetto");

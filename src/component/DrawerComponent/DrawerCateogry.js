@@ -1,24 +1,14 @@
 import {Button, Form, Input} from "antd";
 import {hideDrawer} from "../../actions";
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch} from "react-redux";
 import SelectIcon from "../select/SelectIcon";
 import {saveCategory} from "../../actions/ActionsCategory";
+import {Constant} from "../../Constant";
 
 
 function DrawerCateogry(props){
     const dispatch = useDispatch();
-
-    const [fields, setFields] = useState([
-        {
-            name: ['description'],
-            value: (props.item === undefined) ? '' : props.item.description
-        },
-        {
-            name: ['icon'],
-            value: (props.item === undefined) ? 0 : props.item.idIcon
-        }
-    ]);
 
     const finish = (values) => {
         const items = {
@@ -31,22 +21,22 @@ function DrawerCateogry(props){
 
     return (
         <>
-            <Form layout="vertical"
-                  initialValues={{
+            <Form layout="vertical" initialValues={{
                       description:(props.item === undefined) ? '' : props.item.description,
                       icon:(props.item === undefined) ? 0 : props.item.idIcon
-                  }}
-                  onFinish={finish}>
-                <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Inserire descrizione categoria!' }]} tooltip="Inserire descrizione categoria">
+                  }} onFinish={finish}>
+
+                <Form.Item label="Description" name="description" rules={[Constant.requiredField]} tooltip="Inserire descrizione categoria">
                     <Input placeholder="PIZZE, DOlCI, PANE..." />
                 </Form.Item>
-                <Form.Item label="Icon" name="icon" required tooltip="Selezionare icona da associare alla categoria">
+
+                <Form.Item label="Icon" name="icon" rules={[Constant.requiredField]} tooltip="Selezionare icona da associare alla categoria">
                     <SelectIcon/>
                 </Form.Item>
 
-
                 <Button onClick={()=>{dispatch(hideDrawer())}} className="me-2" >Annulla</Button>
                 <Button htmlType="submit" type="primary">Salva</Button>
+
             </Form>
         </>
     );

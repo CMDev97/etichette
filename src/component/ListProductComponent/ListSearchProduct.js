@@ -3,7 +3,7 @@ import FormSearchComponent from "../FormSearchComponent";
 import ListProduct from "./ListProduct";
 import {retriveOptionUnit, setListEditor} from "../../actions/ActionOptionProduct";
 import {useDispatch, useSelector} from "react-redux";
-import {setIdProduct, setPriceProduct} from "../../actions/ActionBalance";
+import {setIdProduct, setOption, setPriceProduct} from "../../actions/ActionBalance";
 
 function ListSearchProduct(){
     const reducer = useSelector(state => state.balance);
@@ -18,6 +18,7 @@ function ListSearchProduct(){
     }
 
     const handleOnClickItem = (item) => {
+        dispatch(setOption(item.id));
         dispatch(setIdProduct(item.idProduct));
         dispatch(setPriceProduct(item.price));
     }

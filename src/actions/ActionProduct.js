@@ -1,11 +1,13 @@
 import Request from "../utils/Request";
 import {hideDrawer, hideModal, setConfirmLoading, setLoadingForm} from "./index";
 import {message} from "antd";
+import {Constant} from "../Constant";
 
+const path = Constant.urlBase + Constant.product + "/";
 
 export const addProduct = (dispatch, value, action) => {
     dispatch(setLoadingForm(true));
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
+    let request = new Request(path);
     request.methodSuccess = (json) => {
         message.success('Caricato!');
         dispatch(setLoadingForm(false));
@@ -23,7 +25,7 @@ export const addProduct = (dispatch, value, action) => {
 }
 
 export const getProduct = (action, id) => {
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/' + id);
+    let request = new Request(path + id);
     request.methodSuccess = (json) => {
         action(json);
     }
@@ -33,7 +35,7 @@ export const getProduct = (action, id) => {
 }
 
 export const reloadProduct = (dispatch) => {
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/');
+    let request = new Request(path);
     request.methodSuccess = (json) => {
         dispatch(setListProduct(json));
     }
@@ -44,7 +46,7 @@ export const reloadProduct = (dispatch) => {
 
 export const togglePrefer = (dispatch, id) => {
     dispatch(setLoadingProduct(true));
-    let request = new Request('http://localhost:8080/Gestionale_war/api/prodotto/prefer/' + id);
+    let request = new Request(path + 'prefer/' + id);
     request.methodSuccess = (json) => {
         dispatch(setDetailProduct(json));
         dispatch(setLoadingProduct(false));
@@ -55,7 +57,7 @@ export const togglePrefer = (dispatch, id) => {
 }
 
 export const deleteProduct = (dispatch, id)=>{
-    let request = new Request("http://localhost:8080/Gestionale_war/api/prodotto/" + id);
+    let request = new Request(path + id);
     request.methodSuccess = () =>{
         dispatch(setConfirmLoading(false));
         message.success("Hai eliminato correttamente l'oggetto");

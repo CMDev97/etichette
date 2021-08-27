@@ -1,8 +1,9 @@
 const initialState = {
     weight: "0.000",
-    preservation: "LOW",
+    preservation: 3,
     product:undefined,
     idProduct:0,
+    idOption:0,
     price:0,
     products:[],
     ingredients: [],
@@ -15,7 +16,7 @@ const BalanceReducer = (state = initialState, action) => {
             return {
                 ...state, weight: action.value
             };
-        case "PRESERVATION":
+        case "SET_PRESERVATION":
             return {
                 ...state, preservation: action.value
             };
@@ -34,6 +35,10 @@ const BalanceReducer = (state = initialState, action) => {
         case "SET_PRICE_PRODUCT":
             return {
                 ...state, price:action.value
+            }
+        case 'SET_OPTION':
+            return {
+                ...state, idOption: action.value
             }
         default: return state;
     }

@@ -3,6 +3,7 @@ import {Button, Checkbox, Form, Input, message, Select, Space} from "antd";
 import React from "react";
 import {Option} from "antd/es/mentions";
 import {addIngredient} from "../../actions/ActionIngredient";
+import {Constant} from "../../Constant";
 
 
 function DrawerFormIngredient(props){
@@ -32,13 +33,13 @@ function DrawerFormIngredient(props){
         }} form={form}
               layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
-            <Form.Item name="description" label="Descrizione" required rules={[{required: true,},]}
+            <Form.Item name="description" label="Descrizione" rules={[Constant.requiredField]}
                        tooltip="Devi inserire la descrizione dell'ingrediente">
                 <Input placeholder="Inserisci descrizione ingrediente" />
             </Form.Item>
 
             <Space className="w-100" key={0} align="baseline" direction={"horizontal"} size={"large"}>
-                <Form.Item name="unitWeight" label="Unità di misura" required rules={[{required: true}]}
+                <Form.Item name="unitWeight" label="Unità di misura" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare l'unità di misura dell'ingrediente">
                     <Select defaultValue="0" >
                         <Option value="0">Seleziona unità</Option>

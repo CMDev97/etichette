@@ -1,10 +1,11 @@
 import Request from "../utils/Request";
 import {message} from "antd";
+import {Constant} from "../Constant";
 
 
 export const retrieveProvince = (dispatch) => {
     dispatch(setLoadingProvince(true));
-    let request = new Request("http://localhost:8080/Gestionale_war/api/provincia/");
+    let request = new Request(Constant.urlBase + "provincia/");
     request.methodSuccess = (json) => {
         console.log(json);
         dispatch(setListProvince(json));
