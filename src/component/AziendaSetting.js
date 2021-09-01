@@ -1,6 +1,7 @@
 import React from "react";
 import SelectProvince from "./select/SelectProvince";
 import {Button, Form, Input, InputNumber} from "antd";
+import {Constant} from "../Constant";
 
 
 export function AziendaSetting(){
@@ -90,7 +91,7 @@ export function AziendaSetting(){
                                style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}>
                         <Input placeholder="Inserisci nome della città"/>
                     </Form.Item>
-                    <Form.Item name="province" label="Provincia" rules={[{required: true}]} style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}>
+                    <Form.Item name="province" label="Provincia" rules={[Constant.requiredField]} style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}>
                         <SelectProvince/>
                     </Form.Item>
                 </Form.Item>

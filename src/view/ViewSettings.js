@@ -22,6 +22,9 @@ function ViewSettings(){
         case '1':
             view = <AziendaSetting/>
             break;
+        case '2':
+            view = <AziendaSetting/>
+            break;
         case '5':
             view = <IvaSettingsView/>
             break;
