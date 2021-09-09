@@ -2,6 +2,7 @@ import Request from "../utils/Request";
 import {hideDrawer, hideModal, setConfirmLoading, setLoadingForm} from "./index";
 import {message} from "antd";
 import {Constant} from "../Constant";
+import {retriveOptionUnit} from "./ActionOptionProduct";
 
 const path = Constant.urlBase + Constant.product + "/";
 
@@ -32,6 +33,17 @@ export const getProduct = (action, id) => {
     request.fetchData().catch((error) => {
         console.log(error);
     })
+}
+
+export const fetchData = (url, action) =>{
+    let request = new Request(Constant.urlBase + url);
+    request.methodSuccess = (json)=>{
+        action(json);
+    }
+    request.fetchData().catch((error) => {
+        message.error("Errore richiesta con il server");
+    })
+
 }
 
 export const reloadProduct = (dispatch) => {

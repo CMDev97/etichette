@@ -1,26 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import TableIconComponent from "./table/TableIconComponent";
+import React, {useState} from 'react';
 import {Button, Form, Input, message} from "antd";
-import Request from "../utils/Request";
+import CustomTable from "./table/CustomTable";
+import {Constant} from "../Constant";
+import {columsIcon} from "./Colums";
 
 function IconSettingsView(props){
-    const [list, setList] = useState();
     const [loading, setLoading] = useState(false);
-
-    const reloadData = () => {
-        let request = new Request('http://localhost:8080/Gestionale_war/api/icon');
-        request.methodSuccess = (json)=>{
-            setList(json);
-        }
-        request.fetchData().catch(error => {
-            message.error("Si è verificato un errore nello scaricare i dati!");
-        });
-    };
-
-
-    useEffect(()=>{
-        reloadData();
-    },[1]);
 
     const [form] = Form.useForm();
 
@@ -39,7 +24,7 @@ function IconSettingsView(props){
                     setLoading(false);
                     console.log(data);
                     if (data.httpStatus === undefined || data.httpStatus === 200){
-                        reloadData();
+                        //reloadData();
                         message.success("Icona salvata correttamente!");
                     } else {
                         message.error("Salvataggio non effettuato");
@@ -82,7 +67,7 @@ function IconSettingsView(props){
                     )}
                 </Form.Item>
             </Form>
-            <TableIconComponent list={list}/>
+            <CustomTable path={Constant.icon} colums={columsIcon()}/>
         </>
     );
 

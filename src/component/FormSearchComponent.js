@@ -1,46 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import FormControl from 'react-bootstrap/FormControl';
+import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {Button, Input} from "antd";
 
 
-class FormSearchComponent extends React.Component {
+function FormSearchComponent({onClickSearch, onClickCancel}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputValue: ''
-        }
-        this.listenerOnClickSearch = this.listenerOnClickSearch.bind(this);
-        this._updateInputValue = this._updateInputValue.bind(this);
+    const [state, setState] = useState({
+        inputValue: '',
+        search:false
+    });
+
+    const handleClickSearch = () => {
+        onClickSearch(state.inputValue);
+        setState({...state,
+            search:true
+        })
     }
 
-    listenerOnClickSearch() {
-        let search = this.state.inputValue;
-        this.props.onClickSearch(search);
+    const handleClickCancel = () =>{
+        onClickCancel();
+        setState({...state, search: false});
     }
 
-    _updateInputValue(evt) {
-        this.setState({
-            inputValue: evt.target.value
-        });
+    const handleOnChangeValue = (evt) => {
+        setState({...state, inputValue: evt.target.value});
     }
 
-    render() {
-        return (
-            <Row>
-                <Col className="d-flex">
-                    <Input placeholder="Cerca..." onChange={this._updateInputValue} value={this.state.inputValue} />
-                    <Button onClick={this.listenerOnClickSearch} type='primary'>
-                        <FontAwesomeIcon icon={faSearch}/>
-                    </Button>
-                </Col>
-            </Row>
-        );
-    }
+    return (
+        <div className={"d-flex"}>
+            <Input placeholder="Cerca..." className="me-1" onChange={handleOnChangeValue} value={state.inputValue} />
+            {(state.search) ?
+                <Button className="me-1"  type='danger' onClick={handleClickCancel}>
+                    <FontAwesomeIcon icon={faTimes}/>
+                </Button>
+                : ''}
+            <Button onClick={handleClickSearch} type='primary'>
+                <FontAwesomeIcon icon={faSearch}/>
+            </Button>
+        </div>
+    );
 }
 
 export default FormSearchComponent;

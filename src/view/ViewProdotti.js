@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import TableProduct from "../component/table/TableProduct";
+import React, {useState} from "react";
+import CustomTable from "../component/table/CustomTable";
 import {Row, Col, Button} from "react-bootstrap";
 import FormSearchComponent from "../component/FormSearchComponent";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -8,25 +8,29 @@ import {useDispatch} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";
 import DrawerFormProduct from "../component/DrawerComponent/DrawerFormProduct";
 import {reloadProduct} from "../actions/ActionProduct";
+import {Constant} from "../Constant";
+import {columsProduct} from "../component/Colums";
 
-
-function startSearch(value){
-    console.log(value);
-}
 
 function ViewProdotti(){
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        reloadProduct(dispatch);
-    },[1])
+    const [path, setPath] = useState(Constant.product);
+
+    const startSearch = (value) => {
+        setPath(Constant.product + "/search/" + value);
+    }
+
+    const cancelSearch = ()=>{
+        setPath(Constant.product);
+    }
 
     return (
         <div>
             <h2 className="mt-4">Prodotti</h2>
             <Row className="mt-5 d-flex justify-content-between">
-                <Col md="4">
-                    <FormSearchComponent onClickSearch={startSearch}/>
+                <Col md="5">
+                    <FormSearchComponent onClickSearch={startSearch} onClickCancel={cancelSearch}/>
                 </Col>
                 <Col className="text-end">
                     <Button onClick={()=>{
@@ -37,7 +41,7 @@ function ViewProdotti(){
                     </Button>
                 </Col>
             </Row>
-            <TableProduct className="mt-4"/>
+            <CustomTable path={path} colums={columsProduct(dispatch)}/>
         </div>
     );
 }
