@@ -16,7 +16,8 @@ export default function SelectReparto({value={}, onChange}){
 
     useEffect(()=>{
         retrieveReparti(dispatch);
-    },[1]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     let option = [];
 

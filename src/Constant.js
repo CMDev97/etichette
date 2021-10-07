@@ -1,8 +1,8 @@
 
 const type = "http://";
-const domain = "www.flicodev.it";
+const domain = "localhost";
 const port = ":8080";
-const war = "/gestionale/api/";
+const war = "/Gestionale_war/api/";
 
 export const Constant = {
     urlBase : type+domain+port+war,

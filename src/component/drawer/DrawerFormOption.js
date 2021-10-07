@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Button, Form, Input, InputNumber, message, Select, Space} from "antd";
 
 
@@ -6,11 +6,9 @@ import React from "react";
 import {Option} from "antd/es/mentions";
 import {Constant} from "../../Constant";
 
-function DrawerFormOption(props){
+function DrawerFormOption(){
     const formReducer = useSelector(state => state.form);
 
-
-    const dispatch = useDispatch();
 
     const [form] = Form.useForm();
 
@@ -60,7 +58,7 @@ function DrawerFormOption(props){
                     <InputNumber
                         defaultValue={1.23}
                         formatter={value => `€ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        parser={value => value.replace(/\€\s?|(,*)/g, '')}/>
+                        parser={value => value.replace(/€\s?|(,*)/g, '')}/>
                 </Form.Item>
             </Space>
 

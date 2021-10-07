@@ -4,8 +4,8 @@ import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Table, Button} from "antd";
 import {useDispatch} from "react-redux";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
-import DrawerIva from "../DrawerComponent/DrawerIva";
-import ModalDeleteEntityComponent from "../ModalComponents/ModalDeleteEntityComponent";
+import DrawerIva from "../drawer/DrawerIva";
+import ModalDeleteEntityComponent from "../modal/ModalDeleteEntityComponent";
 import {actionDeleteReparto} from "../../actions/ActionIvas";
 
 function TableIvaComponent(props){

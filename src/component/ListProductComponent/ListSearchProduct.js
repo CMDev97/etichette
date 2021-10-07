@@ -11,7 +11,8 @@ function ListSearchProduct(){
 
     useEffect(()=>{
         retriveOptionUnit(dispatch, "KG", setListEditor);
-    },[1])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     const handleOnClickSearch = (value)=>{
         console.log(value);

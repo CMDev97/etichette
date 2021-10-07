@@ -17,7 +17,8 @@ function ViewHome(){
 
     useEffect(()=>{
         reloadCategory(dispatch);
-    }, [1])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     let tabs = [];
 

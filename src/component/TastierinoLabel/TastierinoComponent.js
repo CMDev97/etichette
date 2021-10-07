@@ -48,7 +48,7 @@ function addNumber(value, weight){
     if (weight === "0.000" || weight === "0"){
         weight = value;
     } else if( weight.length - weight.indexOf('.') > 3) {
-        weight = weight;
+        return weight;
     }else {
         weight = weight + value;
     }
@@ -59,7 +59,7 @@ function deleteValue(weight){
     console.log(weight.length);
     if(weight === "0.000"){
         weight = "0.";
-    } else if(weight.length == 1){
+    } else if(weight.length === 1){
         weight = "0";
     } else {
         weight = weight.substring(0, weight.length - 1);
@@ -70,7 +70,7 @@ function deleteValue(weight){
 function addPoint(weight){
     if(weight === "0.000"){
         weight = "0.";
-    } else if(weight.indexOf('.') == -1){
+    } else if(weight.indexOf('.') === -1){
         weight = weight + ".";
     }
     return weight

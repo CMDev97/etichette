@@ -1,17 +1,14 @@
-import {Button, Drawer, Form, Input} from "antd";
+import {Button, Form, Input} from "antd";
 import {hideDrawer} from "../../actions";
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch} from "react-redux";
 import SelectIcon from "../select/SelectIcon";
 import {saveCategory} from "../../actions/ActionsCategory";
 import {Constant} from "../../Constant";
-import CustomTable from "../table/CustomTable";
-import {columsIcon} from "../Colums";
 
 
 function DrawerCateogry(props){
     const dispatch = useDispatch();
-    const [visible, setVisible] = useState(false);
 
     const finish = (values) => {
         const items = {

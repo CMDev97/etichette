@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Button, Table} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
@@ -7,7 +7,6 @@ import React from "react";
 
 function TableOptionProduct() {
     const optionProduct = useSelector(state => state.optionProduct);
-    const dispatch = useDispatch();
 
     const columns = [
         {
@@ -40,7 +39,7 @@ function TableOptionProduct() {
         {
             title: "Action",
             key: "action",
-            render: (value) => (
+            render: () => (
                 <>
                     <Button className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>

@@ -1,4 +1,4 @@
-import {Button, Card} from "antd";
+import {Button, Card, Space} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import React, {useEffect} from "react";
@@ -6,7 +6,8 @@ import TableOptionProduct from "./table/TableOptionProduct";
 import {retriveOptionProduct} from "../actions/ActionOptionProduct";
 import {useDispatch} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";
-import DrawerFormOption from "./DrawerComponent/DrawerFormOption";
+import DrawerFormOption from "./drawer/DrawerFormOption";
+import Title from "antd/es/typography/Title";
 
 
 export default function OptionProductView(props){
@@ -14,22 +15,21 @@ export default function OptionProductView(props){
 
     useEffect(()=>{
             retriveOptionProduct(dispatch, props.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.id])
 
     return (
-        <Card className="shadow">
-            <div className="card-body d-flex">
-                <h3 className="card-title w-100 text-start mb-0">Varianti prodotto</h3>
-                <span className="flex-shrink-1">
+        <Card>
+            <Space direction={"vertical"} className={"w-100"}>
+                <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between"}}>
+                    <Title level={4} className={"mb-0"}>Opzioni vendita</Title>
                     <Button onClick={()=>{
                         dispatch(setContentDrawer(<DrawerFormOption />));
                         dispatch(showDrawer("Nuova variante prodotto"));
                     }} shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
-                </span>
-            </div>
-            <div className="card-body p-0">
+                </Space>
                 <TableOptionProduct />
-            </div>
+            </Space>
         </Card>
     );
 

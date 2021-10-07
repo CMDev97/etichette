@@ -3,13 +3,15 @@ import {Button} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faInfoCircle, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../actions";
-import DrawerFormProduct from "./DrawerComponent/DrawerFormProduct";
+import DrawerFormProduct from "./drawer/DrawerFormProduct";
 import {deleteProduct, reloadProduct} from "../actions/ActionProduct";
-import ModalDeleteEntityComponent from "./ModalComponents/ModalDeleteEntityComponent";
+import ModalDeleteEntityComponent from "./modal/ModalDeleteEntityComponent";
 import React from "react";
-import DrawerFormIngredient from "./DrawerComponent/DrawerFormIngredient";
+import DrawerFormIngredient from "./drawer/DrawerFormIngredient";
 import {deleteIngredient} from "../actions/ActionIngredient";
 import parse from "html-react-parser";
+import DrawerIva from "./drawer/DrawerIva";
+import {actionDeleteReparto} from "../actions/ActionIvas";
 
 
 export const columsProduct = (dispatch) => {
@@ -125,14 +127,6 @@ export const columsIngredientSelect = () => {
             title: "Unità di misura",
             dataIndex: "unitWeight",
             key: "unitWeight"
-        },
-        {
-            title: "Disponibile",
-            dataIndex: "enable",
-            key: "enable",
-            render: (value => (
-                <i className= {(value) ? "fas fa-check-circle " : "fas fa-times-circle"}></i>
-            ))
         }
     ];
 }
@@ -168,4 +162,61 @@ export const columsIcon = () => {
         }
     ];
 }
+
+export const columnsIncidenze = () => {
+    return [
+        {
+            title: "Ingrediente",
+            dataIndex: "ingrediente",
+            key: "ingrediente",
+            render: text => {
+                console.log(text);
+                return (<>{text.description}</>)
+            }
+        },
+        {
+            title: "Incidenza",
+            dataIndex: "incidenza",
+            key: "incidenza",
+            render: value => <>{value} %</>
+        }]
+}
+
+export const columnsIvas = (dispatch) => { return[
+    {
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
+        render: text => <>#{text}</>
+    },
+    {
+        title: "Description",
+        dataIndex: "description",
+        key: "description"
+    },
+    {
+        title: "Value",
+        dataIndex: "value",
+        key: "value",
+        render: value => <>{value}%</>
+    },
+    {
+        title:"Action",
+        key:"id",
+        render: (value) => (
+            <>
+                <Button onClick={()=>{
+                    console.log(value);
+                    dispatch(setContentDrawer(<DrawerIva item={value}/>));
+                    dispatch(showDrawer("Modifica prodotto"));
+                }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
+                <Button onClick={()=>{
+                    dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id}
+                                                                         onDelete={actionDeleteReparto}/>));
+                    dispatch(showModal("Elimina iva"));
+                }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+            </>
+        )
+    }
+]};
 

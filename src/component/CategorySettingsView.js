@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import TableCateogryComponent from "./table/TableCateogryComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {reloadCategory} from "../actions/ActionsCategory";
@@ -6,8 +6,7 @@ import {Col, Row} from "react-bootstrap";
 import FormSearchComponent from "./FormSearchComponent";
 import {Button} from "antd";
 import {setContentDrawer, showDrawer} from "../actions";
-import DrawerIva from "./DrawerComponent/DrawerIva";
-import DrawerCateogry from "./DrawerComponent/DrawerCateogry";
+import DrawerCateogry from "./drawer/DrawerCateogry";
 
 function CategorySettingsView(props){
     const categoryReducer = useSelector(state => state.category)
@@ -16,7 +15,8 @@ function CategorySettingsView(props){
 
     useEffect(()=>{
         reloadCategory(dispatch);
-    },[1]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     const onSearchClicked = ()=>{
 

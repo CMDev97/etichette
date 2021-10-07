@@ -3,9 +3,9 @@ import {Button, Table} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
-import ModalDeleteEntityComponent from "../ModalComponents/ModalDeleteEntityComponent";
+import ModalDeleteEntityComponent from "../modal/ModalDeleteEntityComponent";
 import React, {useEffect} from "react";
-import DrawerFormIngredient from "../DrawerComponent/DrawerFormIngredient";
+import DrawerFormIngredient from "../drawer/DrawerFormIngredient";
 import {deleteIngredient, retrieveAllIngredient} from "../../actions/ActionIngredient";
 
 function TableIngredient() {

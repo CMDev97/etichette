@@ -14,6 +14,31 @@ code {
     monospace;
 }
 
+.w-100{
+  width: 100% !important;
+}
+
+.w-50{
+  width: 50%!important;
+}
+
+.mb-0{
+  margin-bottom: 0 !important;
+}
+
+.t-start{
+  text-align: initial;
+}
+
 .card{
   border-radius: 1.5rem !important;
+}
+
+
+#components-table-demo-drag-sorting tr.drop-over-downward td {
+  border-bottom: 2px dashed #1890ff;
+}
+
+#components-table-demo-drag-sorting tr.drop-over-upward td {
+  border-top: 2px dashed #1890ff;
 }

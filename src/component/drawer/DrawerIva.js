@@ -8,7 +8,7 @@ import retrieveReparti from "../../actions/ActionIvas";
 function DrawerIva(props){
     const dispatch = useDispatch();
 
-    const [fields, setFields] = useState([
+    const [fields] = useState([
         {
             name: ['description'],
             value: (props.item === undefined) ? '' : props.item.description,
@@ -20,7 +20,7 @@ function DrawerIva(props){
     ]);
 
 
-    const finish = (values)=>{;
+    const finish = (values)=>{
         let newObject = {
             id:(props.item !== undefined) ? props.item.id : 0,
             description: values.description,

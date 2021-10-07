@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Col, Row} from "react-bootstrap";
 import FormSearchComponent from "../FormSearchComponent";
 import CustomTable from "./CustomTable";
+import {Space} from "antd";
 
 
 function ViewDefaultTable({type, extra='', columns, selection = false,
@@ -13,21 +13,18 @@ function ViewDefaultTable({type, extra='', columns, selection = false,
         setPath(type + "/search/" + value);
     }
 
-    const cancelSearch = ()=>{
+    const cancelSearch = () => {
         setPath(type);
     }
 
     return (
         <>
-        <Row className="py-2 d-flex justify-content-between">
-            <Col md="5">
+            <Space style={{width:"100%", justifyContent:"space-between", margin:"0.5rem 0"}}
+                   direction={"horizontal"} size={"large"}>
                 <FormSearchComponent onClickSearch={startSearch} onClickCancel={cancelSearch}/>
-            </Col>
-            <Col className="text-end">
                 {extra}
-            </Col>
-        </Row>
-        <CustomTable path={path} colums={columns} selection={selection} onChangeSelection={onChangeSelection}/>
+            </Space>
+            <CustomTable path={path} colums={columns} selection={selection} onChangeSelection={onChangeSelection}/>
         </>
     );
 }

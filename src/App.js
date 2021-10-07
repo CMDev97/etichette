@@ -9,11 +9,12 @@ import ViewHome from "./view/ViewHome";
 import ViewBalance from "./view/ViewBalance";
 import ViewProdotti from "./view/ViewProdotti";
 import ViewSettings from "./view/ViewSettings";
-import DrawerView from "./component/DrawerComponent/DrawerView";
-import ModalView from "./component/ModalComponents/ModalView";
+import DrawerView from "./component/drawer/DrawerView";
+import ModalView from "./component/modal/ModalView";
 import ViewDetailProduct from "./view/ViewDetailProduct";
 import ViewIngredients from "./view/ViewIngredients";
 
+// eslint-disable-next-line no-extend-native
 Array.prototype.filterName = function (search){
     let newArray = [];
     this.forEach((element) => {
@@ -25,6 +26,7 @@ Array.prototype.filterName = function (search){
 }
 
 
+// eslint-disable-next-line no-extend-native
 Array.prototype.findById = function(id){
     let trovato = null;
     this.forEach((element)=>{
@@ -35,32 +37,27 @@ Array.prototype.findById = function(id){
     return trovato;
 }
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+function App(){
+    return (
+        <Router>
+            <div className="App">
+                <NavBarComponent/>
+                <Container>
+                    <Switch>
+                        <Route exact path="/" component={ViewHome}/>
+                        <Route exact path="/balance" component={ViewBalance}/>
+                        <Route exact path="/product" component={ViewProdotti}/>
+                        <Route exact path="/settings" component={ViewSettings}/>
+                        <Route exact path="/product/:id" component={ViewDetailProduct}/>
+                        <Route exact path="/ingredient" component={ViewIngredients}/>
+                    </Switch>
+                </Container>
+                <DrawerView/>
+                <ModalView/>
+            </div>
+        </Router>
+    );
 
-    render() {
-        return (
-            <Router>
-                <div className="App">
-                    <NavBarComponent/>
-                    <Container>
-                        <Switch>
-                            <Route exact path="/" component={ViewHome}/>
-                            <Route exact path="/balance" component={ViewBalance}/>
-                            <Route exact path="/product" component={ViewProdotti}/>
-                            <Route exact path="/settings" component={ViewSettings}/>
-                            <Route exact path="/product/:id" component={ViewDetailProduct}/>
-                            <Route exact path="/ingredient" component={ViewIngredients}/>
-                        </Switch>
-                    </Container>
-                    <DrawerView/>
-                    <ModalView/>
-                </div>
-            </Router>
-        );
-    }
 }
 
 

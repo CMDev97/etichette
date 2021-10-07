@@ -1,46 +1,26 @@
-import React, {useEffect} from "react";
-import TableIvaComponent from "./table/TableIvaComponent";
+import React from "react";
 import {Button} from "antd";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";
-import {Row, Col} from "react-bootstrap";
-import FormSearchComponent from "./FormSearchComponent";
-import DrawerIva from "./DrawerComponent/DrawerIva";
-import retrieveReparti from "../actions/ActionIvas";
+import DrawerIva from "./drawer/DrawerIva";
+import ViewDefaultTable from "./table/ViewDefaultTable";
+import {Constant} from "../Constant";
+import {columnsIvas} from "./Colums";
 
 
 
 function IvaSettingsView(){
 
-    const ivaReducer = useSelector(state => state.ivasReducer);
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        retrieveReparti(dispatch);
-    },[1]);
-
-    const onSearchClicked = (value) => {
-        console.log(value);
-    }
-
     return (
-        <>
-            <Row>
-                <Col lg="6">
-                    <FormSearchComponent  onClickSearch={onSearchClicked} />
-                </Col>
-                <Col lg="6" className="d-flex justify-content-end" >
-                    <Button onClick={()=>{
-                        dispatch(setContentDrawer(<DrawerIva item={undefined}/>));
-                        dispatch(showDrawer("Aggiungi reparto"));
-                    }} type="primary" shape="round">
-                        Nuovo
-                    </Button>
-                </Col>
-            </Row>
-
-            <TableIvaComponent list={ivaReducer.list}/>
-        </>
+        <ViewDefaultTable type={Constant.reparto} columns={columnsIvas(dispatch)} extra={
+            <Button onClick={()=>{
+                dispatch(setContentDrawer(<DrawerIva item={undefined}/>));
+                dispatch(showDrawer("Aggiungi reparto"));
+            }} type="primary" shape="round">
+                Nuovo
+            </Button>} />
     );
 
 }

@@ -1,6 +1,4 @@
-import {Button, Card, Descriptions, PageHeader, Skeleton} from "antd";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus, faPrint} from "@fortawesome/free-solid-svg-icons";
+import {Card, Descriptions, PageHeader, Skeleton} from "antd";
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {getProduct} from "../actions/ActionProduct";
@@ -22,6 +20,7 @@ export function DescriptionProduct(props){
     useEffect(()=>{
         setLoading(true);
         getProduct(onSuccessRetrieve, props.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.id]);
 
     let dataScad = new Date();

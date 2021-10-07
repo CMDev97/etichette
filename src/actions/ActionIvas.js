@@ -1,4 +1,3 @@
-import React from "react";
 import {message} from "antd";
 import {hideModal, setConfirmLoading, setListIvas} from "./index";
 import Request from "../utils/Request";

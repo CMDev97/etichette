@@ -15,7 +15,8 @@ export default function SelectProvince({value={}, onChange}){
 
     useEffect(()=>{
         retrieveProvince(dispatch);
-    },[1]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     let option = [];
 

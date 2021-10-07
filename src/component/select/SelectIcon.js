@@ -24,7 +24,7 @@ function SelectIcon({ value, onChange }, props){
             setLoading(false);
             message.error("Si è verificato un errore nello scaricare i dati!");
         });
-    }, [1]);
+    }, []);
 
     let option = [];
     icons.forEach(icon => {

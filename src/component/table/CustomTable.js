@@ -1,61 +1,54 @@
 import React, {useEffect, useState} from "react";
 import {Pagination, Table} from "antd";
-import {fetchData} from "../../actions/ActionProduct";
+import {useGetData} from "../../utils/DataManager";
+import Title from "antd/es/typography/Title";
 
 
-function CustomTable({path, colums, selection=false, onChangeSelection}) {
+function CustomTable({path, colums, selection=false, onChangeSelection, selected=[]}) {
 
     const [data, setData] = useState({
-        selectedItems:[],
-        list:[],
+        selectedItems:selected,
         page:1,
         size: 10,
         total: 100,
-        loading:false
+        path:path,
     });
 
-    const changeSize = (current, size) =>{
-        console.log(current, size);
-        setData({...data, size:size
-        , page:current});
-    }
+    const {store, progress, error} = useGetData(data.path + "?page=" + data.page + "&tot=" + data.size);
 
-    const onChangeData = (pageable)=>{
-        setData({
-            ...data, list: pageable.content,
-            total:pageable.totalElements,
-            size:pageable.size,
-            loading: false,
-        })
+    const changeSize = (current, size) =>{
+        setData({...data, size:size, page:current});
     }
 
     const handleOnChangePage = (page, pageSize) => {
         setData({...data, page: page, size: pageSize});
     }
 
-
     useEffect(()=>{
-        setData({...data, loading: true})
-        fetchData(path + "?page=" + data.page + "&tot=" + data.size, onChangeData);
-    }, [path, data.page, data.size])
+        setData({...data, loading: true, path:path})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path])
 
-    const onSelectChange = selectedRowKeys => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        onChangeSelection?.(selectedRowKeys);
+    const onSelectChange = (selectedRowKeys, row) => {
+        onChangeSelection(row);
         setData({ ...data, selectedItems:selectedRowKeys });
     };
 
-    const {selectedRowKeys} = data.selectedItems;
+    const selectedRowKeys = data.selectedItems;
 
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
     };
 
+    if (error != null){
+        return <Title level={2}>Ci sono errori</Title>
+    }
+
     return(
         <div className={"pb-3"}>
-            <Table rowKey={(item) => (item.id + "-" + item.description)}  rowSelection={(selection) ? rowSelection : ''}
-                   loading={data.loading} pagination={false} dataSource={data.list} columns={colums} />
+            <Table rowKey={(item) => (item.id)}  rowSelection={(selection) ? rowSelection : ''}
+                   loading={progress} pagination={false} dataSource={(store != null) ? store.content: []} columns={colums} />
             <Pagination
                 className={"my-3"}
                 showSizeChanger
@@ -63,7 +56,7 @@ function CustomTable({path, colums, selection=false, onChangeSelection}) {
                 onShowSizeChange={changeSize}
                 onChange={handleOnChangePage}
                 defaultCurrent={data.page}
-                total={data.total}
+                total={(store != null) ? store.totalElements : 0}
             />
         </div>
 

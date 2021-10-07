@@ -17,7 +17,8 @@ export default function SelectCategory({value={}, onChange}){
 
     useEffect(()=>{
         reloadCategory(dispatch);
-    },[1]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     let option = [];
     categoryReducer.list.forEach((element) => {

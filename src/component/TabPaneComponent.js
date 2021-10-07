@@ -10,6 +10,7 @@ function TabPaneComponent(props){
 
     useEffect(()=>{
         retriveProductCategory(dispatch, props.idCategory, props.page);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.idCategory, props.page]);
 
     let col = [];

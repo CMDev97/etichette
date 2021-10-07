@@ -20,7 +20,8 @@ export default function SelectTagDieta({value={}, onChange}){
 
     useEffect(()=>{
         reloadTagDieta(dispatch);
-    }, [1]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const children = [];
 

@@ -11,6 +11,7 @@ import IngredientReducer from "./IngredientReducer";
 import SellReducer from "./SellReducer";
 import {ProvinceReducer} from "./ProvinceReducer";
 import {OptionProductReducer} from "./OptionProductReducer";
+import {StepsReducer} from "./StepsReducer";
 
 export const rootReducer = combineReducers({
     drawer: DrawerReducer,
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
     ingredient:IngredientReducer,
     sell:SellReducer,
     province:ProvinceReducer,
-    optionProduct:OptionProductReducer
+    optionProduct:OptionProductReducer,
+    steps:StepsReducer
 });
