@@ -19,7 +19,7 @@ class Request {
         return {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: body
+            body: JSON.stringify(body)
         }
     }
 
@@ -50,7 +50,7 @@ class Request {
             console.log("Creato");
             this._methodSuccess();
         } else {
-            this._methodError(await rawData.error());
+            this._methodError(rawData.status);
         }
     }
 

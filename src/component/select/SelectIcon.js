@@ -1,42 +1,40 @@
 import React, {useState} from "react";
-import {message, Select} from "antd";
+import { Select} from "antd";
 import {Option} from "antd/es/mentions";
-import {useEffect} from "react";
-import parse from "html-react-parser";
-import Request from "../../utils/Request";
+import {useGetData} from "../../utils/DataManager";
+import {CustomOption, OPTION_ICON} from "./CustomOption";
 
-function SelectIcon({ value, onChange }, props){
+function SelectIcon({ value, onChange }){
 
-    const [icons, setIcons] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState(null);
+    const {store, loading} = useGetData("icons?" + ((search == null) ? '' : ("search="+search+"&")) + "page=1&tot=100");
 
     const handleChange = (value) => {
         onChange?.(value);
     }
 
-    useEffect(() => {
-        let request = new Request('http://localhost:8080/Gestionale_war/api/icon');
-        request.methodSuccess = (json)=>{
-            setIcons(json);
-            setLoading(false);
-        }
-        request.fetchData().catch(error => {
-            setLoading(false);
-            message.error("Si è verificato un errore nello scaricare i dati!");
-        });
-    }, []);
+    function onSearch(val) {
+        console.log('search:', val);
+        setSearch(val);
+    }
 
-    let option = [];
-    icons.forEach(icon => {
-        option.push(<Option  value={icon.id} key={icon.id}>{parse(icon.code)} {icon.description}</Option>)
-    });
 
     return (
-        <Select loading={loading} defaultValue={value} onChange={handleChange}>
+        <Select
+            loading={loading}
+            showSearch
+            onChange={handleChange}
+            defaultValue={value}
+            onSearch={onSearch}>
+
             <Option value={0}>Seleziona icona</Option>
-            {option}
+
+            <CustomOption data={(store == null || store.content == null) ? null : store.content} item={OPTION_ICON}/>
+
         </Select>
     );
+
+
 
 }
 

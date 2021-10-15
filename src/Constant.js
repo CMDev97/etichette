@@ -9,7 +9,7 @@ export const Constant = {
     product:'product',
     reparto:'reparto',
     ingredient:'ingredients',
-    icon:'icon',
+    icon:'icons',
 
 
 

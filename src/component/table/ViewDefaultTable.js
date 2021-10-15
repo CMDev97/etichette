@@ -27,6 +27,7 @@ function ViewDefaultTable({type, extra='', columns, selection = false,
             <CustomTable path={path} colums={columns} selection={selection} onChangeSelection={onChangeSelection}/>
         </>
     );
+
 }
 
 export default ViewDefaultTable;

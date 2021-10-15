@@ -1,44 +1,23 @@
-import React, {useEffect} from 'react';
-import TableCateogryComponent from "./table/TableCateogryComponent";
-import {useDispatch, useSelector} from "react-redux";
-import {reloadCategory} from "../actions/ActionsCategory";
-import {Col, Row} from "react-bootstrap";
-import FormSearchComponent from "./FormSearchComponent";
+import React from 'react';
+import {useDispatch} from "react-redux";
 import {Button} from "antd";
+import ViewDefaultTable from "./table/ViewDefaultTable";
+import {columnsCategories} from "./Colums";
 import {setContentDrawer, showDrawer} from "../actions";
 import DrawerCateogry from "./drawer/DrawerCateogry";
 
-function CategorySettingsView(props){
-    const categoryReducer = useSelector(state => state.category)
+function CategorySettingsView(){
+
     const dispatch = useDispatch();
 
-
-    useEffect(()=>{
-        reloadCategory(dispatch);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-
-    const onSearchClicked = ()=>{
-
-    }
-
     return (
-        <>
-            <Row>
-                <Col lg="6">
-                    <FormSearchComponent  onClickSearch={onSearchClicked} />
-                </Col>
-                <Col lg="6" className="d-flex justify-content-end" >
-                    <Button onClick={()=>{
-                        dispatch(setContentDrawer(<DrawerCateogry item={undefined}/>));
-                        dispatch(showDrawer("Aggiungi Categoria"));
-                    }} type="primary" shape="round">
-                        Nuovo
-                    </Button>
-                </Col>
-            </Row>
-            <TableCateogryComponent list={categoryReducer.list}/>
-        </>
+        <ViewDefaultTable columns={columnsCategories(dispatch)} type={"category"} extra={
+            <Button type={"primary"}
+                    onClick={() => {
+                        dispatch(setContentDrawer(<DrawerCateogry />))
+                        dispatch(showDrawer("New Cateogry"))
+                    }}
+        >Nuovo</Button>} />
     );
 }
 

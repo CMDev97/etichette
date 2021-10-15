@@ -18,6 +18,7 @@ function IngredientComponent(props){
 
     return (
             <Card>
+
                 <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between"}}>
                     <Title level={4} className={"mb-0"}>Ingredienti</Title>
                     <Button onClick={()=>{
@@ -25,12 +26,9 @@ function IngredientComponent(props){
                 </Space>
 
                 <Table
-                    //components={components}
-                    //rowClassName={() => 'editable-row'}
                     dataSource={ingredientReducer.incidenze}
                     columns={columnsIncidenze()}
                 />
-
 
             </Card>
 

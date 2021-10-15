@@ -3,6 +3,7 @@ import Modal from "antd/es/modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import {hideModal} from "../../actions";
 
+
 function ModalView(){
     const modal = useSelector(state => state.modal);
     const dispatch = useDispatch();
@@ -10,11 +11,13 @@ function ModalView(){
 
     return (
         <Modal title={modal.title} width={modal.width}
-               visible={modal.visible} onOk={()=>{modal.actionOk()}}
+               visible={modal.visible} footer={null} onOk={()=>{modal.actionOk()}}
         confirmLoading={modal.confirmLoading} onCancel={()=>{dispatch(hideModal())}}>
-            <>{modal.content}</>
+            {modal.content}
         </Modal>
     );
+
 }
+
 
 export default ModalView;

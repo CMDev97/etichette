@@ -16,34 +16,42 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
 
     const {store, progress, error} = useGetData(data.path + "?page=" + data.page + "&tot=" + data.size);
 
+
     const changeSize = (current, size) =>{
         setData({...data, size:size, page:current});
     }
 
+
     const handleOnChangePage = (page, pageSize) => {
         setData({...data, page: page, size: pageSize});
     }
+
 
     useEffect(()=>{
         setData({...data, loading: true, path:path})
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
 
+
     const onSelectChange = (selectedRowKeys, row) => {
         onChangeSelection(row);
         setData({ ...data, selectedItems:selectedRowKeys });
     };
 
+
     const selectedRowKeys = data.selectedItems;
+
 
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
     };
 
+
     if (error != null){
         return <Title level={2}>Ci sono errori</Title>
     }
+
 
     return(
         <div className={"pb-3"}>

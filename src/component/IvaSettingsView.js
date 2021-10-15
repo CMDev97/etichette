@@ -18,7 +18,7 @@ function IvaSettingsView(){
             <Button onClick={()=>{
                 dispatch(setContentDrawer(<DrawerIva item={undefined}/>));
                 dispatch(showDrawer("Aggiungi reparto"));
-            }} type="primary" shape="round">
+            }} type="primary">
                 Nuovo
             </Button>} />
     );
