@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
-import {columsIngredientSelect} from "../Colums";
+import {columsIngredientSelect} from "./Colums";
 
 const type = 'DraggableBodyRow';
 

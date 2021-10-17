@@ -2,9 +2,9 @@ import React from 'react';
 import {useDispatch} from "react-redux";
 import {Button} from "antd";
 import ViewDefaultTable from "./table/ViewDefaultTable";
-import {columnsCategories} from "./Colums";
+import {columnsCategories} from "./table/Colums";
 import {setContentDrawer, showDrawer} from "../actions";
-import DrawerCateogry from "./drawer/DrawerCateogry";
+import {FormCategory} from "./forms/FormCategory";
 
 function CategorySettingsView(){
 
@@ -14,10 +14,9 @@ function CategorySettingsView(){
         <ViewDefaultTable columns={columnsCategories(dispatch)} type={"category"} extra={
             <Button type={"primary"}
                     onClick={() => {
-                        dispatch(setContentDrawer(<DrawerCateogry />))
+                        dispatch(setContentDrawer(<FormCategory />))
                         dispatch(showDrawer("New Cateogry"))
-                    }}
-        >Nuovo</Button>} />
+                    }}> Nuovo </Button>} />
     );
 }
 

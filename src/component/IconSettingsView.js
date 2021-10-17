@@ -1,6 +1,6 @@
 import React from 'react';
 import {Constant} from "../Constant";
-import {columsIcon} from "./Colums";
+import {columsIcon} from "./table/Colums";
 import {FormIcon} from "./forms/FormIcon";
 import ViewDefaultTable from "./table/ViewDefaultTable";
 import {Button} from "antd";

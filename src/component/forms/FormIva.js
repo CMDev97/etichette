@@ -1,60 +1,66 @@
 import React, {useState} from "react";
-import Request from "../../utils/Request";
-import {Button, Form,Input, message} from "antd";
+import {Button, Form, Input, message} from "antd";
 import {useDispatch} from "react-redux";
 import {hideDrawer} from "../../actions";
-import retrieveReparti from "../../actions/ActionIvas";
+import Request from "../../utils/Request";
+import {Constant} from "../../Constant";
 
-function DrawerIva(props){
+function FormIva({item = null}){
     const dispatch = useDispatch();
-
+    const [loading, setLoading] = useState(false);
     const [fields] = useState([
         {
             name: ['description'],
-            value: (props.item === undefined) ? '' : props.item.description,
+            value: (item === null) ? '' : item.description,
         },
         {
             name: ['iva'],
-            value: (props.item === undefined) ? '' : props.item.value
+            value: (item === null) ? '' : item.value
         }
     ]);
 
 
     const finish = (values)=>{
         let newObject = {
-            id:(props.item !== undefined) ? props.item.id : 0,
+            id:(item !== null) ? item.id : 0,
             description: values.description,
             value: parseInt(values.iva)
         }
-        let request = new Request('http://localhost:8080/Gestionale_war/api/reparto/');
+        setLoading(true);
+        const request = new Request(Constant.urlBase + Constant.iva);
         request.methodSuccess = () => {
-            message.success("Reparto " + ((props.item !== undefined) ? "modificato" : "salvato") + " correttamente");
+            setLoading(false);
+            message.success("Reparto salvato correttamente");
             dispatch(hideDrawer());
-            retrieveReparti(dispatch);
         }
-        request.fetchPost(JSON.stringify(newObject))
-            .catch(error => {
-                console.log(error);
-                message.error("Errore di conessione!");
-            });
+        request.methodError = (status) => {
+            setLoading(false);
+            message.error("Si è verificato un errore : " + status);
+            dispatch(hideDrawer());
+        }
+        request.fetchPost(newObject);
     }
+
 
     return (
         <>
             <Form layout="vertical" fields={fields} onFinish={finish}>
+
                 <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Inserire descrizione iva!' }]} required tooltip="Inserire il nome del reparto associato all'iva">
                     <Input placeholder="PIZZA, DOLCI o SALATO" />
                 </Form.Item>
+
                 <Form.Item label="IVA" name="iva" required rules={[{ required: true, message: 'Inserire valore iva!' }]} tooltip="Inserire il valore dell'iva del raparto">
                     <Input type="number" placeholder="Inserisci valore IVA" />
                 </Form.Item>
 
                 <Button onClick={()=>{dispatch(hideDrawer())}} className="me-2" >Annulla</Button>
-                <Button htmlType="submit" type="primary">Salva</Button>
+                <Button loading={loading} htmlType="submit" type="primary">Salva</Button>
+
             </Form>
         </>
     );
 
 }
 
-export default DrawerIva;
+export default FormIva;

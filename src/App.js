@@ -7,7 +7,7 @@ import NavBarComponent from "./component/NavBarComponent";
 import {Container} from "react-bootstrap";
 import ViewHome from "./view/ViewHome";
 import ViewBalance from "./view/ViewBalance";
-import ViewProdotti from "./view/ViewProdotti";
+import ViewProducts from "./view/ViewProducts";
 import ViewSettings from "./view/ViewSettings";
 import DrawerView from "./component/drawer/DrawerView";
 import ModalView from "./component/modal/ModalView";
@@ -46,7 +46,7 @@ function App(){
                     <Switch>
                         <Route exact path="/" component={ViewHome}/>
                         <Route exact path="/balance" component={ViewBalance}/>
-                        <Route exact path="/product" component={ViewProdotti}/>
+                        <Route exact path="/product" component={ViewProducts}/>
                         <Route exact path="/settings" component={ViewSettings}/>
                         <Route exact path="/product/:id" component={ViewDetailProduct}/>
                         <Route exact path="/ingredient" component={ViewIngredients}/>

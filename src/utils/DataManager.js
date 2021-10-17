@@ -31,6 +31,7 @@ export function useGetData(url){
     }, [url]);
 
     return {
+        reload : fetch,
         store : data.store,
         error : data.error,
         progress : data.progress

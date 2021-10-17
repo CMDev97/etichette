@@ -1,22 +1,30 @@
 import parse from "html-react-parser";
 import {Option} from "antd/es/mentions";
 import React from "react";
+import {Constant} from "../../Constant";
 
 
-export function CustomOption({data, item}){
-    if (data == null){
-        return ''
+export function CorrectOption({type, value}){
+    switch (type){
+        case Constant.icon :
+            return OPTION_ICON(value);
+        case Constant.category :
+            return OPTION_CATEGORY(value);
+        case Constant.iva :
+            return OPTION_IVA(value);
+        default : return ''
     }
-
-    return <>{
-        data.map(icon => (
-            <Option value={icon.id} key={icon.id}>{parse(icon.code)} {icon.description}</Option>
-        ))}
-    </>
 }
 
 
-export const OPTION_ICON = (icon) => {
-    console.log(icon + "icons");
-    return <Option value={icon.id} key={icon.id}>{parse(icon.code)} {icon.description}</Option>
+const OPTION_ICON = (element) => {
+    return <Option value={element.id} key={element.id}>{parse(element.code)} {element.description}</Option>
+}
+
+const OPTION_CATEGORY = (element) => {
+    return <Option key={element.id} value={element.id}>{element.description}</Option>;
+}
+
+const OPTION_IVA = (element) => {
+    return <Option key={element.id} value={element.id}>{element.description}</Option>
 }

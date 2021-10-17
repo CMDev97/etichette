@@ -7,9 +7,10 @@ const war = "/Gestionale_war/api/";
 export const Constant = {
     urlBase : type+domain+port+war,
     product:'product',
-    reparto:'reparto',
+    iva:'ivas',
     ingredient:'ingredients',
     icon:'icons',
+    category:"category",
 
 
 

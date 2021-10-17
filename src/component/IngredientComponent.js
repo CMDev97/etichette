@@ -4,7 +4,7 @@ import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {retriveIngredientsProduct} from "../actions/ActionIngredient";
 import {useDispatch, useSelector} from "react-redux";
-import {columnsIncidenze} from "./Colums";
+import {columnsIncidenze} from "./table/Colums";
 import Title from "antd/es/typography/Title";
 
 function IngredientComponent(props){

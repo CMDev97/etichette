@@ -2,10 +2,10 @@ import React  from 'react';
 import {Form, message, Input, Button, Space, Checkbox} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import SelectReparto from "../select/SelectReparto";
-import SelectCategory from "../select/SelectCategory";
 import {addProduct} from "../../actions/ActionProduct";
 import SelectTagDieta from "../select/SelectTagDieta";
 import {Constant} from "../../Constant";
+import CustomSelectSearch from "../select/CustomSelectSearch";
 
 function DrawerFormProduct(props){
 
@@ -52,7 +52,7 @@ function DrawerFormProduct(props){
                 </Form.Item>
                 <Form.Item name="categoria" label="Categoria" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare la categoria per il prodotto">
-                    <SelectCategory/>
+                    <CustomSelectSearch type={Constant.category} />
                 </Form.Item>
             </Space>
 

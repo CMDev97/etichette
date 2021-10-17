@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import DrawerFormIngredient from "../component/drawer/DrawerFormIngredient";
 import {Constant} from "../Constant";
 import ViewDefaultTable from "../component/table/ViewDefaultTable";
-import {columsIngredient} from "../component/Colums";
+import {columsIngredient} from "../component/table/Colums";
 import {Button} from "antd";
 
 

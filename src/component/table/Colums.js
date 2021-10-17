@@ -2,18 +2,17 @@ import {Link} from "react-router-dom";
 import {Button} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faInfoCircle, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {setContentDrawer, setContentModal, showDrawer, showModal} from "../actions";
-import DrawerFormProduct from "./drawer/DrawerFormProduct";
-import {deleteProduct, reloadProduct} from "../actions/ActionProduct";
-import ModalDeleteEntityComponent from "./modal/ModalDeleteEntityComponent";
+import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
+import DrawerFormProduct from "../drawer/DrawerFormProduct";
+import {deleteProduct, reloadProduct} from "../../actions/ActionProduct";
+import GenericDeleteModal from "../modal/GenericDeleteModal";
 import React from "react";
-import DrawerFormIngredient from "./drawer/DrawerFormIngredient";
-import {deleteIngredient} from "../actions/ActionIngredient";
+import DrawerFormIngredient from "../drawer/DrawerFormIngredient";
+import {deleteIngredient} from "../../actions/ActionIngredient";
 import parse from "html-react-parser";
-import DrawerIva from "./drawer/DrawerIva";
-import {actionDeleteReparto} from "../actions/ActionIvas";
-import DrawerCateogry from "./drawer/DrawerCateogry";
-import {actionDeleteCategory} from "../actions/ActionsCategory";
+import FormIva from "../forms/FormIva";
+import {FormCategory} from "../forms/FormCategory";
+import {Constant} from "../../Constant";
 
 
 export const columsProduct = (dispatch) => {
@@ -58,7 +57,7 @@ export const columsProduct = (dispatch) => {
                         dispatch(showDrawer("Modifica Prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} onDelete={deleteProduct} />));
+                        dispatch(setContentModal(<GenericDeleteModal id={value.id} onDelete={deleteProduct} />));
                         dispatch(showModal("Rimuovi prodotto"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
@@ -103,7 +102,7 @@ export const columsIngredient = (dispatch) => {
                         dispatch(showDrawer("Modifica Ingrediente"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id} onDelete={deleteIngredient}/>));
+                        dispatch(setContentModal(<GenericDeleteModal id={value.id} onDelete={deleteIngredient}/>));
                         dispatch(showModal("Rimuovi Ingrediente"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>
@@ -134,8 +133,7 @@ export const columsIngredientSelect = () => {
 }
 
 export const columsIcon = () => {
-    return [
-        {
+    return [{
             title: "ID",
             dataIndex: "id",
             key: "id",
@@ -162,8 +160,7 @@ export const columsIcon = () => {
                 </>
             )
         }
-    ];
-}
+    ]};
 
 export const columnsIncidenze = () => {
     return [
@@ -182,7 +179,7 @@ export const columnsIncidenze = () => {
             key: "incidenza",
             render: value => <>{value} %</>
         }]
-}
+};
 
 export const columnsIvas = (dispatch) => { return[
     {
@@ -209,12 +206,11 @@ export const columnsIvas = (dispatch) => { return[
             <>
                 <Button onClick={()=>{
                     console.log(value);
-                    dispatch(setContentDrawer(<DrawerIva item={value}/>));
+                    dispatch(setContentDrawer(<FormIva item={value}/>));
                     dispatch(showDrawer("Modifica prodotto"));
                 }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                 <Button onClick={()=>{
-                    dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id}
-                                                                         onDelete={actionDeleteReparto}/>));
+                    dispatch(setContentModal(<GenericDeleteModal type={Constant.iva} id={value.id}/>));
                     dispatch(showModal("Elimina iva"));
                 }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
             </>
@@ -247,19 +243,17 @@ export const columnsCategories = (dispatch) => { return [
             <>
                 <Button className="me-2" shape="round" type="primary"
                         onClick={()=>{
-                            console.log(value);
-                            dispatch(setContentDrawer(<DrawerCateogry item={value}/>));
+                            dispatch(setContentDrawer(<FormCategory item={value}/>));
                             dispatch(showDrawer("Modifica categoria"));
                         }}
                 ><FontAwesomeIcon icon={faEdit}/></Button>
+
                 <Button onClick={()=>{
-                    dispatch(setContentModal(<ModalDeleteEntityComponent id={value.id}
-                                                                         onDelete={actionDeleteCategory}/>));
+                    dispatch(setContentModal(<GenericDeleteModal id={value.id} type={Constant.category}/>));
                     dispatch(showModal("Elimina categoria"));
                 }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+
             </>
         )
-    }
-];
-};
+    }]};
 

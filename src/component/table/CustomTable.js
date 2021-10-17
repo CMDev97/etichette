@@ -4,7 +4,7 @@ import {useGetData} from "../../utils/DataManager";
 import Title from "antd/es/typography/Title";
 
 
-function CustomTable({path, colums, selection=false, onChangeSelection, selected=[]}) {
+function CustomTable({path, colums, selection=false, onChangeSelection, selected=[]}, refresh=false) {
 
     const [data, setData] = useState({
         selectedItems:selected,
@@ -14,7 +14,8 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
         path:path,
     });
 
-    const {store, progress, error} = useGetData(data.path + "?page=" + data.page + "&tot=" + data.size);
+
+    const {store, progress, error, reload} = useGetData(data.path + "?page=" + data.page + "&tot=" + data.size);
 
 
     const changeSize = (current, size) =>{
@@ -28,9 +29,12 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
 
 
     useEffect(()=>{
-        setData({...data, loading: true, path:path})
+        if (refresh){
+            reload();
+        }
+        setData({...data, path:path})
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [path])
+    }, [path, refresh])
 
 
     const onSelectChange = (selectedRowKeys, row) => {

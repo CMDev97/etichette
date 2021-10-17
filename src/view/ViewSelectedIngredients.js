@@ -1,6 +1,6 @@
 import {Button, Col, Row} from "antd";
 import ViewDefaultTable from "../component/table/ViewDefaultTable";
-import {columsIngredientSelect} from "../component/Colums";
+import {columsIngredientSelect} from "../component/table/Colums";
 import {Constant} from "../Constant";
 import {DragSortingTable} from "../component/table/MoveTable";
 import {useState} from "react";
