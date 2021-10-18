@@ -1,17 +1,16 @@
 import {Link} from "react-router-dom";
 import {Button} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faInfoCircle, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
-import GenericDeleteModal from "../modal/GenericDeleteModal";
+import {faEdit, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {setContentDrawer, showDrawer} from "../../actions";
 import React from "react";
 import DrawerFormIngredient from "../drawer/DrawerFormIngredient";
-import {deleteIngredient} from "../../actions/ActionIngredient";
 import parse from "html-react-parser";
 import FormIva from "../forms/FormIva";
 import {FormCategory} from "../forms/FormCategory";
 import {Constant} from "../../Constant";
 import {FormProduct} from "../forms/FormProduct";
+import {ButtonDelete} from "../button-action/ButtonDelete";
 
 
 export const columsProduct = (dispatch) => {
@@ -55,10 +54,7 @@ export const columsProduct = (dispatch) => {
                         dispatch(setContentDrawer(<FormProduct item={value}/>))
                         dispatch(showDrawer("Modifica Prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button onClick={()=>{
-                        dispatch(setContentModal(<GenericDeleteModal id={value.id} type={Constant.product}/>));
-                        dispatch(showModal("Rimuovi prodotto"));
-                    }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <ButtonDelete type={Constant.product} id={value.id}/>
                 </>
             )
         }
@@ -100,10 +96,7 @@ export const columsIngredient = (dispatch) => {
                         dispatch(setContentDrawer(<DrawerFormIngredient item={value}/>));
                         dispatch(showDrawer("Modifica Ingrediente"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button onClick={()=>{
-                        dispatch(setContentModal(<GenericDeleteModal id={value.id} onDelete={deleteIngredient}/>));
-                        dispatch(showModal("Rimuovi Ingrediente"));
-                    }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <ButtonDelete type={Constant.ingredient} id={value.id}/>
                 </>
             )
         }
@@ -155,7 +148,7 @@ export const columsIcon = () => {
             render: (value) => (
                 <>
                     <Button className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <ButtonDelete type={Constant.icon} id={value.id}/>
                 </>
             )
         }
@@ -208,10 +201,7 @@ export const columnsIvas = (dispatch) => { return[
                     dispatch(setContentDrawer(<FormIva item={value}/>));
                     dispatch(showDrawer("Modifica prodotto"));
                 }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
-                <Button onClick={()=>{
-                    dispatch(setContentModal(<GenericDeleteModal type={Constant.iva} id={value.id}/>));
-                    dispatch(showModal("Elimina iva"));
-                }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                <ButtonDelete type={Constant.iva} id={value.id}/>
             </>
         )
     }
@@ -247,12 +237,50 @@ export const columnsCategories = (dispatch) => { return [
                         }}
                 ><FontAwesomeIcon icon={faEdit}/></Button>
 
-                <Button onClick={()=>{
-                    dispatch(setContentModal(<GenericDeleteModal id={value.id} type={Constant.category}/>));
-                    dispatch(showModal("Elimina categoria"));
-                }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                <ButtonDelete type={Constant.category} id={value.id}/>
 
             </>
         )
     }]};
 
+export const columnsOptions = () => {
+    return [
+        {
+            title: "ID",
+            dataIndex: "id",
+            key: "id",
+            render: text => <>#{text}</>
+        },
+        {
+            title: "Descrizione",
+            dataIndex: "description",
+            key: "description"
+        },
+        {
+            title: "Unità",
+            dataIndex: "unit",
+            key: "unit"
+        },
+        {
+            title: "Quantità",
+            dataIndex: "quantity",
+            key: "quantity",
+        },
+        {
+            title: "Prezzo",
+            dataIndex: "price",
+            key: "price",
+            render: value => <>€ {value}</>
+        },
+        {
+            title: "Action",
+            key: "action",
+            render: (value) => (
+                <>
+                    <Button className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
+                    <ButtonDelete type={Constant.option} id={value.id} />
+                </>
+            )
+        }
+    ];
+}

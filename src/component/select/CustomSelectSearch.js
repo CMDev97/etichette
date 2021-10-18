@@ -17,7 +17,6 @@ function CustomSelectSearch({ type, value, onChange }){
         setSearch(val);
     }
 
-    console.log(store)
     return (
         <Select
             loading={loading}

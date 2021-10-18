@@ -4,12 +4,10 @@ import {Button, Form, Input, InputNumber, message, Space} from "antd";
 import React from "react";
 import {Constant} from "../../Constant";
 
-function FormIncidenzeProduct(props){
-    const formReducer = useSelector(state => state.form);
+function FormIncidenzeProduct(){
 
     const onFinish = (values) => {
         console.log(values);
-        //addIncidenza(dispatch, values, props.idProduct);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -20,7 +18,6 @@ function FormIncidenzeProduct(props){
 
     return(
         <Form
-            initialValues={formReducer.initialValues}
             layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
             <Form.List name={"incidenze"}>
@@ -54,7 +51,7 @@ function FormIncidenzeProduct(props){
 
 
             <Form.Item>
-                <Button loading={formReducer.loading} type="primary" htmlType="submit">Save</Button>
+                <Button  type="primary" htmlType="submit">Save</Button>
             </Form.Item>
         </Form>
     );

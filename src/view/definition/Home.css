@@ -1,0 +1,34 @@
+
+
+.BaseHome {
+    height: 100%;
+    background: #EAEBED;
+}
+
+.Header-Home{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+
+}
+
+.Header-Home .Title {
+    color: #0A53BE !important;
+}
+
+.Container-Menu{
+    margin-top: 3rem;
+}
+
+.Item-Menu {
+    background: white;
+    cursor: pointer;
+    border-radius: 1rem;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    height: 9rem;
+    color: #0A53BE !important;
+}
+

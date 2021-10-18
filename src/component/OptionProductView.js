@@ -1,35 +1,29 @@
-import {Button, Card, Space} from "antd";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Button, Card} from "antd";
+import React from "react";
+import Title from "antd/es/typography/Title";
+import ViewDefaultTable from "./table/ViewDefaultTable";
+import {Constant} from "../Constant";
+import {columnsOptions} from "./table/Colums";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
-import React, {useEffect} from "react";
-import TableOptionProduct from "./table/TableOptionProduct";
-import {retriveOptionProduct} from "../actions/ActionOptionProduct";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useDispatch} from "react-redux";
 import {setContentDrawer, showDrawer} from "../actions";
-import DrawerFormOption from "./drawer/DrawerFormOption";
-import Title from "antd/es/typography/Title";
+import FormOptionProduct from "./forms/FormOptionProduct";
 
 
-export default function OptionProductView(props){
+export default function OptionProductView({id}){
+
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-            retriveOptionProduct(dispatch, props.id);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [props.id])
 
     return (
         <Card>
-            <Space direction={"vertical"} className={"w-100"}>
-                <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between"}}>
-                    <Title level={4} className={"mb-0"}>Opzioni vendita</Title>
-                    <Button onClick={()=>{
-                        dispatch(setContentDrawer(<DrawerFormOption />));
-                        dispatch(showDrawer("Nuova variante prodotto"));
-                    }} shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
-                </Space>
-                <TableOptionProduct />
-            </Space>
+            <Title level={4} className={"mb-0"} style={{textAlign:"start"}}>Opzioni vendita</Title>
+            <ViewDefaultTable type={Constant.option + "?product=" + id} columns={columnsOptions()}
+                extra={<Button shape={"round"} type={"primary"} onClick={()=>{
+                    dispatch(setContentDrawer(<FormOptionProduct idProduct={id} />));
+                    dispatch(showDrawer("Nuova opzione"));
+                }}><FontAwesomeIcon icon={faPlusCircle}/></Button> }
+            />
         </Card>
     );
 

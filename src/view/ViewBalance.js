@@ -1,6 +1,6 @@
 import React from "react";
 import ListSearchProduct from "../component/ListProductComponent/ListSearchProduct";
-import {Row, Card, Col, Popover, Result} from "antd";
+import {Row, Col, Popover, Result} from "antd";
 import {useSelector} from "react-redux";
 import TastierinoComponent from "../component/TastierinoLabel/TastierinoComponent";
 import {IndicatorDisplay} from "../component/IndicatorDisplay";
@@ -16,9 +16,9 @@ function ViewBalance(){
         < >
             <Row className={"mt-5"} gutter={[24,8]}>
                 <Col span={8}>
-                    <Card className={"shadow"}>
+                    <div className={"shadow Box"}>
                         <ListSearchProduct/>
-                    </Card>
+                    </div>
                 </Col>
 
                 <Col span={16}>
@@ -46,11 +46,11 @@ function ViewBalance(){
 
 function result(){
     return (
-        <Card className={"shadow"}>
+        <div className={"shadow Box"}>
             <Result
                 icon={<FrownOutlined />}
                 title="Non hai selezionato ancora il prodotto! Selezionalo dalla lista affianco"/>
-        </Card>
+        </div>
     );
 }
 

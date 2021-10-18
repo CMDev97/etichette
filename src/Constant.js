@@ -11,12 +11,14 @@ export const Constant = {
     ingredient:'ingredients',
     icon:'icons',
     category:"category",
-
+    option: "options",
+    productIngredients : "incidenza",
 
 
     requiredField:{
         required:true,
         message:"Questo campo è obbligatorio"
-    }
+    },
+
 
 }

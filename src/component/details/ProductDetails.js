@@ -1,43 +1,44 @@
-
-import {Button, Card, Row, Col, Space, Divider} from "antd";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import React, {useEffect, useState} from "react";
-import {getRequest} from "../../actions/ActionsRequest";
-import {Constant} from "../../Constant";
+import {Card, Row, Col, Space, Divider, Spin} from "antd";
+import React from "react";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
+import {useGetData} from "../../utils/DataManager";
+import {Constant} from "../../Constant";
+import {ButtonLike} from "../button-action/ButtonLike";
+import {ButtonDelete} from "../button-action/ButtonDelete";
+import {ButtonEdit} from "../button-action/ButtonEdit";
+import {useDispatch} from "react-redux";
+import {setContentDrawer, showDrawer} from "../../actions";
+import {FormProduct} from "../forms/FormProduct";
 
 
 export  function ProductDetails({id}){
+    const dispatch = useDispatch();
+    const { store, error, progress } = useGetData(Constant.product + "/" + id);
 
-    const [data, setData] = useState({
-        product:null,
-        loading:false,
-    });
+    if (progress) {
+        return <Card>
+            <Spin size={"large"}/>
+        </Card>
+    }
 
-    useEffect(()=>{
-        console.log("use Effect");
-        getRequest(Constant.product, (value) => setData({...data, loading: value}),
-            (value) => setData({...data, product: value}), ()=>{});
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[id]);
+    if (error) {
+        return <Card>
+            <Text>Errore durante la richiesta</Text>
+        </Card>
+    }
 
     return (
-        <Card loading={data.loading}>
+        <Card>
             <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between"}}>
-                <Title level={3} className={"mb-0"}>{(data.product != null) ? data.product.nome : ""}</Title>
+                <Title level={3} className={"mb-0"}>{store.nome}</Title>
                 <Space direction={"horizontal"}>
-                    <Button onClick={()=>{
-                        //togglePrefer(dispatch, id);
-                    }} shape="round">
-                        <i className= {((data.product != null) ? data.product.preferito : "") ? "fas fa-heart text-danger" : "far fa-heart text-danger"}></i>
-                    </Button>
-                    <Button onClick={()=>{
-                        //dispatch(setContentDrawer(<DrawerFormProduct item={state.product} actionOnSave={getProduct}/>))
-                        //dispatch(showDrawer("Modifica Prodotto"));
-                    }} shape="round"><FontAwesomeIcon icon={faEdit}/></Button>
-                    <Button  type="danger" shape="round"><FontAwesomeIcon icon={faTrashAlt}/></Button>
+                    <ButtonLike type={Constant.product} id={id} initialState={store.preferito}/>
+                    <ButtonEdit onClick={()=>{
+                        dispatch(setContentDrawer(<FormProduct item={store}/>))
+                        dispatch(showDrawer("Modifica Prodotto"));
+                    }}/>
+                    <ButtonDelete type={Constant.product} id={id}/>
                 </Space>
             </Space>
             <Row style={{marginTop: "1rem"}}>
@@ -45,12 +46,12 @@ export  function ProductDetails({id}){
                     <Space direction={"vertical"} className={"w-100 t-start"}>
                         <Space direction={"horizontal"}>
                             <Text type={"secondary"} >Codice int.: </Text>
-                            <Text strong > {(data.product !== null) ? data.product.codice : ""} </Text>
+                            <Text strong > {store.codice} </Text>
                         </Space>
                         <Divider style={{margin:0}}/>
                         <Space direction={"horizontal"} style={{width:"100%"}}>
                             <Text type={"secondary"}>Confezionato:</Text>
-                            <i className={(data.product !== null && data.product.confezionato) ? "fas fa-check" : "fas fa-times"}></i>
+                            <i className={(store.confezionato) ? "fas fa-check" : "fas fa-times"}></i>
                         </Space>
                         <Divider style={{margin:0}}/>
                     </Space>
@@ -59,12 +60,12 @@ export  function ProductDetails({id}){
                     <Space direction={"vertical"} className={"w-100 t-start"}>
                         <Space direction={"horizontal"} className={"w-100"}>
                             <Text type={"secondary"}>Categoria:</Text>
-                            <Text strong>{(data.product !== null) ? data.product.categoria.description : ""}</Text>
+                            <Text strong>{store.categoria.description}</Text>
                         </Space>
                         <Divider style={{margin:0}}/>
                         <Space direction={"horizontal"}>
                             <Text type={"secondary"}>Reparto:</Text>
-                            <Text strong>{(data.product !== null) ? data.product.reparto.description : ""}</Text>
+                            <Text strong>{store.reparto.description}</Text>
                         </Space>
                         <Divider style={{margin:0}}/>
                     </Space>

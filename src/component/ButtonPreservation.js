@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setPreservation} from "../actions/ActionBalance";
 
 
-function ButtonPreservation(props){
+function ButtonPreservation(){
     return (
         <Popover placement="topLeft" content={<Preservation/>} trigger="click">
             <Button >Conservazione</Button>
@@ -14,7 +14,7 @@ function ButtonPreservation(props){
 
 
 
-function Preservation(props){
+function Preservation(){
     const balance = useSelector(state => state.balance);
 
     const dispatch = useDispatch();

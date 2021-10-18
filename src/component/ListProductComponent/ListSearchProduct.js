@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import FormSearchComponent from "../FormSearchComponent";
+import FormSearchComponent from "../forms/FormSearchComponent";
 import ListProduct from "./ListProduct";
 import {retriveOptionUnit, setListEditor} from "../../actions/ActionOptionProduct";
 import {useDispatch, useSelector} from "react-redux";

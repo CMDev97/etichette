@@ -30,10 +30,10 @@ export function DescriptionProduct(props){
     return (
         <>
             {(loading) ?
-                <Card><Skeleton active /></Card>
+                <div className={"shadow Box"}><Skeleton active /></div>
                 :
                 <PageHeader
-                    className={"shadow"}
+                    className={"shadow Box"}
                     ghost={false}
                     title={(props.product !== undefined) ? props.product.nome : ""}
                     subTitle={props.price + " € / Kg"}

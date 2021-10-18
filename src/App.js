@@ -13,6 +13,8 @@ import DrawerView from "./component/drawer/DrawerView";
 import ModalView from "./component/modal/ModalView";
 import ViewDetailProduct from "./view/ViewDetailProduct";
 import ViewIngredients from "./view/ViewIngredients";
+import {ViewSeller} from "./view/ViewSeller";
+import {BaseLayout} from "./view/definition/BaseLayout";
 
 // eslint-disable-next-line no-extend-native
 Array.prototype.filterName = function (search){
@@ -40,21 +42,37 @@ Array.prototype.findById = function(id){
 function App(){
     return (
         <Router>
-            <div className="App">
-                <NavBarComponent/>
-                <Container>
-                    <Switch>
-                        <Route exact path="/" component={ViewHome}/>
-                        <Route exact path="/balance" component={ViewBalance}/>
-                        <Route exact path="/product" component={ViewProducts}/>
-                        <Route exact path="/settings" component={ViewSettings}/>
-                        <Route exact path="/product/:id" component={ViewDetailProduct}/>
-                        <Route exact path="/ingredient" component={ViewIngredients}/>
-                    </Switch>
-                </Container>
-                <DrawerView/>
-                <ModalView/>
-            </div>
+            <Switch>
+                <Route exact path="/" component={ViewHome}/>
+                <Route exact path="/seller" component={ViewSeller}/>
+                <Route exact path="/balance">
+                    <BaseLayout>
+                        <ViewBalance/>
+                    </BaseLayout>
+                </Route>
+                <Route exact path="/product">
+                    <BaseLayout>
+                        <ViewProducts/>
+                    </BaseLayout>
+                </Route>
+                <Route exact path="/settings">
+                    <BaseLayout>
+                        <ViewSettings/>
+                    </BaseLayout>
+                </Route>
+                <Route exact path="/product/:id" component={()=>(<BaseLayout>
+                    <ViewDetailProduct/>
+                </BaseLayout>)}>
+
+                </Route>
+                <Route exact path="/ingredient">
+                    <BaseLayout>
+                        <ViewIngredients/>
+                    </BaseLayout>
+                </Route>
+            </Switch>
+            <DrawerView/>
+            <ModalView/>
         </Router>
     );
 

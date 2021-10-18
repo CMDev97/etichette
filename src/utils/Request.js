@@ -23,6 +23,14 @@ class Request {
         }
     }
 
+    static PUT_OPTION = (body) =>{
+        return {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        }
+    }
+
     constructor(url) {
         this._url = url;
     }
@@ -64,6 +72,15 @@ class Request {
         }
     }
 
+    fetchUpdate = async (body) => {
+        const rawData = await fetch(this._url, Request.PUT_OPTION(body));
+        if (rawData.ok){
+            this._methodSuccess();
+        } else {
+            console.log(rawData);
+            this._methodError(rawData.status);
+        }
+    }
 }
 
 export default Request;

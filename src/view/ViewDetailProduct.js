@@ -4,23 +4,21 @@ import { Space} from "antd";
 import IngredientComponent from "../component/IngredientComponent";
 import OptionProductView from "../component/OptionProductView";
 import {ProductDetails} from "../component/details/ProductDetails";
+import {CustomBreadcrumb} from "../component/breadcrumb/CustomBreadcrumb";
+import {useParams} from "react-router-dom";
 
-function ViewDetailProduct({match}){
+function ViewDetailProduct(){
 
-    const id = match.params.id;
-
-
-
+    const {id} = useParams();
 
     return (
-        <div style={{padding:"0.5rem 0"}}>
-            <Row className="py-5">
+        <div style={{padding:"0.5rem 0", textAlign:"start"}}>
+            <CustomBreadcrumb/>
+            <Row className="py-2">
                 <Col md={8}>
                     <Space direction={"vertical"} style={{width:"100%"}}>
-
                         <ProductDetails id={id}/>
                         <OptionProductView id={id}/>
-
                     </Space>
                 </Col>
                 <Col md={4}>

@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {Button, Input} from "antd";
+import {Button, Input, Space} from "antd";
+import "../../stile/FormSearch.css";
 
 
 function FormSearchComponent({onClickSearch, onClickCancel}) {
@@ -12,14 +13,14 @@ function FormSearchComponent({onClickSearch, onClickCancel}) {
     });
 
     const handleClickSearch = () => {
-        onClickSearch(state.inputValue);
+        onClickSearch?.(state.inputValue);
         setState({...state,
             search:true
         })
     }
 
     const handleClickCancel = () =>{
-        onClickCancel();
+        onClickCancel?.();
         setState({...state, inputValue: '', search: false});
     }
 
@@ -28,17 +29,17 @@ function FormSearchComponent({onClickSearch, onClickCancel}) {
     }
 
     return (
-        <div className={"d-flex"}>
-            <Input placeholder="Cerca..." className="me-1" onChange={handleOnChangeValue} value={state.inputValue} />
+        <Space>
+            <Input placeholder="Cerca..." className="Input-Form-Search"  onChange={handleOnChangeValue} value={state.inputValue} />
             {(state.search) ?
-                <Button className="me-1"  type='danger' onClick={handleClickCancel}>
+                <Button className="Button-Form-Cancel" shape={"circle"} onClick={handleClickCancel}>
                     <FontAwesomeIcon icon={faTimes}/>
                 </Button>
                 : ''}
-            <Button onClick={handleClickSearch} type='primary'>
+            <Button onClick={handleClickSearch} shape={"circle"} className={"Button-Form-Search"} >
                 <FontAwesomeIcon icon={faSearch}/>
             </Button>
-        </div>
+        </Space>
     );
 }
 

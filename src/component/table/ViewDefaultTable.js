@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import FormSearchComponent from "../FormSearchComponent";
+import FormSearchComponent from "../forms/FormSearchComponent";
 import CustomTable from "./CustomTable";
 import {Space} from "antd";
 
