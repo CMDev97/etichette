@@ -6,6 +6,7 @@ import React, {useState} from "react";
 import Request from "../../utils/Request";
 import {useDispatch} from "react-redux";
 import {hideDrawer} from "../../actions";
+import {ProductSaved} from "../../utils/JsonUtils";
 
 
 export function FormProduct({item}){
@@ -13,14 +14,6 @@ export function FormProduct({item}){
     const dispatch = useDispatch();
 
     const handleFinish = (values) => {
-
-        if (item !== undefined){
-            values.id = item.id;
-            values.codice = item.codice
-            if (!isNaN(values.reparto)) values.reparto = item.reparto
-            if (!isNaN(values.categoria)) values.categoria = item.categoria
-        }
-        console.log(values);
         setLoading(true);
         const request = new Request(Constant.urlBase + Constant.product);
         request.methodSuccess = () => {
@@ -33,7 +26,7 @@ export function FormProduct({item}){
             dispatch(hideDrawer());
             message.error("Si è verificato un errore : " + status);
         }
-        request.fetchPost(values);
+        request.fetchPost(ProductSaved(values, item));
 
     };
 

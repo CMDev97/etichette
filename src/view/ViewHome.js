@@ -8,6 +8,7 @@ import parse from "html-react-parser";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWallet, faCalendarAlt, faVoteYea, faCashRegister} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "react-bootstrap";
+
 const { TabPane } = Tabs;
 
 function ViewHome(){
@@ -36,7 +37,6 @@ function ViewHome(){
     }
 
     const handleOnChange = (event)=> {
-        console.log(event);
         dispatch(setCategorySelected(parseInt(event)));
     }
 

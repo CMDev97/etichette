@@ -15,7 +15,7 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
     });
 
 
-    const {store, progress, error, reload} = useGetData(data.path + "?page=" + data.page + "&tot=" + data.size);
+    const {store, progress, error, reload} = useGetData(data.path + (data.path.includes("?") ? '&' : '?') +  "page=" + data.page + "&tot=" + data.size);
 
 
     const changeSize = (current, size) =>{

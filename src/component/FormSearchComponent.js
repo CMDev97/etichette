@@ -20,7 +20,7 @@ function FormSearchComponent({onClickSearch, onClickCancel}) {
 
     const handleClickCancel = () =>{
         onClickCancel();
-        setState({...state, search: false});
+        setState({...state, inputValue: '', search: false});
     }
 
     const handleOnChangeValue = (evt) => {

@@ -10,7 +10,7 @@ function ViewDefaultTable({type, extra='', columns, selection = false,
     const [path, setPath] = useState(type);
 
     const startSearch = (value) => {
-        setPath(type + "/search/" + value);
+        setPath(type + "?search=" + value);
     }
 
     const cancelSearch = () => {

@@ -3,8 +3,6 @@ import {Button} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faInfoCircle, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {setContentDrawer, setContentModal, showDrawer, showModal} from "../../actions";
-import DrawerFormProduct from "../drawer/DrawerFormProduct";
-import {deleteProduct, reloadProduct} from "../../actions/ActionProduct";
 import GenericDeleteModal from "../modal/GenericDeleteModal";
 import React from "react";
 import DrawerFormIngredient from "../drawer/DrawerFormIngredient";
@@ -13,6 +11,7 @@ import parse from "html-react-parser";
 import FormIva from "../forms/FormIva";
 import {FormCategory} from "../forms/FormCategory";
 import {Constant} from "../../Constant";
+import {FormProduct} from "../forms/FormProduct";
 
 
 export const columsProduct = (dispatch) => {
@@ -53,11 +52,11 @@ export const columsProduct = (dispatch) => {
                     <Link to={"product/" + value.id}><Button  className="me-2" shape="round" type="default"><FontAwesomeIcon icon={faInfoCircle}/></Button></Link>
                     <Button onClick={()=>{
                         console.log(value);
-                        dispatch(setContentDrawer(<DrawerFormProduct item={value} actionOnSave={reloadProduct}/>))
+                        dispatch(setContentDrawer(<FormProduct item={value}/>))
                         dispatch(showDrawer("Modifica Prodotto"));
                     }} className="me-2" shape="round" type="primary"><FontAwesomeIcon icon={faEdit}/></Button>
                     <Button onClick={()=>{
-                        dispatch(setContentModal(<GenericDeleteModal id={value.id} onDelete={deleteProduct} />));
+                        dispatch(setContentModal(<GenericDeleteModal id={value.id} type={Constant.product}/>));
                         dispatch(showModal("Rimuovi prodotto"));
                     }} shape="round" type="danger"><FontAwesomeIcon icon={faTrashAlt}/></Button>
                 </>

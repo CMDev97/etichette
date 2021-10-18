@@ -50,6 +50,7 @@ class Request {
             console.log("Creato");
             this._methodSuccess();
         } else {
+            console.log(rawData);
             this._methodError(rawData.status);
         }
     }
