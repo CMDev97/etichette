@@ -1,39 +1,40 @@
-import React, {useEffect} from "react";
+import React from "react";
 import FormSearchComponent from "../forms/FormSearchComponent";
 import ListProduct from "./ListProduct";
-import {retriveOptionUnit, setListEditor} from "../../actions/ActionOptionProduct";
-import {useDispatch, useSelector} from "react-redux";
-import {setIdProduct, setOption, setPriceProduct} from "../../actions/ActionBalance";
+import {useGetData} from "../../utils/DataManager";
+import {Constant} from "../../Constant";
+import {Empty, Spin} from "antd";
 
-function ListSearchProduct(){
-    const reducer = useSelector(state => state.balance);
-    const dispatch = useDispatch();
+function ListSearchProduct({handleClickItem}){
 
-    useEffect(()=>{
-        retriveOptionUnit(dispatch, "KG", setListEditor);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    const {store, error, progress} = useGetData(Constant.option + "/unit/KG");
 
     const handleOnClickSearch = (value)=>{
         console.log(value);
     }
 
-    const handleOnClickItem = (item) => {
-        dispatch(setOption(item.id));
-        dispatch(setIdProduct(item.idProduct));
-        dispatch(setPriceProduct(item.price));
+    const handleOnClickItem = (optionSelected) => {
+        handleClickItem(optionSelected);
     }
 
+    if (progress) {
+        return <BaseGroup children={<Spin size={"large"}/>} onClickSearch={handleOnClickSearch}/>
+    }
 
-    return (
-        <div className="List-Box px-2 py-3">
-            <FormSearchComponent onClickSearch={handleOnClickSearch}/>
-            <ListProduct dataSource={reducer.products} onClickItem={handleOnClickItem}/>
-        </div>
-    );
+    if (error) {
+        return <BaseGroup onClickSearch={handleOnClickSearch} children={<Empty/>} />
+    }
 
-
+    return <BaseGroup onClickSearch={handleOnClickSearch} children={<ListProduct dataSource={store} onClickItem={handleOnClickItem}/>} />
 
 }
+
+function BaseGroup({children, onClickSearch}){
+    return <div className="List-Box px-2 py-3">
+        <FormSearchComponent onClickSearch={onClickSearch}/>
+        {children}
+    </div>
+}
+
 
 export default ListSearchProduct;

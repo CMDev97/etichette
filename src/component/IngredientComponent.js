@@ -1,27 +1,31 @@
 import React from "react";
-import {Button, Card, Space} from "antd";
+import {Button, Card, Space, Spin} from "antd";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import {columnsIncidenze} from "./table/Colums";
 import Title from "antd/es/typography/Title";
-import CustomTable from "./table/CustomTable";
+import {TableEditable} from "./table/EditableTable";
+import {useGetData} from "../utils/DataManager";
 import {Constant} from "../Constant";
 
 function IngredientComponent({id}){
-    //const dispatch = useDispatch();
+    const {store, progress} = useGetData(Constant.productIngredients + "?product="+id);
+
+    if (progress) {
+        return <Spin size={"large"}/>
+    }
 
     return (
             <Card>
 
-                <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between"}}>
+                <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between", marginBottom:".5rem"}}>
                     <Title level={4} className={"mb-0"}>Ingredienti</Title>
                     <Button onClick={()=>{
 
                     }} shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
                 </Space>
 
-                <CustomTable path={Constant.productIngredients + "?product=" + id} colums={columnsIncidenze()}/>
+                <TableEditable dataSource={store.content}/>
 
             </Card>
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Row, Col} from "react-bootstrap";
-import IvaSettingsView from "../component/IvaSettingsView";
+import IvaSettingsView from "../component/settings/IvaSettingsView";
 import {Menu, Card} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faFileImage} from "@fortawesome/free-solid-svg-icons";

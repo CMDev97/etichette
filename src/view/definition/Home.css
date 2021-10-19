@@ -21,9 +21,9 @@
 }
 
 .Item-Menu {
+    border-radius: .3rem;
     background: white;
     cursor: pointer;
-    border-radius: 1rem;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center;

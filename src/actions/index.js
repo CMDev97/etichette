@@ -1,10 +1,4 @@
 
-export const setEditIva = (value) => {
-    return {
-        type:'EDIT_IVA',
-        value:value
-    }
-}
 
 export const setListIvas = (value) => {
     return {
@@ -16,13 +10,6 @@ export const setListIvas = (value) => {
 export const setLoadingUploadIvas = (value) =>{
     return {
         type:'SET_LOADING_UPLOAD_IVAS',
-        value:value
-    }
-}
-
-export const setLoadingForm = (value) => {
-    return {
-        type:'LOADING_STATE',
         value:value
     }
 }

@@ -1,56 +1,74 @@
-import {Card, Descriptions, PageHeader, Skeleton} from "antd";
-import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import {getProduct} from "../actions/ActionProduct";
-import {setProductSelect} from "../actions/ActionBalance";
+import {Descriptions, message, PageHeader, Skeleton} from "antd";
+import React from "react";
 import {ButtonPrintLabel} from "./ButtonPrintLabel";
 import ButtonPreservation from "./ButtonPreservation";
+import {useGetData} from "../utils/DataManager";
+import {Constant} from "../Constant";
+import Text from "antd/es/typography/Text";
+import {useDispatch, useSelector} from "react-redux";
+import {getDocument, setPreservation} from "../actions/ActionFormBalance";
 
-export function DescriptionProduct(props){
+export function DescriptionProduct({id}){
 
+    const form = useSelector(state => state.formBalanceReducer);
     const dispatch = useDispatch();
-    const [loading, setLoading ] = useState(props.product === undefined);
-
-
-    const onSuccessRetrieve = (product) => {
-        setLoading(false);
-        dispatch(setProductSelect(product));
-    }
-
-    useEffect(()=>{
-        setLoading(true);
-        getProduct(onSuccessRetrieve, props.id);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.id]);
+    const {store, progress, error} = useGetData(Constant.product + "/" + id);
 
     let dataScad = new Date();
-    dataScad.setMonth(dataScad.getMonth() + props.preservation);
+    dataScad.setMonth(dataScad.getMonth() + form.preservation);
 
+    if (error) {
+        return <div className={"shadow Box"}><Text>Errore dati : {error}</Text></div>
+    }
+
+    if (progress) return <div className={"shadow Box"}><Skeleton active /></div>
+
+    const handleClickPrinter = () => {
+
+        if (isNaN(form.weight)) {
+            message.error("Errore convalida")
+            return
+        }
+        if (store === null) {
+            message.error("Errore! Prodotto non selezionato")
+            return
+        }
+        if (form.option === 0 ) {
+            message.error("Errore! Opzione non selezionate")
+            return
+        }
+
+        let json = {
+            product: store.id,
+            option: form.option.id,
+            weight: form.weight,
+            preservation: form.preservation
+        }
+
+        getDocument(json);
+
+    }
 
     return (
         <>
-            {(loading) ?
-                <div className={"shadow Box"}><Skeleton active /></div>
-                :
-                <PageHeader
-                    className={"shadow Box"}
-                    ghost={false}
-                    title={(props.product !== undefined) ? props.product.nome : ""}
-                    subTitle={props.price + " € / Kg"}
-                    extra={[
-                        <ButtonPreservation/>,
-                        <ButtonPrintLabel/>
-                    ]}>
+            <PageHeader
+                className={"shadow Box"}
+                ghost={false}
+                title={store.nome}
+                subTitle={form.option.price + " € / " + ((form.option.quantity === 1) ? '' : form.option.quantity) + " Kg"}
 
-                    <Descriptions size={"small"} layout={"vertical"} column={3}>
-                        <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Ingredienti" span={3}>{(props.product !== undefined) ? props.product.ingredients : ""}</Descriptions.Item>
-                        <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Confezionamento">{new Date().toLocaleDateString()}</Descriptions.Item>
-                        <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Scadenza">{dataScad.toLocaleDateString()}</Descriptions.Item>
+                extra={[
+                    <ButtonPreservation value={form.preservation} onChangeValue={(e) => dispatch(setPreservation(e))}/>,
+                    <ButtonPrintLabel onClick={handleClickPrinter}/>
+                ]}>
 
-                        <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Code">{(props.product !== undefined) ? props.product.codice : ""}</Descriptions.Item>
-                    </Descriptions>
-                </PageHeader>
-                }
+                <Descriptions size={"small"} layout={"vertical"} column={3}>
+                    <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Ingredienti" span={3}>{store.ingredients}</Descriptions.Item>
+                    <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Confezionamento">{new Date().toLocaleDateString()}</Descriptions.Item>
+                    <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Scadenza">{dataScad.toLocaleDateString()}</Descriptions.Item>
+                    <Descriptions.Item labelStyle={{color:"gray", fontWeight:"bold"}} label="Code">{store.codice}</Descriptions.Item>
+                </Descriptions>
+            </PageHeader>
         </>
     );
 }

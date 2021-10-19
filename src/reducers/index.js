@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import DrawerReducer from "./DrawerReducer";
 import ProductsReducer from "./ProductsReducer";
-import BalanceReducer from "./BalanceReducer";
+import BalanceFormReducer from "./BalanceFormReducer";
 import {ModalReducer} from "./ModalReducer";
 import {FormReducer} from "./FormReducer";
 import TagDietaReducer from "./TagDietaReducer";
@@ -14,7 +14,7 @@ export const rootReducer = combineReducers({
     drawer: DrawerReducer,
     modal:ModalReducer,
     products : ProductsReducer,
-    balance: BalanceReducer,
+    formBalanceReducer: BalanceFormReducer,
     form:FormReducer,
     tagDieta: TagDietaReducer,
     ingredient:IngredientReducer,

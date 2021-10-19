@@ -1,24 +1,20 @@
 import React from 'react';
 import ButtonKeypad from "./ButtonKeypad";
-import {useDispatch, useSelector} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBackspace} from '@fortawesome/free-solid-svg-icons';
-import {changeWeight} from "../../actions";
 
-function TastierinoComponent(){
-    const editorState = useSelector(state => state.balance);
-    const dispatch = useDispatch();
+function TastierinoComponent({value, onChange}){
 
-    const handleOnClick = (value) => {
-        let weight = editorState.weight + "";
-        if (value === "canc"){
+    const handleOnClick = (val) => {
+        let weight = value + "";
+        if (val === "canc"){
             weight = deleteValue(weight);
-        } else if (value === "point"){
+        } else if (val === "point"){
             weight = addPoint(weight);
         } else {
-            weight = addNumber(value, weight);
+            weight = addNumber(val, weight);
         }
-        dispatch(changeWeight(weight));
+        onChange(weight);
     }
 
     let html = [];

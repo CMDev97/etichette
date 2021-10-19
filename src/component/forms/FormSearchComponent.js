@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {Button, Input, Space} from "antd";
-import "../../stile/FormSearch.css";
 
 
 function FormSearchComponent({onClickSearch, onClickCancel}) {
@@ -30,13 +29,13 @@ function FormSearchComponent({onClickSearch, onClickCancel}) {
 
     return (
         <Space>
-            <Input placeholder="Cerca..." className="Input-Form-Search"  onChange={handleOnChangeValue} value={state.inputValue} />
+            <Input placeholder="Cerca..." onChange={handleOnChangeValue} value={state.inputValue} />
             {(state.search) ?
-                <Button className="Button-Form-Cancel" shape={"circle"} onClick={handleClickCancel}>
+                <Button onClick={handleClickCancel} type={"primary"} danger>
                     <FontAwesomeIcon icon={faTimes}/>
                 </Button>
                 : ''}
-            <Button onClick={handleClickSearch} shape={"circle"} className={"Button-Form-Search"} >
+            <Button onClick={handleClickSearch} type={"primary"} >
                 <FontAwesomeIcon icon={faSearch}/>
             </Button>
         </Space>

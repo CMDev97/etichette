@@ -1,15 +1,15 @@
 import React from "react";
 import RowItemProduct from "./RowItemProduct";
 
-function ListProduct (props){
+function ListProduct ({dataSource, onClickItem}){
 
     const handleClickItemProduct = (element) => {
-        props.onClickItem(element);
+        onClickItem(element);
     }
 
     let row = [];
 
-    props.dataSource.forEach((element)=>{
+    dataSource.forEach((element)=>{
         row.push(<RowItemProduct key={element.idProduct} item={element} onClickItem={handleClickItemProduct}/>);
     });
 

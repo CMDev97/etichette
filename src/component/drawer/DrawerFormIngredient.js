@@ -1,14 +1,12 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Button, Checkbox, Form, Input, message, Select, Space} from "antd";
 import React from "react";
 import {Option} from "antd/es/mentions";
-import {addIngredient} from "../../actions/ActionIngredient";
 import {Constant} from "../../Constant";
 
 
 function DrawerFormIngredient(props){
     const formReducer = useSelector(state => state.form);
-    const dispatch = useDispatch();
 
     const [form] = Form.useForm();
 
@@ -16,7 +14,6 @@ function DrawerFormIngredient(props){
         if (props.item !== undefined){
             values.id = props.item.id;
         }
-        addIngredient(dispatch, values);
     };
 
     const onFinishFailed = (errorInfo) => {

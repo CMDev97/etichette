@@ -12,6 +12,7 @@ export function useGetData(url){
 
     const fetch = async ()=>{
         try {
+            setData({...data, progress: true});
             const response = await axios.get(Constant.urlBase + url);
 
             setData({...data, store: response.data, progress: false, error: null});
@@ -19,7 +20,7 @@ export function useGetData(url){
             setData({...data,
                 error: "Error request data",
                 store: null,
-                progress: false
+                progress: false,
             });
         }
     }
