@@ -2,7 +2,7 @@ import React from "react";
 import {Row, Col} from "react-bootstrap";
 import { Space} from "antd";
 import IngredientComponent from "../component/IngredientComponent";
-import OptionProductView from "../component/OptionProductView";
+import OptionProductView from "../component/settings/OptionProductView";
 import {ProductDetails} from "../component/details/ProductDetails";
 import {CustomBreadcrumb} from "../component/breadcrumb/CustomBreadcrumb";
 import {useParams} from "react-router-dom";

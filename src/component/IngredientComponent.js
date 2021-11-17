@@ -7,9 +7,14 @@ import Title from "antd/es/typography/Title";
 import {TableEditable} from "./table/EditableTable";
 import {useGetData} from "../utils/DataManager";
 import {Constant} from "../Constant";
+import {useDispatch} from "react-redux";
+import {setContentModal, showModal} from "../actions";
+import {FormSelectIngredients} from "./forms/FormSelectIngredients";
 
 function IngredientComponent({id}){
     const {store, progress} = useGetData(Constant.productIngredients + "?product="+id);
+    const dispatch = useDispatch();
+
 
     if (progress) {
         return <Spin size={"large"}/>
@@ -20,9 +25,12 @@ function IngredientComponent({id}){
 
                 <Space direction={"horizontal"} align={"center"} style={{width:"100%", justifyContent:"space-between", marginBottom:".5rem"}}>
                     <Title level={4} className={"mb-0"}>Ingredienti</Title>
-                    <Button onClick={()=>{
 
+                    <Button onClick={()=>{
+                        dispatch(setContentModal(<FormSelectIngredients id={id}/>));
+                        dispatch(showModal("Aggiungi ingredienti"));
                     }} shape="round" type="primary"><FontAwesomeIcon icon={faPlusCircle}/></Button>
+
                 </Space>
 
                 <TableEditable dataSource={store.content}/>

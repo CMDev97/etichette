@@ -3,8 +3,6 @@ import './stile/NavBar.css';
 import 'antd/dist/antd.css';
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import NavBarComponent from "./component/NavBarComponent";
-import {Container} from "react-bootstrap";
 import ViewHome from "./view/ViewHome";
 import ViewBalance from "./view/ViewBalance";
 import ViewProducts from "./view/ViewProducts";

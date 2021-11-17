@@ -4,9 +4,9 @@ import IvaSettingsView from "../component/settings/IvaSettingsView";
 import {Menu, Card} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStoreAlt, faUserAlt, faPrint, faCashRegister, faPercent, faTags, faFileImage} from "@fortawesome/free-solid-svg-icons";
-import IconSettingsView from "../component/IconSettingsView";
-import CategorySettingsView from "../component/CategorySettingsView";
-import {AziendaSetting} from "../component/AziendaSetting";
+import IconSettingsView from "../component/settings/IconSettingsView";
+import CategorySettingsView from "../component/settings/CategorySettingsView";
+import {AziendaSetting} from "../component/settings/AziendaSetting";
 
 function ViewSettings(){
     const [keyMenu, setKeyMenu] = useState('1');

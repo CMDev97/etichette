@@ -24,7 +24,7 @@ function ViewDefaultTable({type, extra='', columns, selection = false,
                 <FormSearchComponent onClickSearch={startSearch} onClickCancel={cancelSearch}/>
                 {extra}
             </Space>
-            <CustomTable path={path} colums={columns} selection={selection} onChangeSelection={onChangeSelection}/>
+            <CustomTable path={path} column={columns} selection={selection} onChangeSelection={onChangeSelection}/>
         </>
     );
 

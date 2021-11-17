@@ -14,10 +14,16 @@ export function FormCategory({item = null}){
 
 
     const handleSave = (values) => {
+        if (values.icon.id === 0) {
+            message.error("Devi selezionare un'icona ");
+            return;
+        }
         const object = {
             id: (item === null) ? 0 : item.id,
             description : values.description,
-            idIcon : values.icon
+            icon : {
+                id:values.icon
+            }
         }
         const request = new Request(Constant.urlBase + Constant.category);
         request.methodSuccess = () => {
@@ -36,7 +42,7 @@ export function FormCategory({item = null}){
     return (
         <Form layout="vertical" initialValues={{
             description:(item === null) ? '' : item.description,
-            icon:(item === null) ? 0 : item.idIcon
+            icon:(item === null) ? {id:0} : (item.code == null) ? {id:0} : item
         }} onFinish={handleSave} preserve={false}>
 
             <Form.Item label="Description" name="description" rules={[Constant.requiredField]} tooltip="Inserire descrizione categoria">

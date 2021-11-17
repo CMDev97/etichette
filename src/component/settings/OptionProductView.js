@@ -1,14 +1,14 @@
 import {Button, Card} from "antd";
 import React from "react";
 import Title from "antd/es/typography/Title";
-import ViewDefaultTable from "./table/ViewDefaultTable";
-import {Constant} from "../Constant";
-import {columnsOptions} from "./table/Colums";
+import ViewDefaultTable from "../table/ViewDefaultTable";
+import {Constant} from "../../Constant";
+import {columnsOptions} from "../table/Colums";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useDispatch} from "react-redux";
-import {setContentDrawer, showDrawer} from "../actions";
-import FormOptionProduct from "./forms/FormOptionProduct";
+import {setContentDrawer, showDrawer} from "../../actions";
+import FormOptionProduct from "../forms/FormOptionProduct";
 
 
 export default function OptionProductView({id}){

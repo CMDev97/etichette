@@ -140,7 +140,9 @@ export const columsIcon = () => {
             title: "Icon",
             dataIndex: "code",
             key: "code",
-            render: value => <span>{parse(value)}</span>
+            render: value => <span>{
+                (value != null) ?
+                    ((value.includes("<i class")) ? parse(value) : "") : ""}</span>
         },
         {
             title:"Action",
@@ -223,7 +225,9 @@ export const columnsCategories = (dispatch) => { return [
         title: "Icona",
         dataIndex: "icon",
         key: "icon",
-        render: value => <>{parse(value.code)}</>
+        render: value => <>{
+            (value.code != null) ?
+                ((value.code.includes("<i class")) ? parse(value.code) : "") : ""}</>
     },
     {
         title:"Action",

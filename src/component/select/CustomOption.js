@@ -18,7 +18,7 @@ export function CorrectOption({type, value}){
 
 
 const OPTION_ICON = (element) => {
-    return <Option value={element.id} key={element.id}>{parse(element.code)} {element.description}</Option>
+    return <Option value={element.id} key={element.id}>{(element.code != null) ? parse(element.code) : ""} {element.description}</Option>
 }
 
 const OPTION_CATEGORY = (element) => {

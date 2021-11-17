@@ -4,7 +4,7 @@ import {useGetData} from "../../utils/DataManager";
 import Title from "antd/es/typography/Title";
 
 
-function CustomTable({path, colums, selection=false, onChangeSelection, selected=[]}, refresh=false) {
+function CustomTable({path, column, selection=false, onChangeSelection, selected=[], refresh=false}) {
 
     const [data, setData] = useState({
         selectedItems:selected,
@@ -17,6 +17,7 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
 
     const {store, progress, error, reload} = useGetData(data.path + (data.path.includes("?") ? '&' : '?') +  "page=" + data.page + "&tot=" + data.size);
 
+    console.log("items select " , selected);
 
     const changeSize = (current, size) =>{
         setData({...data, size:size, page:current});
@@ -38,12 +39,13 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
 
 
     const onSelectChange = (selectedRowKeys, row) => {
-        onChangeSelection(row);
+        onChangeSelection?.(row);
+        console.log(selectedRowKeys);
         setData({ ...data, selectedItems:selectedRowKeys });
     };
 
 
-    const selectedRowKeys = data.selectedItems;
+    const selectedRowKeys = [...data.selectedItems];
 
 
     const rowSelection = {
@@ -60,7 +62,7 @@ function CustomTable({path, colums, selection=false, onChangeSelection, selected
     return(
         <div className={"pb-3"}>
             <Table rowKey={(item) => (item.id)}  rowSelection={(selection) ? rowSelection : ''}
-                   loading={progress} pagination={false} dataSource={(store != null) ? store.content: []} columns={colums} />
+                   loading={progress} pagination={false} dataSource={(store != null) ? store.content: []} columns={column} />
             <Pagination
                 className={"my-3"}
                 showSizeChanger

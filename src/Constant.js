@@ -2,7 +2,7 @@
 const type = "http://";
 const domain = "localhost";
 const port = ":8080";
-const war = "/Gestionale_war/api/";
+const war = "/api/";
 
 export const Constant = {
     urlBase : type+domain+port+war,
@@ -10,8 +10,8 @@ export const Constant = {
     iva:'ivas',
     ingredient:'ingredients',
     icon:'icons',
-    category:"category",
-    option: "options",
+    category:"categories",
+    option: "variants",
     productIngredients : "incidenza",
 
 

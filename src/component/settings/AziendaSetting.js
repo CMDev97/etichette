@@ -1,7 +1,7 @@
 import React from "react";
-import SelectProvince from "./select/SelectProvince";
+import SelectProvince from "../select/SelectProvince";
 import {Button, Form, Input, InputNumber} from "antd";
-import {Constant} from "../Constant";
+import {Constant} from "../../Constant";
 
 
 export function AziendaSetting(){
