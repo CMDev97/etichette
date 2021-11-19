@@ -4,7 +4,7 @@ import {Option} from "antd/es/mentions";
 import {useGetData} from "../../utils/DataManager";
 import {CorrectOption} from "./CustomOption";
 
-function CustomSelectSearch({ type, value = {}, onChange, isSearch=true}){
+function CustomSelectSearch({ type, value = {}, onChange, isSearch=true, defValue = true}){
 
     const [search, setSearch] = useState(null);
     const stringPath = isSearch ? "?" + ((search == null) ? '' : ("search="+search+"&")) + "page=1&tot=100" : "";
@@ -25,7 +25,7 @@ function CustomSelectSearch({ type, value = {}, onChange, isSearch=true}){
             showSearch={isSearch}
             filterOption={false}
             onChange={handleChange}
-            defaultValue={value.id}
+            defaultValue={(defValue) ? value.id : value}
             onSearch={onSearch}>
 
             <Option key={0} value={0}>Seleziona o cerca per nome</Option>

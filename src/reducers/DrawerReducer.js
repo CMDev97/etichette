@@ -4,6 +4,10 @@ const initialState = {
     title:'Drawer'
 }
 
+export const ACTION_HIDDEN_DRAWER = {
+    type: 'HIDDEN_DRAWER'
+}
+
 const DrawerReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SHOW_DRAWER':

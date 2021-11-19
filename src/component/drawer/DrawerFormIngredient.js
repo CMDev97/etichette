@@ -4,21 +4,25 @@ import React, {useState} from "react";
 import {Constant} from "../../Constant";
 import CustomSelectSearch from "../select/CustomSelectSearch";
 import Request from "../../utils/Request";
+import {useDispatch} from "react-redux";
+import {ACTION_HIDDEN_DRAWER} from "../../reducers/DrawerReducer";
 
 
-function DrawerFormIngredient(props){
-
+function DrawerFormIngredient({item = undefined}){
+    const dispatch = useDispatch();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
     const onFinish = (values) => {
-        if (props.item !== undefined){
-            values.id = props.item.id;
+        if (item !== undefined){
+            values.id = item.id;
         }
+        setLoading(true);
         const request = new Request(Constant.urlBase + Constant.ingredient);
         request.methodSuccess = ()=>{
-            setLoading(true);
+            setLoading(false);
             message.success("Salvato correttamente");
+            dispatch(ACTION_HIDDEN_DRAWER);
         };
         request.methodError = (status)=>{
             setLoading(false);
@@ -35,9 +39,10 @@ function DrawerFormIngredient(props){
 
     return(
         <Form initialValues={{
-            description:(props.item === undefined) ? '' : props.item.description,
-            unit : (props.item === undefined) ? '0' : props.item.unit,
-            enabled : (props.item === undefined) ? false : props.item.enabled
+            description:(item === undefined) ? '' : item.description,
+            unit : (item === undefined) ? '0' : item.unit,
+            incidence : (item === undefined) ? 0 : item.incidence,
+            enabled : (item === undefined) ? false : item.enabled
         }} form={form} layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
             <Form.Item name="description" label="Descrizione" rules={[Constant.requiredField]}
@@ -48,7 +53,13 @@ function DrawerFormIngredient(props){
             <Space className="w-100" key={0} align="baseline" direction={"horizontal"} size={"large"}>
                 <Form.Item name="unit" label="Unità di misura" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare l'unità di misura dell'ingrediente">
-                    <CustomSelectSearch type={Constant.unit} isSearch={false}/>
+                    <CustomSelectSearch type={Constant.unit} isSearch={false} defValue={false}/>
+                </Form.Item>
+
+                <Form.Item name="incidence" label="Incidenza" rules={[Constant.requiredField]}
+                           tooltip="Devi inserire l'incidenza dell'ingrediente all'interno di un generico prodotto">
+
+                    <Input type={"number"} placeholder={"0 ... 100 %"} min={0} max={100}/>
                 </Form.Item>
             </Space>
 

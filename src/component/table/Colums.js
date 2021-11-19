@@ -80,6 +80,12 @@ export const columsIngredient = (dispatch) => {
             key: "unit"
         },
         {
+            title: "Incidenza",
+            dataIndex: "incidence",
+            key: "incidence",
+            render: (value => (<>{value} %</>))
+        },
+        {
             title: "Disponibile",
             dataIndex: "enabled",
             key: "enabled",
