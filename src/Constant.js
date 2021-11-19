@@ -12,6 +12,8 @@ export const Constant = {
     icon:'icons',
     category:"categories",
     option: "variants",
+    unit: "utils/units",
+    util: "utils",
     productIngredients : "incidenza",
 
 

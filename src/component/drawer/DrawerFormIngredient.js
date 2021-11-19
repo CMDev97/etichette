@@ -1,19 +1,30 @@
-import {useSelector} from "react-redux";
-import {Button, Checkbox, Form, Input, message, Select, Space} from "antd";
-import React from "react";
-import {Option} from "antd/es/mentions";
+
+import {Button, Checkbox, Form, Input, message, Space} from "antd";
+import React, {useState} from "react";
 import {Constant} from "../../Constant";
+import CustomSelectSearch from "../select/CustomSelectSearch";
+import Request from "../../utils/Request";
 
 
 function DrawerFormIngredient(props){
-    const formReducer = useSelector(state => state.form);
 
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     const onFinish = (values) => {
         if (props.item !== undefined){
             values.id = props.item.id;
         }
+        const request = new Request(Constant.urlBase + Constant.ingredient);
+        request.methodSuccess = ()=>{
+            setLoading(true);
+            message.success("Salvato correttamente");
+        };
+        request.methodError = (status)=>{
+            setLoading(false);
+            message.error("Non è stato possibile salvare : " + status);
+        };
+        request.fetchPost(values);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -25,10 +36,9 @@ function DrawerFormIngredient(props){
     return(
         <Form initialValues={{
             description:(props.item === undefined) ? '' : props.item.description,
-            unitWeight : (props.item === undefined) ? '0' : props.item.unitWeight,
-            enable : (props.item === undefined) ? false : props.item.enable
-        }} form={form}
-              layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            unit : (props.item === undefined) ? '0' : props.item.unit,
+            enabled : (props.item === undefined) ? false : props.item.enabled
+        }} form={form} layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
 
             <Form.Item name="description" label="Descrizione" rules={[Constant.requiredField]}
                        tooltip="Devi inserire la descrizione dell'ingrediente">
@@ -36,24 +46,19 @@ function DrawerFormIngredient(props){
             </Form.Item>
 
             <Space className="w-100" key={0} align="baseline" direction={"horizontal"} size={"large"}>
-                <Form.Item name="unitWeight" label="Unità di misura" rules={[Constant.requiredField]}
+                <Form.Item name="unit" label="Unità di misura" rules={[Constant.requiredField]}
                            tooltip="Devi selezionare l'unità di misura dell'ingrediente">
-                    <Select defaultValue="0" >
-                        <Option value="0">Seleziona unità</Option>
-                        <Option value="KG">Peso (kg)</Option>
-                        <Option value="L">Volume (litro)</Option>
-                        <Option value="M">Lunghezza (metro)</Option>
-                    </Select>
+                    <CustomSelectSearch type={Constant.unit} isSearch={false}/>
                 </Form.Item>
             </Space>
 
-            <Form.Item valuePropName="checked" name="enable">
+            <Form.Item valuePropName="checked" name="enabled">
                 <Checkbox>Disponibile</Checkbox>
             </Form.Item>
 
 
             <Form.Item>
-                <Button loading={formReducer.loading} type="primary" htmlType="submit">Save</Button>
+                <Button loading={loading} type="primary" htmlType="submit">Save</Button>
             </Form.Item>
         </Form>
     );

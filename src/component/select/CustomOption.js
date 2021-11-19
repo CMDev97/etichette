@@ -12,6 +12,8 @@ export function CorrectOption({type, value}){
             return OPTION_CATEGORY(value);
         case Constant.iva :
             return OPTION_IVA(value);
+        case Constant.unit:
+            return OPTION_UNIT(value);
         default : return ''
     }
 }
@@ -27,4 +29,8 @@ const OPTION_CATEGORY = (element) => {
 
 const OPTION_IVA = (element) => {
     return <Option key={element.id} value={element.id}>{element.description}</Option>
+}
+
+const OPTION_UNIT = (element) => {
+    return <Option key={element} value={element}>{element}</Option>
 }

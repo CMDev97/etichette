@@ -76,13 +76,13 @@ export const columsIngredient = (dispatch) => {
         },
         {
             title: "Unità di misura",
-            dataIndex: "unitWeight",
-            key: "unitWeight"
+            dataIndex: "unit",
+            key: "unit"
         },
         {
             title: "Disponibile",
-            dataIndex: "enable",
-            key: "enable",
+            dataIndex: "enabled",
+            key: "enabled",
             render: (value => (
                 <i className= {(value) ? "fas fa-check-circle " : "fas fa-times-circle"}></i>
             ))
@@ -119,7 +119,7 @@ export const columsIngredientSelect = () => {
         {
             title: "Unità di misura",
             dataIndex: "unitWeight",
-            key: "unitWeight"
+            key: "unit"
         }
     ];
 }
